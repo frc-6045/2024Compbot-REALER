@@ -145,7 +145,7 @@ public class Bindings {
 
          new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, () -> {return -operatorController.getLeftTriggerAxis();}));
 
-         new Trigger(() -> {return operatorController.getRightBumperPressed();}).onTrue(new InstantCommand(() -> {pneumatics.ToggleTrapSolenoid();}, pneumatics));
+         //new Trigger(() -> {return operatorController.getRightBumperPressed();}).onTrue(new InstantCommand(() -> {pneumatics.ToggleTrapSolenoid();}, pneumatics));
        
          new Trigger(() -> {return driverController.getPOV() == 90;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
          new Trigger(() -> {return driverController.getPOV() == 270;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));
