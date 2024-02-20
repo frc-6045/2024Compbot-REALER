@@ -44,7 +44,7 @@ public final class Constants {
     public static double kHighSpeakerOpeningHeight = 2.11;  //meters
     public static double kHighSpeakerOpeningDistanceFromWall = .46; //meters
 
-    public static Pose2d kSpeakerBackLocation = new Pose2d(0.0, 5.525, new Rotation2d(0.0));
+    public static Pose2d kSpeakerBackLocation = new Pose2d(-.04, 5.525, new Rotation2d(0.0));
     public static Pose2d kSpeakerFrontLoation = new Pose2d(kHighSpeakerOpeningDistanceFromWall, 5.525, new Rotation2d(0.0));
 
     public static Pose2d kRedSpeakerBackLocation = new Pose2d(16.579342, 5.525, new Rotation2d(Units.degreesToRadians(0))); // rotation might have to be flipped
@@ -79,9 +79,9 @@ public final class Constants {
 
     // Angular offsets of the modules relative to the chassis in radians
     public static final double kFrontLeftChassisAngularOffset = -Math.PI / 2; //-Math.PI / 2;
-    public static final double kFrontRightChassisAngularOffset = 0;
-    public static final double kBackLeftChassisAngularOffset = Math.PI;
-    public static final double kBackRightChassisAngularOffset = Math.PI / 2;
+    public static final double kFrontRightChassisAngularOffset = 0; // 0
+    public static final double kBackLeftChassisAngularOffset = Math.PI; // Math.PI
+    public static final double kBackRightChassisAngularOffset = Math.PI / 2; // Math.PI / 2
 
     // SPARK FLEX CAN IDs
     public static final int kFrontLeftDrivingCanId = 1;
@@ -159,7 +159,7 @@ public final class Constants {
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
-    public static final int kDrivingMotorCurrentLimit = 50; // amps
+    public static final int kDrivingMotorCurrentLimit = 80; // amps
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
@@ -172,7 +172,7 @@ public final class Constants {
     //TODO: likely going to have to revisit these pid constants
     //test
     public static final HolonomicPathFollowerConfig autoBuilderPathConfig = new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-      new PIDConstants(5.0, 0.0 ,0.2), //original p = 5, 1st attempt: p = 5, d = 0.5, 2nd attempt: p= 5, d = 0.5, 3rd attempt: p = 5, d = 3 this caused the wheels to shutter
+      new PIDConstants(4.0, 0.0 ,0.2), //original p = 5, 1st attempt: p = 5, d = 0.5, 2nd attempt: p= 5, d = 0.5, 3rd attempt: p = 5, d = 3 this caused the wheels to shutter
       new PIDConstants(1.5, 0.0, 0), //5.0, 0, 0.2
       DriveConstants.kMaxSpeedMetersPerSecond, // Max module speed, in m/s
       DriveConstants.radiusMeters, // Drive base radius in meters. Distance from robot center to furthest module.
@@ -246,7 +246,7 @@ public final class Constants {
     public static final int kAngleControlCANID = 11; //TODO hey
     public static final double kAngleControlMaxSpeed = 0.12;
 
-    public static final double kShooterAngleP = 2.00;
+    public static final double kShooterAngleP = 4.00;
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
 
@@ -266,7 +266,7 @@ public final class Constants {
     public static final int kRightClimbMotorCanId = 14;
     public static final int kTrapMotorCanId = 15;
     public static final double kClimbMaxSpeed = .20;
-    public static final double kTrapMaxSpeed = .50;
+    public static final double kTrapMaxSpeed = 0.80;
 
   }
   

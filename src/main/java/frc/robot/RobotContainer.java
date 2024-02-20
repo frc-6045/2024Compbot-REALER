@@ -27,8 +27,11 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.commands.closedloop.HoldAngle;
 import frc.robot.commands.closedloop.PIDAngleControl;
 import frc.robot.commands.closedloop.PIDShooter;
+import frc.robot.commands.openloop.FeederOpenLoop;
+import frc.robot.commands.openloop.IntakeOpenLoop;
 import frc.robot.subsystems.AngleController;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Feeder;
@@ -53,34 +56,33 @@ private final AngleController m_AngleController = new AngleController();
 private final Trap m_Trap = new Trap();
 
 
-private Autos m_autos = new Autos(m_driveSubsystem, m_Feeder, m_Intake, m_Pneumatics, m_Shooter);  
+private Autos m_Autos;
 private ShuffleboardTab teleopTab = Shuffleboard.getTab("teleOp");
 public RobotContainer() {
 
   NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
-  NamedCommands.registerCommand("IntakeIn", new ParallelDeadlineGroup(new WaitCommand(1.5), new RunCommand(() -> {m_Intake.intakeIn();}, m_Intake)));
-  NamedCommands.registerCommand("IntakeOut",new ParallelDeadlineGroup(new WaitCommand(1.5), new RunCommand(() -> {m_Intake.intakeOut();}, m_Intake)));;
+  NamedCommands.registerCommand("IntakeIn", new ParallelDeadlineGroup(new WaitCommand(1.5), new IntakeOpenLoop(m_Intake, () -> {return 1.00;})));
+  NamedCommands.registerCommand("IntakeOut",new ParallelDeadlineGroup(new WaitCommand(1.5), new RunCommand(() -> {m_Intake.intakeOut();}, m_Intake)));
+  m_Autos = new Autos(m_driveSubsystem, m_Feeder, m_Intake, m_Pneumatics, m_Shooter);  
 
-
-    m_Pneumatics.setDefaultCommand(new RunCommand(() -> {
-      if(m_driverController.getPOV() == 0) {
-        m_Pneumatics.ActutateIntakeSolenoid(true);
-      } else if(m_driverController.getPOV() == 180) {
-        m_Pneumatics.ActutateIntakeSolenoid(false);
-      }
-    }, m_Pneumatics));
+    // m_Pneumatics.setDefaultCommand(new RunCommand(() -> {
+    //   if(m_driverController.getPOV() == 0) {
+    //     m_Pneumatics.ActutateIntakeSolenoid(true);
+    //   } else if(m_driverController.getPOV() == 180) {
+    //     m_Pneumatics.ActutateIntakeSolenoid(false);
+    //   }
+    // }, m_Pneumatics));
 
     m_driveSubsystem.setDefaultCommand(
     new RunCommand(
             () -> m_driveSubsystem.drive( //FIXME: very very stupid bodge
-                MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.15),
+                MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.15), 
                 MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.15),
                 MathUtil.applyDeadband(-m_driverController.getRightX(), 0.20),
                 true),
             m_driveSubsystem));
-    // m_AngleController.setDefaultCommand(
-    //   new PIDAngleControl(m_AngleController, m_AngleController.getAngleEncoder().getPosition())
-    // );
+    m_AngleController.setDefaultCommand(
+      new HoldAngle(m_AngleController, () -> {return m_AngleController.getAngleEncoder().getPosition();}));
     
     
 
@@ -101,6 +103,6 @@ public RobotContainer() {
   }
 
   public Command getAutonomousCommand() {
-    return m_autos.getAutonomousCommand();
+    return m_Autos.getAutonomousCommand();
   }
 }

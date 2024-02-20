@@ -49,7 +49,7 @@ public class Autos {
     
         autoChooser.addOption("Basic Test Auto", AutoBuilder.buildAuto("Basic Test Auto"));
         autoChooser.addOption("4Ring", AutoBuilder.buildAuto("4Ring"));
-
+        autoChooser.addOption("cool", AutoBuilder.buildAuto("New Auto"));
         SmartDashboard.putData("Autos", autoChooser);
         //autoTab.add(autoChooser); sure
     }

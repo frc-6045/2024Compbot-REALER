@@ -25,7 +25,7 @@ public class PIDAngleControl extends Command {
     this.setpoint = setpoint;
     System.out.println("first setpoint : " + setpoint.get());
     m_AnglePIDController = new PIDController(ShooterConstants.kShooterAngleP, ShooterConstants.kShooterAngleI, ShooterConstants.kShooterAngleD);
-    m_AnglePIDController.setTolerance(.1); //who care
+    m_AnglePIDController.setTolerance(.01); //who care
     m_AnglePIDController.disableContinuousInput();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_AngleController);
@@ -45,7 +45,7 @@ public class PIDAngleControl extends Command {
   public void execute() {
     double feedforward = 0.0; // just to have TODO: maybe do characterization??
    
-    double speed = m_AnglePIDController.calculate(m_AngleController.getAngleEncoder().getPosition(), setpoint.get());
+    double speed = -m_AnglePIDController.calculate(m_AngleController.getAngleEncoder().getPosition(), setpoint.get());
     m_AngleController.getAngleMotor().set(speed);
   }
 

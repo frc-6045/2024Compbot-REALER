@@ -75,8 +75,6 @@ public class LookupTables {
         shooterAngleTable.put(2.4892, 0.1414);
         shooterAngleTable.put(3.048, 0.1277);
         shooterAngleTable.put(3.5687, 0.1151);
-
-        shooterSpeedTable.put(0.0, 0.0);
     }
 
     public static InterpolatingTreeMap<Double, Double> getAngleTable(){

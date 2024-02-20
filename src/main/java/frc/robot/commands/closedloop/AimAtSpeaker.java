@@ -69,7 +69,7 @@ public class AimAtSpeaker extends Command {
     System.out.println(m_AimPIDController.getPositionError());
     System.out.println("yaw to pose: " + PhotonUtils.getYawToPose(m_drive.getPose(), FieldConstants.kSpeakerBackLocation).getDegrees());
     //return m_AimPIDController.atSetpoint();
-    if(m_AimPIDController.getPositionError() < -179 || m_AimPIDController.getPositionError() > 179 ){
+    if(m_AimPIDController.getPositionError() < -179.5 || m_AimPIDController.getPositionError() > 179.5 ){
       return true;
     } else {
       return false;

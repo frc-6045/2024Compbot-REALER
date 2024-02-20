@@ -61,6 +61,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void intakeIn(){
+    System.out.println("intake in");
     m_IntakeMotor.set(-IntakeConstants.kIntakeSpeed);
     m_IndexerMotor.set(IntakeConstants.kIntakeSpeed);
 

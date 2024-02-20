@@ -34,6 +34,8 @@ public class PIDShooter extends Command {
   private final RelativeEncoder encoder;
   private double setpoint;
   private boolean atSetpoint;
+  private boolean timerSet;
+  private Timer timer;
   public PIDShooter(Shooter shooter, Feeder feeder, Intake intake, double setpoint) {
     m_Shooter = shooter;
     m_Feeder = feeder;
@@ -52,7 +54,8 @@ public class PIDShooter extends Command {
     m_PIDController.setFeedbackDevice(encoder);
     m_Feedforward = new SimpleMotorFeedforward(.17674,.00030); //TODO characterization
     atSetpoint = false;
-    
+    timer = new Timer();
+    timerSet = false;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_Shooter, m_Feeder, m_Intake);
   }
@@ -61,6 +64,8 @@ public class PIDShooter extends Command {
   @Override
   public void initialize() {
     atSetpoint = false;
+    timerSet = false;
+    timer.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -71,8 +76,14 @@ public class PIDShooter extends Command {
  
     m_PIDController.setReference(setpoint, ControlType.kVelocity, 0, m_Feedforward.calculate(setpoint)); //TODO: characterization for feedforward
 
+    
    System.out.println(encoder.getVelocity());
     if(encoder.getVelocity() <= -ShooterConstants.kShooterLaunchRPM){
+      if(!timerSet){
+        timer.reset();
+        timer.start();
+        timerSet = true;
+      }
       m_Feeder.getMotor().set(FeederConstants.kFeederSpeed);               
       m_Intake.runIntake(() -> {return -IntakeConstants.kIntakeSpeed;});
     }
@@ -90,6 +101,10 @@ public class PIDShooter extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    System.out.println(timer.get());
+    if(timer.get() > .5){
+      return true;
+    }
     return false;
   }
 
