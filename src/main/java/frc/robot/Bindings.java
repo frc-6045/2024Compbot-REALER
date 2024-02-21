@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -156,8 +157,11 @@ public class Bindings {
          new Trigger(() -> {return driverController.getPOV() == 90;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
          new Trigger(() -> {return driverController.getPOV() == 270;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));
 
-         new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new TrapOpenLoop(trap, () -> {return ClimbConstants.kTrapMaxSpeed;}));
-         new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new TrapOpenLoop(trap, () -> {return -ClimbConstants.kTrapMaxSpeed;}));
+         //new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new TrapOpenLoop(trap, () -> {return ClimbConstants.kTrapMaxSpeed;}));
+         //new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new TrapOpenLoop(trap, () -> {return -ClimbConstants.kTrapMaxSpeed;}));
+
+         new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new ParallelCommandGroup(new TrapOpenLoop(trap, () -> {return ClimbConstants.kTrapMaxSpeed;}), new IntakeOpenLoop(intake, () -> {return 1.0;})));
+         new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new ParallelCommandGroup(new TrapOpenLoop(trap, () -> {return -ClimbConstants.kTrapMaxSpeed;}), new IntakeOpenLoop(intake, () -> {return -1.0;})));
 
 
 
