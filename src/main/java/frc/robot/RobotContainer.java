@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.closedloop.HoldAngle;
 import frc.robot.commands.closedloop.PIDAngleControl;
 import frc.robot.commands.closedloop.PIDShooter;
@@ -60,7 +61,8 @@ private Autos m_Autos;
 private ShuffleboardTab teleopTab = Shuffleboard.getTab("teleOp");
 public RobotContainer() {
 
-  NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
+  //NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
+  NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kAngleSetpoint;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
   NamedCommands.registerCommand("IntakeIn", new ParallelDeadlineGroup(new WaitCommand(1.5), new IntakeOpenLoop(m_Intake, () -> {return 1.00;})));
   NamedCommands.registerCommand("IntakeOut",new ParallelDeadlineGroup(new WaitCommand(1.5), new RunCommand(() -> {m_Intake.intakeOut();}, m_Intake)));
   m_Autos = new Autos(m_driveSubsystem, m_Feeder, m_Intake, m_Pneumatics, m_Shooter);  
@@ -75,7 +77,7 @@ public RobotContainer() {
 
     m_driveSubsystem.setDefaultCommand(
     new RunCommand(
-            () -> m_driveSubsystem.drive( //FIXME: very very stupid bodge
+            () -> m_driveSubsystem.drive( 
                 MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.15), 
                 MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.15),
                 MathUtil.applyDeadband(-m_driverController.getRightX(), 0.20),

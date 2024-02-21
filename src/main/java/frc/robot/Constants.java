@@ -48,6 +48,8 @@ public final class Constants {
     public static Pose2d kSpeakerFrontLoation = new Pose2d(kHighSpeakerOpeningDistanceFromWall, 5.525, new Rotation2d(0.0));
 
     public static Pose2d kRedSpeakerBackLocation = new Pose2d(16.579342, 5.525, new Rotation2d(Units.degreesToRadians(0))); // rotation might have to be flipped
+  
+    public static boolean kVisionEnable = false;
   }
 
   public static final class DriveConstants {
@@ -250,6 +252,7 @@ public final class Constants {
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
 
+    public static final double kAngleSetpoint = 0.10; //angle setpoint here
   }
 
   public static final class IntakeConstants {

@@ -167,7 +167,9 @@ public class DriveSubsystem extends SubsystemBase {
     //eventually figure out what each result value is
 
     updateOdometry();
-    vision.UpdateVision();
+    if(FieldConstants.kVisionEnable){
+      vision.UpdateVision();
+    }
     
     SmartDashboard.putNumber("drive angle", getPoseHeading());
     SmartDashboard.putNumber("target angle 8lue", PoseMath.getTargetAngle(FieldConstants.kSpeakerBackLocation, getPose()).getDegrees());

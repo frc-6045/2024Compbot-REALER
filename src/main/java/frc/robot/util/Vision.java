@@ -28,15 +28,18 @@ public class Vision {
   private final DriveSubsystem m_drive;
   private Pose2d visionPose;
   public Vision(DriveSubsystem drive){
+  if(FieldConstants.kVisionEnable){
     try {
       m_visionPoseEstimator = new PhotonPoseEstimator(AprilTagFieldLayout.loadFromResource(AprilTagFields.k2024Crescendo.m_resourceFile), PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, new PhotonCamera("Arducam_OV2311_USB_Camera"), new Transform3d(new Translation3d(Units.inchesToMeters(6), -Units.inchesToMeters(14), Units.inchesToMeters(19.5)), new Rotation3d(0, -11,0))); //TODO: actually make this work
     } catch(IOException e){
       System.out.println(e.getMessage() + "\n april tags didnt load");
     }
+  }
     m_drive = drive;
   } 
 
   public void UpdateVision() {
+  if(FieldConstants.kVisionEnable){
      m_visionPoseEstimator.update().ifPresent(estimatedRobotPose -> {
       //System.out.println(estimatedRobotPose.estimatedPose.toPose2d().toString());
       
@@ -48,6 +51,7 @@ public class Vision {
       //SmartDashboard.putNumber("estimated proper turning angle", PoseMath.getTargetAngle(FieldConstants.kSpeakerBackLocation, estimatedRobotPose.estimatedPose.toPose2d()).getDegrees());
       SmartDashboard.putNumber("lookup table number", LookupTables.getAngleTable().get(PoseMath.getDistanceToSpeakerBack(estimatedRobotPose.estimatedPose.toPose2d())));
     });
+  }
   }
 
   public Pose2d getVisionPose() {
