@@ -44,7 +44,7 @@ public final class Constants {
     public static double kHighSpeakerOpeningHeight = 2.11;  //meters
     public static double kHighSpeakerOpeningDistanceFromWall = .46; //meters
 
-    public static Pose2d kSpeakerBackLocation = new Pose2d(-.04, 5.525, new Rotation2d(0.0));
+    public static Pose2d kSpeakerBackLocation = new Pose2d(-.04, 6, new Rotation2d(0.0));
     public static Pose2d kSpeakerFrontLoation = new Pose2d(kHighSpeakerOpeningDistanceFromWall, 5.525, new Rotation2d(0.0));
 
     public static Pose2d kRedSpeakerBackLocation = new Pose2d(16.579342, 5.525, new Rotation2d(Units.degreesToRadians(0))); // rotation might have to be flipped
@@ -172,7 +172,7 @@ public final class Constants {
     //TODO: likely going to have to revisit these pid constants
     //test
     public static final HolonomicPathFollowerConfig autoBuilderPathConfig = new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-      new PIDConstants(4.0, 0.0 ,0.2), //original p = 5, 1st attempt: p = 5, d = 0.5, 2nd attempt: p= 5, d = 0.5, 3rd attempt: p = 5, d = 3 this caused the wheels to shutter
+      new PIDConstants(.5, 0.0 ,0.2), //original p = 5, 1st attempt: p = 5, d = 0.5, 2nd attempt: p= 5, d = 0.5, 3rd attempt: p = 5, d = 3 this caused the wheels to shutter
       new PIDConstants(1.5, 0.0, 0), //5.0, 0, 0.2
       DriveConstants.kMaxSpeedMetersPerSecond, // Max module speed, in m/s
       DriveConstants.radiusMeters, // Drive base radius in meters. Distance from robot center to furthest module.

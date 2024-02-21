@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.354605173665323,
-      "y": 5.534466424383086
+      "x": 2.0,
+      "y": 5.660912933200273
     },
     "rotation": 0
   },
@@ -15,6 +15,12 @@
           "type": "named",
           "data": {
             "name": "AngleAndShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "New Path"
           }
         }
       ]

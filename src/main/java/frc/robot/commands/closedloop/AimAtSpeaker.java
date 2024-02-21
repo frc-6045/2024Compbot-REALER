@@ -29,7 +29,7 @@ public class AimAtSpeaker extends Command {
     m_drive = drive;
     setpointAngle = 0;
     currentPose = new Pose2d();
-    m_AimPIDController = new PIDController(.003, 0, 0); // was .03
+    m_AimPIDController = new PIDController(.001, 0, 0); // was .03
     m_AimPIDController.setTolerance(2);
     m_AimPIDController.enableContinuousInput(-180,180);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -69,7 +69,7 @@ public class AimAtSpeaker extends Command {
     System.out.println(m_AimPIDController.getPositionError());
     System.out.println("yaw to pose: " + PhotonUtils.getYawToPose(m_drive.getPose(), FieldConstants.kSpeakerBackLocation).getDegrees());
     //return m_AimPIDController.atSetpoint();
-    if(m_AimPIDController.getPositionError() < -179.5 || m_AimPIDController.getPositionError() > 179.5 ){
+    if(m_AimPIDController.getPositionError() < -179.7 || m_AimPIDController.getPositionError() > 179.7){
       return true;
     } else {
       return false;

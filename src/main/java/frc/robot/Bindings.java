@@ -78,7 +78,7 @@ public class Bindings {
 
         //new Trigger(() -> {return driverController.getBackButtonPressed();}).onTrue(new TurnAndAim(angleController, driveSubsystem));
 
-        new Trigger(() -> {return driverController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose()));})); //3.9624 works
+        new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose()));})); //3.9624 works
 
         //new Trigger(() -> {return driverController.getBackButtonPressed();}).onTrue(new TurnAndAim(angleController, driveSubsystem)); //3.9624 works
 
@@ -102,7 +102,7 @@ public class Bindings {
         
         // // B toggle for SingleSolenoid
         
-        new Trigger(() -> {return operatorController.getPOV() == 0;}).onTrue(new InstantCommand(() -> {
+        new Trigger(() -> {return operatorController.getPOV() == 180;}).onTrue(new InstantCommand(() -> {
             pneumatics.ActutateIntakeSolenoid(bIntakeToggle);
             bIntakeToggle = !bIntakeToggle;
         }));
@@ -115,7 +115,7 @@ public class Bindings {
         //     pneumatics.ActutateIntakeSolenoid(true);
         // }, intake));
 
-        new Trigger(() -> {return operatorController.getPOV() == 180;}).onTrue(new InstantCommand(() -> {
+        new Trigger(() -> {return operatorController.getPOV() == 0;}).onTrue(new InstantCommand(() -> {
             pneumatics.ActutateTrapSolenoid(bTrapToggle);
             bTrapToggle = !bTrapToggle;
         }));
@@ -145,13 +145,15 @@ public class Bindings {
 
          new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, () -> {return -operatorController.getLeftTriggerAxis();}));
 
+         
+
          //new Trigger(() -> {return operatorController.getRightBumperPressed();}).onTrue(new InstantCommand(() -> {pneumatics.ToggleTrapSolenoid();}, pneumatics));
        
          new Trigger(() -> {return driverController.getPOV() == 90;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
          new Trigger(() -> {return driverController.getPOV() == 270;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));
 
-         new Trigger(() -> {return driverController.getPOV() == 0;}).whileTrue(new TrapOpenLoop(trap, () -> {return ClimbConstants.kTrapMaxSpeed;}));
-         new Trigger(() -> {return driverController.getPOV() == 180;}).whileTrue(new TrapOpenLoop(trap, () -> {return -ClimbConstants.kTrapMaxSpeed;}));
+         new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new TrapOpenLoop(trap, () -> {return ClimbConstants.kTrapMaxSpeed;}));
+         new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new TrapOpenLoop(trap, () -> {return -ClimbConstants.kTrapMaxSpeed;}));
 
 
 
