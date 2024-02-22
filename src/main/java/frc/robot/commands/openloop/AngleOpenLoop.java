@@ -4,20 +4,19 @@
 
 package frc.robot.commands.openloop;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
-import frc.robot.commands.closedloop.PIDAngleControl;
-import frc.robot.subsystems.AngleController;
+import java.util.function.DoubleSupplier;
 
-//Real basic stuff right now
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.AngleSubSystem;
+
 public class AngleOpenLoop extends Command {
-  private AngleController m_AngleController;
-  private double AngleSpeed;
   /** Creates a new AngleOpenLoop. */
-  public AngleOpenLoop(AngleController angleController, double AngleSpeed) {
-    m_AngleController = angleController;
-    this.AngleSpeed = AngleSpeed;
-    addRequirements(m_AngleController);
+  private final AngleSubSystem m_SubSystem;
+  private DoubleSupplier m_speed;
+  public AngleOpenLoop(DoubleSupplier speed, AngleSubSystem subsystem) {
+    m_speed = speed;
+    m_SubSystem = subsystem;
+    addRequirements(m_SubSystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -28,21 +27,18 @@ public class AngleOpenLoop extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_AngleController.getAngleMotor().set(AngleSpeed);
+    m_SubSystem.runOpenLoop(m_speed.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_AngleController.getAngleMotor().set(0);
+    m_SubSystem.runOpenLoop(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-   // if(m_AngleController.getLimitSwitch().get()){
-     // return true;
-    //}
     return false;
   }
 }

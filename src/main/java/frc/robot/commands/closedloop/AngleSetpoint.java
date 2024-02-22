@@ -4,29 +4,33 @@
 
 package frc.robot.commands.closedloop;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.AngleSubSystem;
 
-public class HoldAngle extends Command {
-  /** Creates a new HoldAngle. */
-  private final AngleSubSystem m_SubSystem;
+public class AngleSetpoint extends Command {
+  /** Creates a new AngleSetpoint. */
+  private final AngleSubSystem m_Subsystem;
   private double m_setpoint;
-  public HoldAngle(AngleSubSystem subsystem) {
-    m_SubSystem = subsystem;
-    addRequirements(m_SubSystem);
+  public AngleSetpoint(double setpoint, AngleSubSystem subsystem) {
+    m_Subsystem = subsystem;
+    m_setpoint = setpoint;
+    addRequirements(m_Subsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_setpoint = m_SubSystem.getAngleDeg();
-    m_SubSystem.runClosedLoop(m_setpoint);
+    DriverStation.reportError("init _AngleSetPoint: " + m_setpoint, false);
+    m_Subsystem.runClosedLoop(m_setpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override

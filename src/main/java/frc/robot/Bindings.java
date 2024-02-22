@@ -19,11 +19,9 @@ import frc.robot.Constants.FieldConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.closedloop.AimAtSpeaker;
+import frc.robot.commands.closedloop.AngleSetpoint;
 import frc.robot.commands.closedloop.HoldAngle;
-import frc.robot.commands.closedloop.OneButtonShooting;
-import frc.robot.commands.closedloop.PIDAngleControl;
 import frc.robot.commands.closedloop.PIDShooter;
-import frc.robot.commands.closedloop.TurnAndAim;
 import frc.robot.commands.openloop.AngleOpenLoop;
 import frc.robot.commands.openloop.ClimberOpenLoop;
 import frc.robot.commands.openloop.FeederOpenLoop;
@@ -31,7 +29,7 @@ import frc.robot.commands.openloop.IntakeOpenLoop;
 import frc.robot.commands.openloop.ShooterAndFeederOpenLoop;
 import frc.robot.commands.openloop.ShooterOpenLoop;
 import frc.robot.commands.openloop.TrapOpenLoop;
-import frc.robot.subsystems.AngleController;
+import frc.robot.subsystems.AngleSubSystem;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
@@ -60,7 +58,7 @@ public class Bindings {
             Shooter shooter,
             Feeder feeder,
             Pneumatics pneumatics, 
-            AngleController angleController,
+            AngleSubSystem angleSubSystem,
             Intake intake,
             Climber climber, 
             Trap trap){
@@ -81,17 +79,17 @@ public class Bindings {
         //new Trigger(() -> {return driverController.getBackButtonPressed();}).onTrue(new TurnAndAim(angleController, driveSubsystem));
         if(FieldConstants.kVisionEnable){
         //could possibly still work with odometry instead of vision
-        new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose()));})); //3.9624 works
+        new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new AngleSetpoint(LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose())), angleSubSystem));
         } else {
-        new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleSetpoint;})); //number returned is angle setpoint
+        new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new AngleSetpoint(ShooterConstants.kAngleSetpoint, angleSubSystem)); //number returned is angle setpoint
         }  
         //new Trigger(() -> {return driverController.getBackButtonPressed();}).onTrue(new TurnAndAim(angleController, driveSubsystem)); //3.9624 works
 
         
         //Angle Controller
-        new Trigger(() -> {return driverController.getBButton();}).whileTrue(new AngleOpenLoop(angleController, -ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
+        new Trigger(() -> {return driverController.getBButton();}).whileTrue(new AngleOpenLoop(() -> ShooterConstants.kAngleControlMaxSpeed, angleSubSystem));
 
-        new Trigger(() -> {return driverController.getAButton();}).whileTrue(new AngleOpenLoop(angleController, ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
+        new Trigger(() -> {return driverController.getAButton();}).whileTrue(new AngleOpenLoop(() -> -ShooterConstants.kAngleControlMaxSpeed, angleSubSystem));
 
         //Compressor Toggle
         new Trigger(() -> {return driverController.getRightBumper();}).onTrue(new InstantCommand(() -> {

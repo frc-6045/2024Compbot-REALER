@@ -29,11 +29,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.closedloop.HoldAngle;
-import frc.robot.commands.closedloop.PIDAngleControl;
 import frc.robot.commands.closedloop.PIDShooter;
 import frc.robot.commands.openloop.FeederOpenLoop;
 import frc.robot.commands.openloop.IntakeOpenLoop;
-import frc.robot.subsystems.AngleController;
+import frc.robot.subsystems.AngleSubSystem;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
@@ -53,7 +52,8 @@ private final Feeder m_Feeder = new Feeder();
 private final Pneumatics m_Pneumatics = new Pneumatics();
 private final Intake m_Intake = new Intake();
 private final Climber m_Climber = new Climber();
-private final AngleController m_AngleController = new AngleController();
+//private final AngleController m_AngleController = new AngleController();
+private final AngleSubSystem m_AngleSubSystem = new AngleSubSystem();
 private final Trap m_Trap = new Trap();
 
 
@@ -62,7 +62,7 @@ private ShuffleboardTab teleopTab = Shuffleboard.getTab("teleOp");
 public RobotContainer() {
 
   //NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
-  NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kAngleSetpoint;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
+  //NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kAngleSetpoint;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
   NamedCommands.registerCommand("IntakeIn", new ParallelDeadlineGroup(new WaitCommand(1.5), new IntakeOpenLoop(m_Intake, () -> {return 1.00;})));
   NamedCommands.registerCommand("IntakeOut",new ParallelDeadlineGroup(new WaitCommand(1.5), new RunCommand(() -> {m_Intake.intakeOut();}, m_Intake)));
   m_Autos = new Autos(m_driveSubsystem, m_Feeder, m_Intake, m_Pneumatics, m_Shooter);  
@@ -83,8 +83,8 @@ public RobotContainer() {
                 MathUtil.applyDeadband(-m_driverController.getRightX(), 0.20),
                 true),
             m_driveSubsystem));
-    m_AngleController.setDefaultCommand(
-      new HoldAngle(m_AngleController, () -> {return m_AngleController.getAngleEncoder().getPosition();}));
+    //m_AngleController.setDefaultCommand(
+      //new HoldAngle(m_AngleController, () -> {return m_AngleController.getAngleEncoder().getPosition();}));
     
     
 
@@ -93,14 +93,14 @@ public RobotContainer() {
     teleopTab.addDouble("Right Trigger Axis", m_driverController::getRightTriggerAxis);
     teleopTab.addDouble("Left Trigger Axis", m_driverController::getLeftTriggerAxis);
     teleopTab.addDouble("Shooter RPM", () -> {return m_Shooter.getMotor().getEncoder().getVelocity();});
-    teleopTab.addDouble("hood position", () -> {return m_AngleController.getAngleEncoder().getPosition();});
+    //teleopTab.addDouble("hood position", () -> {return m_AngleController.getAngleEncoder().getPosition();});
   }
 
   private void configureBindings() {
     Bindings.InitBindings(m_driverController, m_operatorController, 
     m_driveSubsystem, m_Shooter, 
     m_Feeder, m_Pneumatics, 
-    m_AngleController, m_Intake, 
+    m_AngleSubSystem, m_Intake, 
     m_Climber, m_Trap);
   }
 

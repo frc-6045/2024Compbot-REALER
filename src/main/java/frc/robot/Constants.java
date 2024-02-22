@@ -252,7 +252,7 @@ public final class Constants {
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
 
-    public static final double kAngleSetpoint = 0.10; //angle setpoint here
+    public static final double kAngleSetpoint = 40; //angle setpoint here
   }
 
   public static final class IntakeConstants {
