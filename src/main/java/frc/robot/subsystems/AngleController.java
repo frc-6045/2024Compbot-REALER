@@ -24,6 +24,9 @@ public class AngleController extends SubsystemBase {
 
   public AngleController() {
     m_AngleMotor = new CANSparkFlex(ShooterConstants.kAngleControlCANID, MotorType.kBrushless);
+    m_AngleMotor.restoreFactoryDefaults();
+    m_AngleMotor.setInverted(false);
+    m_AngleMotor.burnFlash();
     m_AngleEncoder = m_AngleMotor.getAbsoluteEncoder(Type.kDutyCycle);
     //m_RelativeEncoder = m_AngleMotor.getEncoder();
     //m_limitSwitch = new DigitalInput(0);
