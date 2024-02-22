@@ -134,6 +134,7 @@ public class Bindings {
         // }, trap));
 
         // // intake toggle
+        // do things
          new Trigger(() -> {return operatorController.getLeftBumperPressed();}).onTrue(new InstantCommand(() -> {
            if(!bIntakeToggle){
              intake.intakeIn();
