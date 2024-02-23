@@ -62,9 +62,11 @@ private ShuffleboardTab teleopTab = Shuffleboard.getTab("teleOp");
 public RobotContainer() {
 
   //NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
-  NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kAngleSetpoint;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
-  NamedCommands.registerCommand("IntakeIn", new ParallelDeadlineGroup(new WaitCommand(1.5), new IntakeOpenLoop(m_Intake, () -> {return 1.00;})));
-  NamedCommands.registerCommand("IntakeOut",new ParallelDeadlineGroup(new WaitCommand(1.5), new RunCommand(() -> {m_Intake.intakeOut();}, m_Intake)));
+  NamedCommands.registerCommand("AngleAndShootClose", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kAngleCloseSetpoint;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
+  NamedCommands.registerCommand("AngleAndShoot4Ring", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kAngle4RingSetpoint;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
+
+  NamedCommands.registerCommand("IntakeOut", new SequentialCommandGroup(new ParallelDeadlineGroup(new WaitCommand(1.5), new RunCommand(() -> {m_Intake.intakeIn();}, m_Intake)), new InstantCommand(() -> {m_Intake.stopIntake();}, m_Intake)));
+  NamedCommands.registerCommand("IntakeIn", new SequentialCommandGroup(new ParallelDeadlineGroup(new WaitCommand(1.5), new RunCommand(() -> {m_Intake.intakeOut();}, m_Intake)), new InstantCommand(() -> {m_Intake.stopIntake();}, m_Intake)));
   m_Autos = new Autos(m_driveSubsystem, m_Feeder, m_Intake, m_Pneumatics, m_Shooter);  
 
     // m_Pneumatics.setDefaultCommand(new RunCommand(() -> {

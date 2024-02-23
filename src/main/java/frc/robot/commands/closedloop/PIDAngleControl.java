@@ -24,9 +24,7 @@ public class PIDAngleControl extends Command {
     m_AngleController = angleController;
     this.setpoint = setpoint;
     System.out.println("first setpoint : " + setpoint.get());
-    m_AnglePIDController = new PIDController(ShooterConstants.kShooterAngleP, 
-                                              ShooterConstants.kShooterAngleI, 
-                                              ShooterConstants.kShooterAngleD);
+    m_AnglePIDController = new PIDController(ShooterConstants.kShooterAngleP, ShooterConstants.kShooterAngleI, ShooterConstants.kShooterAngleD);
     m_AnglePIDController.setTolerance(.01); //who care
     m_AnglePIDController.disableContinuousInput();
     // Use addRequirements() here to declare subsystem dependencies.

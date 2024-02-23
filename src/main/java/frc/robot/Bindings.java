@@ -83,7 +83,7 @@ public class Bindings {
         //could possibly still work with odometry instead of vision
         new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose()));})); //3.9624 works
         } else {
-        new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleSetpoint;})); //number returned is angle setpoint
+        new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleCloseSetpoint;})); //number returned is angle setpoint
         }  
         //new Trigger(() -> {return driverController.getBackButtonPressed();}).onTrue(new TurnAndAim(angleController, driveSubsystem)); //3.9624 works
 

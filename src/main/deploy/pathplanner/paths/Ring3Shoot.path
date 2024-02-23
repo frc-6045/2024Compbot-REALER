@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3674521584632144,
-        "y": 5.750622428563154
+        "x": 2.087565879392411,
+        "y": 4.793899913614364
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2521633013190843,
-        "y": 5.555162990025228
+        "x": 1.9023937797249038,
+        "y": 5.112807418597295
       },
       "isLocked": false,
-      "linkedName": "Shoot"
+      "linkedName": "Ring3One"
     },
     {
       "anchor": {
-        "x": 2.5704369892152106,
-        "y": 5.524739769858686
+        "x": 1.3674521584632144,
+        "y": 5.750622428563154
       },
       "prevControl": {
-        "x": 1.5704369892152106,
-        "y": 5.524739769858686
+        "x": 1.9083175317284853,
+        "y": 5.493000160358017
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Ring1"
+      "linkedName": "Shoot"
     }
   ],
   "rotationTargets": [],
@@ -39,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.8951737102111287,
+    "rotation": -1.471973157455815,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": -2.33730585912375,
+    "rotation": -52.65065095535944,
     "velocity": 0
   },
   "useDefaultConstraints": true

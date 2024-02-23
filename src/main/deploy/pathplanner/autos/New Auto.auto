@@ -14,13 +14,7 @@
         {
           "type": "named",
           "data": {
-            "name": "AngleAndShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "New Path"
+            "name": "IntakeIn"
           }
         }
       ]

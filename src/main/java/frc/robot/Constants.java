@@ -161,7 +161,7 @@ public final class Constants {
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
-    public static final int kDrivingMotorCurrentLimit = 80; // amps
+    public static final int kDrivingMotorCurrentLimit = 50; // amps
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
@@ -174,8 +174,8 @@ public final class Constants {
     //TODO: likely going to have to revisit these pid constants
     //test
     public static final HolonomicPathFollowerConfig autoBuilderPathConfig = new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-      new PIDConstants(.5, 0.0 ,0.2), //original p = 5, 1st attempt: p = 5, d = 0.5, 2nd attempt: p= 5, d = 0.5, 3rd attempt: p = 5, d = 3 this caused the wheels to shutter
-      new PIDConstants(1.5, 0.0, 0), //5.0, 0, 0.2
+      new PIDConstants(5.0, 0.0 ,0.2), //original p = 5, 1st attempt: p = 5, d = 0.5, 2nd attempt: p= 5, d = 0.5, 3rd attempt: p = 5, d = 3 this caused the wheels to shutter
+      new PIDConstants(5, 0.0, 0), //5.0, 0, 0.2
       DriveConstants.kMaxSpeedMetersPerSecond, // Max module speed, in m/s
       DriveConstants.radiusMeters, // Drive base radius in meters. Distance from robot center to furthest module.
       new ReplanningConfig());
@@ -252,7 +252,8 @@ public final class Constants {
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
 
-    public static final double kAngleSetpoint = 0.10; //angle setpoint here
+    public static final double kAngleCloseSetpoint = 0.19; //angle setpoint here
+    public static final double kAngle4RingSetpoint = 0.15;
   }
 
   public static final class IntakeConstants {

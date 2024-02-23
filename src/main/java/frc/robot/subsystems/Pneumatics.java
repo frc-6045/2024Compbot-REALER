@@ -23,7 +23,8 @@ public class Pneumatics extends SubsystemBase {
     m_Compressor = new Compressor(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH);
     m_Solenoid = new Solenoid(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH, PneumaticsConstants.kSolenoidSingleChannel);
     m_TrapSolenoid = new Solenoid(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH, PneumaticsConstants.kTrapSolenoidChannel);
-    m_Compressor.enableDigital();
+    //m_Compressor.enableDigital()
+    m_Compressor.disable();
     System.out.println("enabled compressor");
   }
 

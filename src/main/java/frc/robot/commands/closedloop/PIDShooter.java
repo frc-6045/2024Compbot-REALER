@@ -102,7 +102,7 @@ public class PIDShooter extends Command {
   @Override
   public boolean isFinished() {
     System.out.println(timer.get());
-    if(timer.get() > 2){
+    if(timer.get() > 1){
       return true;
     }
     return false;

@@ -37,6 +37,7 @@ public class AngleController extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("hood angle", m_AngleEncoder.getPosition());
+    SmartDashboard.putBoolean("isInverted", m_AngleMotor.getInverted());
   }
 
   public CANSparkFlex getAngleMotor() {
