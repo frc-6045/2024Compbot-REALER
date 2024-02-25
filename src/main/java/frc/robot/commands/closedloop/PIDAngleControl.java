@@ -27,6 +27,7 @@ public class PIDAngleControl extends Command {
     m_AnglePIDController = new PIDController(ShooterConstants.kShooterAngleP, ShooterConstants.kShooterAngleI, ShooterConstants.kShooterAngleD);
     m_AnglePIDController.setTolerance(.01); //who care
     m_AnglePIDController.disableContinuousInput();
+    
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_AngleController);
   }
@@ -44,8 +45,12 @@ public class PIDAngleControl extends Command {
   @Override
   public void execute() {
     double feedforward = 0.0; // just to have TODO: maybe do characterization??
-   
-    double speed = -m_AnglePIDController.calculate(m_AngleController.getAngleEncoder().getPosition(), setpoint.get());
+    double speed;
+    if(m_AngleController.getAngleEncoder().getPosition() > .75){
+      speed = -.10;
+    } else {
+      speed = -m_AnglePIDController.calculate(m_AngleController.getAngleEncoder().getPosition(), setpoint.get());
+    }
     m_AngleController.getAngleMotor().set(speed);
   }
 

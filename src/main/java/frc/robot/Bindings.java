@@ -47,7 +47,7 @@ import frc.robot.util.PoseMath;
 // Dominic
 public class Bindings {
 
-    private static boolean bCompressorEnabled = true;
+    private static boolean bCompressorEnabled = false;
     private static boolean bIntakeToggle = true;
     private static boolean bTrapToggle = true;
 
@@ -85,6 +85,12 @@ public class Bindings {
         } else {
         new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleCloseSetpoint;})); //number returned is angle setpoint
         }  
+
+        new Trigger(() -> {return operatorController.getStartButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleMidSetpoint;}));
+
+        new Trigger(() -> {return operatorController.getBButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleRestSetpoint;}));
+
+
         //new Trigger(() -> {return driverController.getBackButtonPressed();}).onTrue(new TurnAndAim(angleController, driveSubsystem)); //3.9624 works
 
         
@@ -135,15 +141,17 @@ public class Bindings {
 
         // // intake toggle
         // do things
-         new Trigger(() -> {return operatorController.getLeftBumperPressed();}).onTrue(new InstantCommand(() -> {
-           if(!bIntakeToggle){
-             intake.intakeIn();
-             bIntakeToggle = true;
-           } else {
-            intake.stopIntake();
-             bIntakeToggle = false;
-           }
-         }, intake));
+        //  new Trigger(() -> {return operatorController.getLeftBumperPressed();}).onTrue(new InstantCommand(() -> {
+        //    if(!bIntakeToggle){
+        //      intake.intakeIn();
+        //      bIntakeToggle = true;
+        //    } else {
+        //     intake.stopIntake();
+        //      bIntakeToggle = false;
+        //    }
+        //  }, intake));
+
+        
 
     
 
@@ -151,7 +159,9 @@ public class Bindings {
 
          new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, () -> {return -operatorController.getLeftTriggerAxis();}));
 
-         
+         new Trigger(() -> {return operatorController.getRightBumper();}).whileTrue(new IntakeOpenLoop(intake, () -> {return IntakeConstants.kIntakeSlowSpeed;}));
+
+         new Trigger(() -> {return operatorController.getLeftBumper();}).whileTrue(new IntakeOpenLoop(intake, () -> {return -IntakeConstants.kIntakeSlowSpeed;}));
 
          //new Trigger(() -> {return operatorController.getRightBumperPressed();}).onTrue(new InstantCommand(() -> {pneumatics.ToggleTrapSolenoid();}, pneumatics));
        
@@ -164,8 +174,11 @@ public class Bindings {
          new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new ParallelCommandGroup(new TrapOpenLoop(trap, () -> {return ClimbConstants.kTrapMaxSpeed;}), new IntakeOpenLoop(intake, () -> {return 1.0;})));
          new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new ParallelCommandGroup(new TrapOpenLoop(trap, () -> {return -ClimbConstants.kTrapMaxSpeed;}), new IntakeOpenLoop(intake, () -> {return -1.0;})));
 
+        
 
-
+    }
+    public static boolean getCompressorEnabled(){
+        return bCompressorEnabled;
     }
 
     

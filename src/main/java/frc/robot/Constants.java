@@ -136,6 +136,7 @@ public final class Constants {
     public static final double kTurningEncoderPositionPIDMinInput = 0; // radians
     public static final double kTurningEncoderPositionPIDMaxInput = kTurningEncoderPositionFactor; // radians
 
+    //Drivetrain P
     public static final double kDrivingP = 0.25; //was 0.8
     public static final double kDrivingI = 0;
     public static final double kDrivingD = 0;
@@ -161,7 +162,7 @@ public final class Constants {
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
-    public static final int kDrivingMotorCurrentLimit = 50; // amps
+    public static final int kDrivingMotorCurrentLimit = 80; // amps
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
@@ -205,7 +206,7 @@ public final class Constants {
 
     public static final HashMap<String, Command> eventMap = new HashMap<>();
 
-    public static final double slowIntakeSpeed = 0.5;
+    public static final double slowIntakeSpeed = 0.3;
     public static final double fastIntakeSpeed = 1;
 
 
@@ -246,14 +247,17 @@ public final class Constants {
     public static final int kShooterLaunchRPM = 4300;
 
     public static final int kAngleControlCANID = 11; //TODO hey
-    public static final double kAngleControlMaxSpeed = 0.12;
+    public static final double kAngleControlMaxSpeed = 0.07;
 
-    public static final double kShooterAngleP = 4.00;
+    public static final double kShooterAngleP = 4.50; // was 4.50
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
 
-    public static final double kAngleCloseSetpoint = 0.19; //angle setpoint here
-    public static final double kAngle4RingSetpoint = 0.15;
+    public static final double kAngleCloseSetpoint = 0.03; //angle setpoint here // was before surgical tubing 0.17
+    public static final double kStartingAngleCloseSetpoint = 0.03; // was before surgical tubing 0.17
+    public static final double kAngleMidSetpoint = 0.03; 
+    public static final double kAngleRestSetpoint = 0.03;
+    public static final double kAngle4RingSetpoint = 0.03;
   }
 
   public static final class IntakeConstants {
@@ -262,14 +266,14 @@ public final class Constants {
     public static final int kIndexerCANID = 23;
     public static final double kIntakeSpeed = 1.0; 
     public static final double kIndexerSpeed = .5;
-    public static final double kIntakeSlowSpeed = 0.5; 
+    public static final double kIntakeSlowSpeed = 0.2; 
   }
 
   public static final class ClimbConstants {
     public static final int kLeftClimbMotorCanId = 13;
     public static final int kRightClimbMotorCanId = 14;
     public static final int kTrapMotorCanId = 15;
-    public static final double kClimbMaxSpeed = .20;
+    public static final double kClimbMaxSpeed = 1.00;
     public static final double kTrapMaxSpeed = 0.80;
 
   }

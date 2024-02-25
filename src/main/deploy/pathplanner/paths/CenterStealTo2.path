@@ -8,40 +8,40 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8701178634578595,
-        "y": 6.740571585409808
+        "x": 2.181370808239247,
+        "y": 7.197724348055331
       },
       "isLocked": false,
       "linkedName": "CenterStealStart"
     },
     {
       "anchor": {
-        "x": 3.4555625509355288,
-        "y": 6.225058895615422
+        "x": 3.4361092418867303,
+        "y": 6.215332241091023
       },
       "prevControl": {
-        "x": 2.3369972806241543,
-        "y": 6.02079915060914
+        "x": 2.4232834893497444,
+        "y": 6.012767090583626
       },
       "nextControl": {
-        "x": 4.294370541149668,
-        "y": 6.378232528605723
+        "x": 4.506041239570631,
+        "y": 6.429318640627803
       },
       "isLocked": false,
-      "linkedName": "MiddleCenterSteal"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.55048410570755,
-        "y": 7.333897511396918
+        "x": 7.6769306145247365,
+        "y": 5.787359442017461
       },
       "prevControl": {
-        "x": 5.965039418229883,
-        "y": 6.993464603044183
+        "x": 6.130392545145281,
+        "y": 6.322325440859411
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "CenterStealRing1"
+      "linkedName": "CenterStealRing2"
     }
   ],
   "rotationTargets": [],

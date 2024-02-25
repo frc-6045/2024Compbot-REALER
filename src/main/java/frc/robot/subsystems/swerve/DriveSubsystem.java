@@ -40,6 +40,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Bindings;
 import frc.robot.Constants;
 
 import frc.robot.Constants.AutoConstants;
@@ -170,7 +171,7 @@ public class DriveSubsystem extends SubsystemBase {
     if(FieldConstants.kVisionEnable){
       vision.UpdateVision();
     }
-    
+    SmartDashboard.putBoolean("Compressor Enabled", Bindings.getCompressorEnabled());
     SmartDashboard.putNumber("m_gyro_Get Heading", getHeadingDegrees());
     SmartDashboard.putNumber("drive angle", getPoseHeading());
     SmartDashboard.putNumber("target angle 8lue", PoseMath.getTargetAngle(FieldConstants.kSpeakerBackLocation, getPose()).getDegrees());

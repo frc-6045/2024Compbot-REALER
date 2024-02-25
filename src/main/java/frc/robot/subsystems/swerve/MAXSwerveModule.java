@@ -115,7 +115,8 @@ public class MAXSwerveModule {
     m_desiredState.angle = new Rotation2d(m_turningEncoder.getPosition());
     m_drivingEncoder.setPosition(0);
 
-    m_SimpleMotorFeedforward = new SimpleMotorFeedforward(0.1902, .346228); //ks: 0.1555825 kv: .336085
+    //Characterization Constants
+    m_SimpleMotorFeedforward = new SimpleMotorFeedforward(0.198228, .342548); //ks: 0.1902 kv: .346228
     
 
 

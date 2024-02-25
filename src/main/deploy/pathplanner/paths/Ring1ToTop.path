@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.4032384462873189,
-        "y": 5.651186278675874
+        "x": 0.8099125202989738,
+        "y": 6.740571585408573
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2879495891431887,
-        "y": 5.455726840137949
+        "x": 1.7339447001168882,
+        "y": 7.0226445666161466
       },
       "isLocked": false,
-      "linkedName": "Shoot"
+      "linkedName": "ShootTop"
     },
     {
       "anchor": {
@@ -43,9 +43,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "4RingCenter",
+  "folder": null,
   "previewStartingState": {
-    "rotation": -2.33730585912375,
+    "rotation": 63.43494882292203,
     "velocity": 0
   },
   "useDefaultConstraints": true

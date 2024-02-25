@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.FeedForwardCharacterization;
 import frc.robot.commands.FeedForwardCharacterization.FeedForwardCharacterizationData;
 import frc.robot.subsystems.Feeder;
@@ -41,12 +42,12 @@ public class Autos {
     
         // autoChooser = AutoBuilder.buildAutoChooser(); 
         
-
+        autoChooser.addOption("DoNothing", new InstantCommand());
         autoChooser.addOption("Drivetrain Characterization", new FeedForwardCharacterization(m_Drivetrain, true, new FeedForwardCharacterizationData("DriveSubsystem"), 
             m_Drivetrain::runCharacterizationVolts, m_Drivetrain::getCharacterizationVelocity));
         autoChooser.addOption("Shooter Characterization", new FeedForwardCharacterization(m_Shooter, true, new FeedForwardCharacterizationData("Shooter"),
                 m_Shooter::runCharacterizationVolts , m_Shooter::getCharacterizationVelocity));
-    
+        
         autoChooser.addOption("Basic Test Auto", AutoBuilder.buildAuto("Basic Test Auto"));
         autoChooser.addOption("4Ring", AutoBuilder.buildAuto("4Ring"));
         autoChooser.addOption("cool", AutoBuilder.buildAuto("New Auto"));

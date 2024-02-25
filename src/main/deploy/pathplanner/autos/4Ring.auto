@@ -14,7 +14,13 @@
         {
           "type": "named",
           "data": {
-            "name": "AngleAndShootClose"
+            "name": "ActuateIntakeDown"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShootClose"
           }
         },
         {
@@ -45,7 +51,7 @@
         {
           "type": "named",
           "data": {
-            "name": "AngleAndShootClose"
+            "name": "ShootClose"
           }
         },
         {
@@ -76,7 +82,7 @@
         {
           "type": "named",
           "data": {
-            "name": "AngleAndShootClose"
+            "name": "ShootClose"
           }
         },
         {
@@ -102,6 +108,18 @@
           "type": "path",
           "data": {
             "pathName": "Ring3Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShootClose"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActuateIntakeUp"
           }
         }
       ]

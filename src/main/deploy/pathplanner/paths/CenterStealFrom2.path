@@ -3,79 +3,66 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.7612792476769783,
-        "y": 6.808658167079367
-      },
-      "prevControl": null,
-      "nextControl": {
-        "x": 1.8701178634578595,
-        "y": 6.740571585409808
-      },
-      "isLocked": false,
-      "linkedName": "CenterStealStart"
-    },
-    {
-      "anchor": {
-        "x": 3.406929278313533,
-        "y": 6.409865331579004
-      },
-      "prevControl": {
-        "x": 2.2883640080021594,
-        "y": 6.205605586572722
-      },
-      "nextControl": {
-        "x": 4.245737268527671,
-        "y": 6.563038964569306
-      },
-      "isLocked": false,
-      "linkedName": "MiddleCenterSteal"
-    },
-    {
-      "anchor": {
-        "x": 5.517613310108138,
-        "y": 6.721118276359775
-      },
-      "prevControl": {
-        "x": 4.675136145369824,
-        "y": 7.193416080834284
-      },
-      "nextControl": {
-        "x": 6.159572508718478,
-        "y": 6.361232058957008
-      },
-      "isLocked": false,
-      "linkedName": "CenterSteal2ndWaypoint"
-    },
-    {
-      "anchor": {
         "x": 7.6769306145247365,
         "y": 5.787359442017461
       },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.675085198513018,
+        "y": 6.429318640624023
+      },
+      "isLocked": false,
+      "linkedName": "CenterStealRing2"
+    },
+    {
+      "anchor": {
+        "x": 3.4458358964111295,
+        "y": 6.254238859188618
+      },
       "prevControl": {
-        "x": 6.091485927047684,
-        "y": 5.91380595083465
+        "x": 4.525494548619429,
+        "y": 6.516858531347393
+      },
+      "nextControl": {
+        "x": 2.251118066105275,
+        "y": 5.963631819384492
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.7612792476769783,
+        "y": 6.808658167079367
+      },
+      "prevControl": {
+        "x": 1.761279247676978,
+        "y": 6.808658167079367
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "CenterStealRing2"
+      "linkedName": "CenterStealStart"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 4.5,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 178.2642954111439,
+    "rotation": 61.9275130641471,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "CenterSteal",
-  "previewStartingState": null,
-  "useDefaultConstraints": false
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
 }

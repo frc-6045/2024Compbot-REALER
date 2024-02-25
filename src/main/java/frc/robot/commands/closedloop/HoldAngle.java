@@ -44,8 +44,12 @@ public class HoldAngle extends Command {
   @Override
   public void execute() {
     double feedforward = 0.0; // just to have TODO: maybe do characterization??
-   
-    double speed = -m_AnglePIDController.calculate(m_AngleController.getAngleEncoder().getPosition(), actualSetpoint);
+    double speed;
+    if(m_AngleController.getAngleEncoder().getPosition() > .75){
+      speed = -.10;
+    } else {
+      speed = -m_AnglePIDController.calculate(m_AngleController.getAngleEncoder().getPosition(), setpoint.get());
+    }
     m_AngleController.getAngleMotor().set(speed);
   }
 
