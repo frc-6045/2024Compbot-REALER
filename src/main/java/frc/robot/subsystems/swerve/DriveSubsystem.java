@@ -116,13 +116,13 @@ public class DriveSubsystem extends SubsystemBase {
             //for characterization
             private boolean isCharacterizing = false;
             private double characterizationVolts = 0.0;
-
       private Vision vision;
 
   /** Creates a new DriveSubsystem. */
     public DriveSubsystem() {
-    this.xLimiter = new SlewRateLimiter(1.8);
-    this.yLimiter = new SlewRateLimiter(1.8);
+      
+    this.xLimiter = new SlewRateLimiter(1.2); // was 1.2
+    this.yLimiter = new SlewRateLimiter(1.2); // was 1.2
     this.turningLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond);
     m_VisionLockController.setSetpoint(0);
 
@@ -254,18 +254,26 @@ public class DriveSubsystem extends SubsystemBase {
     // Adjust input based on max speed
     // xSpeed *= 0.5;
     // ySpeed *= 0.5;
-    //rot *= 0.3;
+    rot *= 0.5;
 
 
     xSpeed = xLimiter.calculate(xSpeed) * DriveConstants.kMaxSpeedMetersPerSecond;
     ySpeed = yLimiter.calculate(ySpeed) * DriveConstants.kMaxSpeedMetersPerSecond;
     rot = turningLimiter.calculate(rot) * DriveConstants.kMaxAngularSpeed;
     double m_HeadingDegrees = getPose().getRotation().getDegrees();
-
-    var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
+    SwerveModuleState[] swerveModuleStates;
+    if(DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red){
+       swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
         fieldRelative
-            ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, Rotation2d.fromDegrees(m_HeadingDegrees)) //TODO: changed getHeadingDegrees()
+            ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, Rotation2d.fromDegrees(m_HeadingDegrees).rotateBy(Rotation2d.fromDegrees(180)))//TODO: changed getHeadingDegrees()
             : new ChassisSpeeds(xSpeed, ySpeed, rot));
+    } else {
+      swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
+          fieldRelative
+              ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, Rotation2d.fromDegrees(m_HeadingDegrees)) //TODO: changed getHeadingDegrees()
+              : new ChassisSpeeds(xSpeed, ySpeed, rot));
+    }
+   
     SwerveDriveKinematics.desaturateWheelSpeeds(
         swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);
@@ -335,7 +343,28 @@ public void setModuleTurnVoltage(double voltage) {
 
   /** Zeroes the heading of the robot. */
   public void zeroHeading() {
-    m_gyro.zeroYaw();
+      Pose2d pose;
+      if(DriverStation.getAlliance().isPresent()) {
+    
+          if(DriverStation.getAlliance().get() == Alliance.Red){
+           pose = new Pose2d(getEstimatedX(), getEstimatedY(), Rotation2d.fromDegrees(180));
+          } else {
+           pose = new Pose2d(getEstimatedX(), getEstimatedY(), new Rotation2d(0));
+          }
+        }  else {
+          pose = new Pose2d(getEstimatedX(), getEstimatedY(), new Rotation2d(0));
+        }
+       m_gyro.zeroYaw();
+        m_poseEstimator.resetPosition(
+        Rotation2d.fromDegrees(getHeadingDegrees()),
+        new SwerveModulePosition[] {
+            m_frontLeft.getPosition(),
+            m_frontRight.getPosition(),
+            m_rearLeft.getPosition(),
+            m_rearRight.getPosition()
+        },
+        pose);
+        
     //m_gyro.setAngleAdjustment(-1);
     
   }

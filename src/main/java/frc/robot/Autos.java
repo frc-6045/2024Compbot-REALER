@@ -49,8 +49,20 @@ public class Autos {
                 m_Shooter::runCharacterizationVolts , m_Shooter::getCharacterizationVelocity));
         
         autoChooser.addOption("Basic Test Auto", AutoBuilder.buildAuto("Basic Test Auto"));
-        autoChooser.addOption("4Ring", AutoBuilder.buildAuto("4Ring"));
-        autoChooser.addOption("cool", AutoBuilder.buildAuto("New Auto"));
+        autoChooser.addOption("4RingRed", AutoBuilder.buildAuto("4RingRed"));
+        autoChooser.addOption("4RingBlue", AutoBuilder.buildAuto("4RingBlue"));
+        autoChooser.addOption("3RingNoPodium", AutoBuilder.buildAuto("3RingNoPodium"));
+        autoChooser.addOption("3RingNoTop", AutoBuilder.buildAuto("3RingNoTop"));
+        autoChooser.addOption("CenterSteal", AutoBuilder.buildAuto("CenterSteal"));
+        autoChooser.addOption("ShootAndDoNothing", AutoBuilder.buildAuto("ShootAndDoNothing"));
+        autoChooser.addOption("ShootAndDoNothingLeft", AutoBuilder.buildAuto("ShootAndDoNothingLeft"));
+        autoChooser.addOption("ShootAndDoNothingRight", AutoBuilder.buildAuto("ShootAndDoNothingRight"));
+        autoChooser.addOption("ShootAndOutRight", AutoBuilder.buildAuto("ShootAndOutRight"));
+        autoChooser.addOption("DoNothing", AutoBuilder.buildAuto("DoNothing"));
+        autoChooser.addOption("DoNothingLeft", AutoBuilder.buildAuto("DoNothingLeft"));
+        autoChooser.addOption("DoNothingRight", AutoBuilder.buildAuto("DoNothingRight"));
+
+
         SmartDashboard.putData("Autos", autoChooser);
         //autoTab.add(autoChooser); sure
     }

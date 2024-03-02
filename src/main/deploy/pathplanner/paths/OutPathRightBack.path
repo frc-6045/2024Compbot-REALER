@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.5412570256420133,
-        "y": 6.643305040164583
+        "x": 7.7450171961914664,
+        "y": 0.7781323619503491
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.284073553881586,
-        "y": 6.283248179699984
+        "x": 6.237385744909607,
+        "y": 0.5835992714623676
       },
       "isLocked": false,
-      "linkedName": "Ring2"
+      "linkedName": "OutPathRightRing"
     },
     {
       "anchor": {
-        "x": 1.36,
-        "y": 5.651186278675874
+        "x": 0.712645975054983,
+        "y": 4.367267881455193
       },
       "prevControl": {
-        "x": 1.8700033566540197,
-        "y": 5.959367648343679
+        "x": 1.228158664844072,
+        "y": 2.811003157549761
       },
       "nextControl": null,
       "isLocked": false,
@@ -39,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -2.746764626820918,
+    "rotation": -58.5704343851615,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "4RingCenter",
+  "folder": null,
   "previewStartingState": {
-    "rotation": 65.77225468204581,
+    "rotation": 179.3259631020154,
     "velocity": 0
   },
   "useDefaultConstraints": true

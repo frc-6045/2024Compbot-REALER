@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.7612792476769783,
-        "y": 6.808658167079367
+        "x": 2.502350407544417,
+        "y": 6.740571585408573
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8701178634578595,
-        "y": 6.740571585409808
+        "x": 3.6111890233252986,
+        "y": 6.672485003739014
       },
       "isLocked": false,
-      "linkedName": "CenterStealStart"
+      "linkedName": "CenterStealFirstRing"
     },
     {
       "anchor": {
-        "x": 3.4555625509355288,
-        "y": 6.225058895615422
+        "x": 7.900643668585917,
+        "y": 7.32417085687252
       },
       "prevControl": {
-        "x": 2.3369972806241543,
-        "y": 6.02079915060914
-      },
-      "nextControl": {
-        "x": 4.294370541149668,
-        "y": 6.378232528605723
-      },
-      "isLocked": false,
-      "linkedName": "MiddleCenterSteal"
-    },
-    {
-      "anchor": {
-        "x": 7.55048410570755,
-        "y": 7.333897511396918
-      },
-      "prevControl": {
-        "x": 5.965039418229883,
-        "y": 6.993464603044183
+        "x": 6.315198981108249,
+        "y": 6.983737948519785
       },
       "nextControl": null,
       "isLocked": false,
@@ -55,7 +39,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 178.2642954111439,
+    "rotation": 15.945395900922893,
     "rotateFast": false
   },
   "reversed": false,

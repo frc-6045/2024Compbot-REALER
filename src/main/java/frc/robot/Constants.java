@@ -57,7 +57,7 @@ public final class Constants {
     // the robot, rather the allowed maximum speeds
     
     //Slew Constants
-    public static final double kMaxSpeedMetersPerSecond = 4.8; //changed from 4.8 bc stuff wasnt straped down
+    public static final double kMaxSpeedMetersPerSecond =  5.74; //changed from 4.8 bc stuff wasnt straped down
     public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
     public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = //
@@ -140,7 +140,7 @@ public final class Constants {
     public static final double kDrivingP = 0.25; //was 0.8
     public static final double kDrivingI = 0;
     public static final double kDrivingD = 0;
-    public static final double kDrivingFF = 0; 
+    public static final double kDrivingFF = 1 / kDriveWheelFreeSpeedRps; 
     public static final double kDrivingMinOutput = -1;
     public static final double kDrivingMaxOutput = 1;
 
@@ -162,7 +162,7 @@ public final class Constants {
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
-    public static final int kDrivingMotorCurrentLimit = 80; // amps
+    public static final int kDrivingMotorCurrentLimit = 80; // 80 amps
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
@@ -176,8 +176,9 @@ public final class Constants {
     //test
     public static final HolonomicPathFollowerConfig autoBuilderPathConfig = new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
       new PIDConstants(5.0, 0.0 ,0.2), //original p = 5, 1st attempt: p = 5, d = 0.5, 2nd attempt: p= 5, d = 0.5, 3rd attempt: p = 5, d = 3 this caused the wheels to shutter
-      new PIDConstants(5, 0.0, 0), //5.0, 0, 0.2
-      DriveConstants.kMaxSpeedMetersPerSecond, // Max module speed, in m/s
+      new PIDConstants(5, 0.0, 0), 
+      4.8, //5.0, 0, 0.2
+      //DriveConstants.kMaxSpeedMetersPerSecond, // Max module speed, in m/s
       DriveConstants.radiusMeters, // Drive base radius in meters. Distance from robot center to furthest module.
       new ReplanningConfig());
 
@@ -214,7 +215,7 @@ public final class Constants {
 
   }
   public static final class NeoMotorConstants {
-    public static final double kFreeSpeedRpm = 5676;
+    public static final double kFreeSpeedRpm = 6784;
   }
 
   public static final class PIDSwerveConstants
@@ -244,19 +245,21 @@ public final class Constants {
     public static final double kShooterAmpP = .001;
     public static final double kShooterAmpI = 0;
     public static final double kShooterAmpD = 0;
-    public static final int kShooterLaunchRPM = 4300;
+    public static final int kShooterLaunchRPM = -2700; //4300
 
     public static final int kAngleControlCANID = 11; //TODO hey
     public static final double kAngleControlMaxSpeed = 0.07;
 
-    public static final double kShooterAngleP = 4.50; // was 4.50
+    public static final double kShooterAngleP = 7; // was 4.50
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
+    //public static final double kAngleHardSetpoint = 0.015;
+    public static final double kAngleCloseSetpoint = 0.071; //was .0915
+    public static final double kStartingAngleCloseSetpoint = 0.0634; // was 0.0634
+    public static final double kAngleRestSetpoint = 0.011; // was .022
+    public static final double kAnglePodiumSetpoint = .057; //same as climb
+    public static final double kAngleClimbSetpoint = .057; //was
 
-    public static final double kAngleCloseSetpoint = 0.03; //angle setpoint here // was before surgical tubing 0.17
-    public static final double kStartingAngleCloseSetpoint = 0.03; // was before surgical tubing 0.17
-    public static final double kAngleMidSetpoint = 0.03; 
-    public static final double kAngleRestSetpoint = 0.03;
     public static final double kAngle4RingSetpoint = 0.03;
   }
 

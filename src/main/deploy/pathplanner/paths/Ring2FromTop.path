@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.284073553881586,
-        "y": 6.283248179699984
+        "x": 1.6755847729704936,
+        "y": 6.944831330420956
       },
       "isLocked": false,
       "linkedName": "Ring2"
     },
     {
       "anchor": {
-        "x": 1.36,
-        "y": 5.651186278675874
+        "x": 0.8099125202989738,
+        "y": 6.740571585408573
       },
       "prevControl": {
-        "x": 1.8700033566540197,
-        "y": 5.959367648343679
+        "x": 1.6366781548728973,
+        "y": 6.798931512554969
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "ShootTop"
     }
   ],
   "rotationTargets": [],
@@ -39,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -2.746764626820918,
+    "rotation": 62.40270413135625,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "4RingCenter",
+  "folder": null,
   "previewStartingState": {
-    "rotation": 65.77225468204581,
+    "rotation": 61.0735741647464,
     "velocity": 0
   },
   "useDefaultConstraints": true

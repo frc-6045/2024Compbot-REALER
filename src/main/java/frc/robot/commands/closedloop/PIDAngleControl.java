@@ -25,9 +25,9 @@ public class PIDAngleControl extends Command {
     this.setpoint = setpoint;
     System.out.println("first setpoint : " + setpoint.get());
     m_AnglePIDController = new PIDController(ShooterConstants.kShooterAngleP, ShooterConstants.kShooterAngleI, ShooterConstants.kShooterAngleD);
-    m_AnglePIDController.setTolerance(.01); //who care
+    m_AnglePIDController.setTolerance(.003); //was .01//who care
+    //m_AnglePIDController.enableContinuousInput(0,1);
     m_AnglePIDController.disableContinuousInput();
-    
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_AngleController);
   }
@@ -44,12 +44,14 @@ public class PIDAngleControl extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    System.out.println("error: " + m_AnglePIDController.getPositionError());
+    System.out.println("setpoint: " + setpoint.get());
     double feedforward = 0.0; // just to have TODO: maybe do characterization??
     double speed;
     if(m_AngleController.getAngleEncoder().getPosition() > .75){
-      speed = -.10;
-    } else {
-      speed = -m_AnglePIDController.calculate(m_AngleController.getAngleEncoder().getPosition(), setpoint.get());
+       speed = -.10;
+     } else {
+      speed = -m_AnglePIDController.calculate(m_AngleController.getAngleEncoder().getPosition(), actualSetpoint);
     }
     m_AngleController.getAngleMotor().set(speed);
   }
@@ -66,5 +68,7 @@ public class PIDAngleControl extends Command {
   public boolean isFinished() {
     //return false;
     return m_AnglePIDController.atSetpoint();
+
+    //return true;
   }
 }

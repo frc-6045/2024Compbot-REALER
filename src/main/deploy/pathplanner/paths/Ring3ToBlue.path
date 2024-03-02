@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.5412570256420133,
-        "y": 6.643305040164583
+        "x": 1.4032384462873189,
+        "y": 5.651186278675874
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.284073553881586,
-        "y": 6.283248179699984
+        "x": 1.6354836534400772,
+        "y": 5.496437399174909
       },
       "isLocked": false,
-      "linkedName": "Ring2"
+      "linkedName": "Shoot"
     },
     {
       "anchor": {
-        "x": 1.36,
-        "y": 5.651186278675874
+        "x": 2.4579100787274255,
+        "y": 4.351544342186429
       },
       "prevControl": {
-        "x": 1.8700033566540197,
-        "y": 5.959367648343679
+        "x": 2.0052671684290737,
+        "y": 4.7013138637806104
       },
       "nextControl": null,
       "isLocked": false,
@@ -39,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -2.746764626820918,
+    "rotation": -33.69006752597987,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "4RingCenter",
   "previewStartingState": {
-    "rotation": 65.77225468204581,
+    "rotation": -1.1361084795418337,
     "velocity": 0
   },
   "useDefaultConstraints": true

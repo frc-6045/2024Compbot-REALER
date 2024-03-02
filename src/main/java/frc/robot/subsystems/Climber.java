@@ -21,6 +21,12 @@ public class Climber extends SubsystemBase {
   public Climber() {
     m_LeftClimbMotor = new CANSparkFlex(ClimbConstants.kLeftClimbMotorCanId, MotorType.kBrushless);
     m_RightClimbMotor = new CANSparkFlex(ClimbConstants.kRightClimbMotorCanId, MotorType.kBrushless);
+
+    m_LeftClimbMotor.setSmartCurrentLimit(50);
+    m_RightClimbMotor.setSmartCurrentLimit(50); 
+
+    m_LeftClimbMotor.burnFlash();
+    m_RightClimbMotor.burnFlash();
   }
 
   @Override
@@ -29,6 +35,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void runMotors(Supplier<Double> speedSupplier){
+    System.out.println("left: " + m_LeftClimbMotor.getOutputCurrent() + "|  right: " + m_RightClimbMotor.getOutputCurrent());
     m_LeftClimbMotor.set(speedSupplier.get());
     m_RightClimbMotor.set(-speedSupplier.get());
   }

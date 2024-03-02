@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -65,7 +66,8 @@ public class Bindings {
             Climber climber, 
             Trap trap){
         
-        new JoystickButton(driverController, XboxController.Button.kStart.value).onTrue(new InstantCommand(() -> { driveSubsystem.zeroHeading();}, driveSubsystem));
+        //new JoystickButton(driverController, XboxController.Button.kStart.value).onTrue(new InstantCommand(() -> { driveSubsystem.zeroHeading();}, driveSubsystem));
+        new Trigger(() -> {return driverController.getStartButtonPressed();}).onTrue(new InstantCommand(() -> {driveSubsystem.zeroHeading();}, driveSubsystem));
         
         new Trigger(() -> {return driverController.getYButtonPressed();}).onTrue(new AimAtSpeaker(driveSubsystem));
 
@@ -76,8 +78,9 @@ public class Bindings {
 
         //new Trigger(() -> {return operatorController.getRightTriggerAxis() > 0;}).whileTrue(new ShooterAndFeederOpenLoop(shooter, feeder, operatorController::getRightTriggerAxis, operatorController::getRightTriggerAxis));
         
-        new Trigger(() -> {return operatorController.getXButton();}).whileTrue(new PIDShooter(shooter, feeder, intake, -6000));
-
+        new Trigger(() -> {return operatorController.getXButton();}).whileTrue(new PIDShooter(shooter, feeder, intake, -6000, false));
+        
+        new Trigger(() -> {return operatorController.getAButton();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return ShooterConstants.kShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return FeederConstants.kFeederSpeed;})));
         //new Trigger(() -> {return driverController.getBackButtonPressed();}).onTrue(new TurnAndAim(angleController, driveSubsystem));
         if(FieldConstants.kVisionEnable){
         //could possibly still work with odometry instead of vision
@@ -86,10 +89,11 @@ public class Bindings {
         new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleCloseSetpoint;})); //number returned is angle setpoint
         }  
 
-        new Trigger(() -> {return operatorController.getStartButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleMidSetpoint;}));
+        new Trigger(() -> {return operatorController.getStartButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAnglePodiumSetpoint;})); //was kAngleMidSetpoint
 
         new Trigger(() -> {return operatorController.getBButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleRestSetpoint;}));
 
+        new Trigger(() -> {return operatorController.getYButtonPressed();}).onTrue(new PIDAngleControl(angleController, () -> {return ShooterConstants.kAngleClimbSetpoint;}));
 
         //new Trigger(() -> {return driverController.getBackButtonPressed();}).onTrue(new TurnAndAim(angleController, driveSubsystem)); //3.9624 works
 

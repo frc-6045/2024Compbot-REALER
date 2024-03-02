@@ -24,7 +24,7 @@ public class Pneumatics extends SubsystemBase {
     m_Compressor = new Compressor(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH);
     m_Solenoid = new Solenoid(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH, PneumaticsConstants.kSolenoidSingleChannel);
     m_TrapSolenoid = new Solenoid(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH, PneumaticsConstants.kTrapSolenoidChannel);
-    //m_Compressor.enableDigital()
+    //m_Compressor.enableAnalog(0, 115);
     m_Compressor.disable();
     compressorEnabled = false;
     System.out.println("enabled compressor");
@@ -36,7 +36,7 @@ public class Pneumatics extends SubsystemBase {
   }
 
   public void enableCompressor(){
-    m_Compressor.enableDigital();
+    m_Compressor.enableAnalog(80, 115);
   }
   public void disableCompressor(){
     m_Compressor.disable();

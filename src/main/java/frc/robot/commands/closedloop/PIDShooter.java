@@ -36,7 +36,7 @@ public class PIDShooter extends Command {
   private boolean atSetpoint;
   private boolean timerSet;
   private Timer timer;
-  public PIDShooter(Shooter shooter, Feeder feeder, Intake intake, double setpoint) {
+  public PIDShooter(Shooter shooter, Feeder feeder, Intake intake, double setpoint, boolean isSlow) {
     m_Shooter = shooter;
     m_Feeder = feeder;
     m_Intake = intake;
@@ -44,9 +44,15 @@ public class PIDShooter extends Command {
     encoder = shooterMotor.getEncoder(); //TODO check type of encoder
     this.setpoint = setpoint;
     m_PIDController = shooterMotor.getPIDController();
+    if(!isSlow){
     m_PIDController.setP(ShooterConstants.kShooterP);
     m_PIDController.setI(ShooterConstants.kShooterI);
     m_PIDController.setD(ShooterConstants.kShooterD);
+    } else {
+    m_PIDController.setP(ShooterConstants.kShooterAmpP);
+    m_PIDController.setI(ShooterConstants.kShooterAmpI);
+    m_PIDController.setD(ShooterConstants.kShooterAmpD);
+    }
     m_PIDController.setIZone(0);
     m_PIDController.setFF(.0001);
     m_PIDController.setOutputRange(-1, 1);
@@ -73,13 +79,15 @@ public class PIDShooter extends Command {
   public void execute() {
 
    
- 
+   
     m_PIDController.setReference(setpoint, ControlType.kVelocity, 0, m_Feedforward.calculate(setpoint)); //TODO: characterization for feedforward
+    m_Intake.runIntake(() -> {return -0.5;});
 
     
    System.out.println(encoder.getVelocity());
-    if(encoder.getVelocity() <= -ShooterConstants.kShooterLaunchRPM){
+    if(encoder.getVelocity() <= ShooterConstants.kShooterLaunchRPM){
       if(!timerSet){
+
         timer.reset();
         timer.start();
         timerSet = true;
@@ -96,13 +104,14 @@ public class PIDShooter extends Command {
     shooterMotor.set(0);
     m_Feeder.getMotor().set(0);
     m_Intake.stopIntake();
+    timer.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     System.out.println(timer.get());
-    if(timer.get() > 1){
+    if(timer.get() > 0.9){ //lmao
       return true;
     }
     return false;
