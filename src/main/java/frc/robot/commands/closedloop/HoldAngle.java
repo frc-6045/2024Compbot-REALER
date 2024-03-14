@@ -65,6 +65,6 @@ public class HoldAngle extends Command {
   @Override
   public boolean isFinished() {
     //return false;
-    return false;
+    return true;
   }
 }

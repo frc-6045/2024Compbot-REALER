@@ -40,6 +40,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.Prototype;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Trap;
 import frc.robot.subsystems.swerve.DriveSubsystem;
@@ -57,6 +58,7 @@ private final Intake m_Intake = new Intake();
 private final Climber m_Climber = new Climber();
 private final AngleController m_AngleController = new AngleController();
 private final Trap m_Trap = new Trap();
+private final Prototype m_Prototype = new Prototype();
 
 
 private Autos m_Autos;
@@ -96,8 +98,8 @@ public RobotContainer() {
     );
     
   
-    m_AngleController.setDefaultCommand(
-      new HoldAngle(m_AngleController, () -> {return m_AngleController.getAngleEncoder().getPosition();}));
+    // m_AngleController.setDefaultCommand(
+    //   new HoldAngle(m_AngleController, () -> {return m_AngleController.getAngleEncoder().getPosition();}));
     
     
 
@@ -114,7 +116,8 @@ public RobotContainer() {
     m_driveSubsystem, m_Shooter, 
     m_Feeder, m_Pneumatics, 
     m_AngleController, m_Intake, 
-    m_Climber, m_Trap);
+    m_Climber, m_Trap,
+    m_Prototype);
   }
 
   public Command getAutonomousCommand() {

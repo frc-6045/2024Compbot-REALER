@@ -18,14 +18,16 @@ import frc.robot.Constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */
-  private CANSparkFlex m_ShooterMotor;
-
+  private CANSparkFlex m_BottomShooterMotor;
+  private CANSparkFlex m_TopShooterMotor;
   private RelativeEncoder m_Encoder;
 
   private ShuffleboardTab teleopTab;
   public Shooter() {
-    m_ShooterMotor = new CANSparkFlex(ShooterConstants.kShooterMotorCANID, MotorType.kBrushless);
-    m_Encoder = m_ShooterMotor.getEncoder(); //TODO: we might want to swap out for the throughbore encoder here
+    m_BottomShooterMotor = new CANSparkFlex(ShooterConstants.kBottomShooterMotorCANID, MotorType.kBrushless);
+    m_TopShooterMotor = new CANSparkFlex(ShooterConstants.kTopShooterMotorCANID, MotorType.kBrushless);
+
+    m_Encoder = m_BottomShooterMotor.getEncoder(); //TODO: we might want to swap out for the throughbore encoder here
     
   }
  
@@ -39,7 +41,8 @@ public class Shooter extends SubsystemBase {
 
 
   public void runMotors(Supplier<Double> speedSupplier) {
-    m_ShooterMotor.set(speedSupplier.get());
+    m_BottomShooterMotor.set(speedSupplier.get());
+    m_TopShooterMotor.set(speedSupplier.get());
   }
 
   public double getCharacterizationVelocity(){
@@ -47,11 +50,13 @@ public class Shooter extends SubsystemBase {
   }
 
   public void runCharacterizationVolts(double volts) {
-    m_ShooterMotor.setVoltage(volts);
+    m_BottomShooterMotor.setVoltage(volts);
+    m_TopShooterMotor.setVoltage(volts);
   }
 
-  public CANSparkFlex getMotor() {
-    return m_ShooterMotor;
+  public CANSparkFlex[] getMotors() {
+    CANSparkFlex[] array = {m_BottomShooterMotor, m_TopShooterMotor};
+    return array;
   }
 
 }

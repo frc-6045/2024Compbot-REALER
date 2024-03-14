@@ -27,11 +27,14 @@ public class PIDShooter extends Command {
   private final Shooter m_Shooter;
   private final Feeder m_Feeder;
   private final Intake m_Intake;
-   private SparkPIDController m_PIDController;
- 
+   private SparkPIDController m_BottomPIDController;
+    private SparkPIDController m_TopPIDController;
+
   private SimpleMotorFeedforward m_Feedforward;
-  private final CANSparkFlex shooterMotor;
-  private final RelativeEncoder encoder;
+  private final CANSparkFlex bottomShooterMotor;
+  private final CANSparkFlex topShooterMotor; 
+  private final RelativeEncoder bottomEncoder;
+  private final RelativeEncoder topEncoder;
   private double setpoint;
   private boolean atSetpoint;
   private boolean timerSet;
@@ -40,24 +43,36 @@ public class PIDShooter extends Command {
     m_Shooter = shooter;
     m_Feeder = feeder;
     m_Intake = intake;
-    shooterMotor = shooter.getMotor();
-    encoder = shooterMotor.getEncoder(); //TODO check type of encoder
+    bottomShooterMotor = shooter.getMotors()[0];
+    topShooterMotor = shooter.getMotors()[1];
+    bottomEncoder = bottomShooterMotor.getEncoder(); //TODO check type of encoder
+    topEncoder = topShooterMotor.getEncoder();
     this.setpoint = setpoint;
-    m_PIDController = shooterMotor.getPIDController();
+    m_BottomPIDController = bottomShooterMotor.getPIDController();
     if(!isSlow){
-    m_PIDController.setP(ShooterConstants.kShooterP);
-    m_PIDController.setI(ShooterConstants.kShooterI);
-    m_PIDController.setD(ShooterConstants.kShooterD);
+    m_BottomPIDController.setP(ShooterConstants.kShooterP);
+    m_BottomPIDController.setI(ShooterConstants.kShooterI);
+    m_BottomPIDController.setD(ShooterConstants.kShooterD);
+    m_TopPIDController.setP(ShooterConstants.kShooterP);
+    m_TopPIDController.setI(ShooterConstants.kShooterI);
+    m_TopPIDController.setD(ShooterConstants.kShooterD);
     } else {
-    m_PIDController.setP(ShooterConstants.kShooterAmpP);
-    m_PIDController.setI(ShooterConstants.kShooterAmpI);
-    m_PIDController.setD(ShooterConstants.kShooterAmpD);
+    m_BottomPIDController.setP(ShooterConstants.kShooterAmpP);
+    m_BottomPIDController.setI(ShooterConstants.kShooterAmpI);
+    m_BottomPIDController.setD(ShooterConstants.kShooterAmpD);
+    m_TopPIDController.setP(ShooterConstants.kShooterAmpP);
+    m_TopPIDController.setI(ShooterConstants.kShooterAmpI);
+    m_TopPIDController.setD(ShooterConstants.kShooterAmpD);
     }
-    m_PIDController.setIZone(0);
-    m_PIDController.setFF(.0001);
-    m_PIDController.setOutputRange(-1, 1);
+    m_BottomPIDController.setIZone(0);
+    m_BottomPIDController.setFF(.0001);
+    m_BottomPIDController.setOutputRange(-1, 1);
+    m_TopPIDController.setIZone(0);
+    m_TopPIDController.setFF(.0001);
+    m_TopPIDController.setOutputRange(-1, 1);
 
-    m_PIDController.setFeedbackDevice(encoder);
+    m_BottomPIDController.setFeedbackDevice(bottomEncoder);
+    m_TopPIDController.setFeedbackDevice(topEncoder);
     m_Feedforward = new SimpleMotorFeedforward(.17674,.00030); //TODO characterization
     atSetpoint = false;
     timer = new Timer();
@@ -80,12 +95,14 @@ public class PIDShooter extends Command {
 
    
    
-    m_PIDController.setReference(setpoint, ControlType.kVelocity, 0, m_Feedforward.calculate(setpoint)); //TODO: characterization for feedforward
+    m_BottomPIDController.setReference(setpoint, ControlType.kVelocity, 0, m_Feedforward.calculate(setpoint));
+    m_TopPIDController.setReference(setpoint, ControlType.kVelocity, 0, m_Feedforward.calculate(setpoint)); //TODO: characterization for feedforward
+
     m_Intake.runIntake(() -> {return -0.5;});
 
     
-   System.out.println(encoder.getVelocity());
-    if(encoder.getVelocity() <= ShooterConstants.kShooterLaunchRPM){
+   System.out.println(bottomEncoder.getVelocity());
+    if(bottomEncoder.getVelocity() <= ShooterConstants.kShooterLaunchRPM){
       if(!timerSet){
 
         timer.reset();
@@ -101,7 +118,9 @@ public class PIDShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooterMotor.set(0);
+    //shooterMotor.set(0);
+    bottomShooterMotor.set(0);
+    topShooterMotor.set(0);
     m_Feeder.getMotor().set(0);
     m_Intake.stopIntake();
     timer.stop();

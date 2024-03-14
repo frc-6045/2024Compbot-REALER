@@ -234,7 +234,8 @@ public final class Constants {
     public static final double kFeederSpeed = 1.00;
   }
   public static final class ShooterConstants {
-    public static final int kShooterMotorCANID = 10;
+    public static final int kBottomShooterMotorCANID = 10;
+    public static final int kTopShooterMotorCANID = 30;
     public static final double kShooterMaxSpeed = 1.00;
 
     public static final  int kRPMSetpointOffset = 100;
@@ -254,11 +255,11 @@ public final class Constants {
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
     //public static final double kAngleHardSetpoint = 0.015;
-    public static final double kAngleCloseSetpoint = 0.071; //was .0915
-    public static final double kStartingAngleCloseSetpoint = 0.0634; // was 0.0634
-    public static final double kAngleRestSetpoint = 0.011; // was .022
-    public static final double kAnglePodiumSetpoint = .057; //same as climb
-    public static final double kAngleClimbSetpoint = .057; //was
+    public static final double kAngleCloseSetpoint = 0.079; //was .0915
+    public static final double kStartingAngleCloseSetpoint = 0.079; // was 0.0634
+    public static final double kAngleRestSetpoint = 0.015; // was .022
+    public static final double kAnglePodiumSetpoint = .061; //same as climb
+    public static final double kAngleClimbSetpoint = .061; //was
 
     public static final double kAngle4RingSetpoint = 0.03;
   }
