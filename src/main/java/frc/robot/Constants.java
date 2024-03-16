@@ -17,6 +17,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
@@ -40,6 +41,7 @@ import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
 public final class Constants {
 
   public static final class FieldConstants{
+    public static boolean kAutoAlignStratToggle = true;
     public static double kLowSpeakerOpeningHeight = 1.98;  //meters
     public static double kHighSpeakerOpeningHeight = 2.11;  //meters
     public static double kHighSpeakerOpeningDistanceFromWall = .46; //meters
@@ -49,6 +51,31 @@ public final class Constants {
 
     public static Pose2d kRedSpeakerBackLocation = new Pose2d(16.579342, 5.525, new Rotation2d(Units.degreesToRadians(0))); // rotation might have to be flipped
   
+
+
+    // corners (blue alliance origin)
+    public static final Translation3d topRightSpeaker =
+        new Translation3d(
+            Units.inchesToMeters(18.055),
+            Units.inchesToMeters(238.815),
+            Units.inchesToMeters(83.091));
+
+    public static final Translation3d topLeftSpeaker =
+        new Translation3d(
+            Units.inchesToMeters(18.055),
+            Units.inchesToMeters(197.765),
+            Units.inchesToMeters(83.091));
+
+    public static final Translation3d bottomRightSpeaker =
+        new Translation3d(0.0, Units.inchesToMeters(238.815), Units.inchesToMeters(78.324));
+    public static final Translation3d bottomLeftSpeaker =
+        new Translation3d(0.0, Units.inchesToMeters(197.765), Units.inchesToMeters(78.324));
+
+    /** Center of the speaker opening (blue alliance) */
+    public static final Translation3d centerSpeakerOpening =
+        bottomLeftSpeaker.interpolate(topRightSpeaker, 0.5);
+  
+
     public static boolean kVisionEnable = false;
   }
 

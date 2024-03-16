@@ -107,7 +107,7 @@ public RobotContainer() {
     configureBindings();
     teleopTab.addDouble("Right Trigger Axis", m_driverController::getRightTriggerAxis);
     teleopTab.addDouble("Left Trigger Axis", m_driverController::getLeftTriggerAxis);
-    teleopTab.addDouble("Shooter RPM", () -> {return m_Shooter.getMotor().getEncoder().getVelocity();});
+    teleopTab.addDouble("Shooter RPM", () -> {return m_Shooter.getMotors()[0].getEncoder().getVelocity();});
     teleopTab.addDouble("hood position", () -> {return m_AngleController.getAngleEncoder().getPosition();});
   }
 

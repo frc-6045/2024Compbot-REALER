@@ -35,9 +35,11 @@ public class ShooterAndFeederOpenLoop extends Command {
   @Override
   public void execute() {
     if(shooterSpeed.get() <=  ShooterConstants.kShooterMaxSpeed){
-      m_Shooter.getMotor().set(shooterSpeed.get());
+      m_Shooter.getMotors()[0].set(shooterSpeed.get());
+      m_Shooter.getMotors()[1].set(shooterSpeed.get());
     } else {
-      m_Shooter.getMotor().set(ShooterConstants.kShooterMaxSpeed);
+      m_Shooter.getMotors()[0].set(ShooterConstants.kShooterMaxSpeed);
+      m_Shooter.getMotors()[1].set(ShooterConstants.kShooterMaxSpeed);
     }
 
     if(feederSpeed.get() <= FeederConstants.kFeederSpeed){
@@ -50,7 +52,8 @@ public class ShooterAndFeederOpenLoop extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Shooter.getMotor().set(0);
+    m_Shooter.getMotors()[0].set(0);
+    m_Shooter.getMotors()[1].set(0);
     m_Feeder.getMotor().set(0);
   }
 

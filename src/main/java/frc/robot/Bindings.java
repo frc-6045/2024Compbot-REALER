@@ -5,6 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.FunctionalCommand;
@@ -21,6 +23,7 @@ import frc.robot.Constants.FieldConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.closedloop.AimAtSpeaker;
+import frc.robot.commands.closedloop.AutoAlign;
 import frc.robot.commands.closedloop.HoldAngle;
 import frc.robot.commands.closedloop.OneButtonShooting;
 import frc.robot.commands.closedloop.PIDAngleControl;
@@ -73,7 +76,11 @@ public class Bindings {
         //new JoystickButton(driverController, XboxController.Button.kStart.value).onTrue(new InstantCommand(() -> { driveSubsystem.zeroHeading();}, driveSubsystem));
         new Trigger(() -> {return driverController.getStartButtonPressed();}).onTrue(new InstantCommand(() -> {driveSubsystem.zeroHeading();}, driveSubsystem));
         
-        new Trigger(() -> {return driverController.getYButtonPressed();}).onTrue(new AimAtSpeaker(driveSubsystem));
+        if(FieldConstants.kAutoAlignStratToggle){
+            new Trigger(() -> {return driverController.getYButtonPressed();}).onTrue(new AimAtSpeaker(driveSubsystem));
+        } else {
+            new Trigger(() -> {return driverController.getYButtonPressed();}).onTrue(new AutoAlign(driveSubsystem, () -> {return new Pose2d(FieldConstants.centerSpeakerOpening.toTranslation2d(), new Rotation2d());}));
+        }
 
         //shooter
         //new Trigger(() -> {return operatorController.getAButton();}).whileTrue(new FeederOpenLoop(feeder, () -> {return FeederConstants.kFeederSpeed;}));

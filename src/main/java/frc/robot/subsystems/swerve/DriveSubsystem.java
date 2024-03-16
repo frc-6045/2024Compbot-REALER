@@ -265,15 +265,16 @@ public class DriveSubsystem extends SubsystemBase {
     if(DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red){
        swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
         fieldRelative
-            ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, Rotation2d.fromDegrees(m_HeadingDegrees).rotateBy(Rotation2d.fromDegrees(180)))//TODO: changed getHeadingDegrees()
-            : new ChassisSpeeds(xSpeed, ySpeed, rot));
+            ? ChassisSpeeds.discretize(ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, Rotation2d.fromDegrees(m_HeadingDegrees).rotateBy(Rotation2d.fromDegrees(180))), 0.02)//TODO: changed getHeadingDegrees()
+            : ChassisSpeeds.discretize(new ChassisSpeeds(xSpeed, ySpeed, rot), 0.02));
     } else {
       swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
           fieldRelative
-              ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, Rotation2d.fromDegrees(m_HeadingDegrees)) //TODO: changed getHeadingDegrees()
-              : new ChassisSpeeds(xSpeed, ySpeed, rot));
+          ? ChassisSpeeds.discretize(ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, Rotation2d.fromDegrees(m_HeadingDegrees)), 0.02)//TODO: changed getHeadingDegrees()
+          : ChassisSpeeds.discretize(new ChassisSpeeds(xSpeed, ySpeed, rot), 0.02));
     }
    
+    
     SwerveDriveKinematics.desaturateWheelSpeeds(
         swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);

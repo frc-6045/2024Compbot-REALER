@@ -1,12 +1,18 @@
 package frc.robot.util;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import org.photonvision.PhotonUtils;
 
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.Constants.FieldConstants;
@@ -62,5 +68,15 @@ public class PoseMath {
         
     }
 
+    public static Pose2d inverse(Pose2d pose) {
+        Rotation2d rotationInverse = pose.getRotation().unaryMinus();
+        return new Pose2d(
+            pose.getTranslation().unaryMinus().rotateBy(rotationInverse), rotationInverse);
+      }
+
+public static Transform2d toTransform2d(Translation2d translation) {
+    return new Transform2d(translation, new Rotation2d());
+  }
+   
 
 }

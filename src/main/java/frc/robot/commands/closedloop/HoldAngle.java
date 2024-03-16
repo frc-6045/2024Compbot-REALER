@@ -26,7 +26,7 @@ public class HoldAngle extends Command {
     System.out.println("first setpoint : " + setpoint.get());
     m_AnglePIDController = new PIDController(ShooterConstants.kShooterAngleP, ShooterConstants.kShooterAngleI, ShooterConstants.kShooterAngleD);
     m_AnglePIDController.setTolerance(.001); //who care
-    m_AnglePIDController.disableContinuousInput();
+    m_AnglePIDController.enableContinuousInput(0, 1);
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_AngleController);
   }
@@ -47,11 +47,11 @@ public class HoldAngle extends Command {
     // System.out.println("setpoint: " + actualSetpoint);
     double feedforward = 0.0; // just to have TODO: maybe do characterization??
     double speed;
-    if(m_AngleController.getAngleEncoder().getPosition() > .75){
-      speed = -.10;
-    } else {
+    // if(m_AngleController.getAngleEncoder().getPosition() > .75){
+    //   speed = -.10;
+    // } else {
       speed = -m_AnglePIDController.calculate(m_AngleController.getAngleEncoder().getPosition(), actualSetpoint);
-    }
+    //}
     m_AngleController.getAngleMotor().set(speed);
   }
 
@@ -64,7 +64,6 @@ public class HoldAngle extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //return false;
-    return true;
+    return false;
   }
 }
