@@ -36,7 +36,7 @@ import frc.robot.commands.openloop.IntakeOpenLoop;
 import frc.robot.commands.openloop.PrototypeOpenLoop;
 import frc.robot.commands.openloop.ShooterAndFeederOpenLoop;
 import frc.robot.commands.openloop.ShooterOpenLoop;
-import frc.robot.commands.openloop.TrapOpenLoop;
+import frc.robot.commands.openloop.AmpOpenLoop;
 import frc.robot.subsystems.AngleController;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Feeder;
@@ -44,7 +44,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Prototype;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Trap;
+import frc.robot.subsystems.Amp;
 import frc.robot.subsystems.swerve.DriveSubsystem;
 import frc.robot.util.LookupTables;
 import frc.robot.util.PoseMath;
@@ -56,7 +56,6 @@ public class Bindings {
 
     private static boolean bCompressorEnabled = false;
     private static boolean bIntakeToggle = true;
-    private static boolean bTrapToggle = true;
 
 
     public Bindings() {}
@@ -70,17 +69,18 @@ public class Bindings {
             AngleController angleController,
             Intake intake,
             Climber climber, 
-            Trap trap,
+            Amp amp,
             Prototype m_Prototype){
         
         //new JoystickButton(driverController, XboxController.Button.kStart.value).onTrue(new InstantCommand(() -> { driveSubsystem.zeroHeading();}, driveSubsystem));
         new Trigger(() -> {return driverController.getStartButtonPressed();}).onTrue(new InstantCommand(() -> {driveSubsystem.zeroHeading();}, driveSubsystem));
-        
+        if(FieldConstants.kVisionEnable){
         if(FieldConstants.kAutoAlignStratToggle){
             new Trigger(() -> {return driverController.getYButtonPressed();}).onTrue(new AimAtSpeaker(driveSubsystem));
         } else {
             new Trigger(() -> {return driverController.getYButtonPressed();}).onTrue(new AutoAlign(driveSubsystem, () -> {return new Pose2d(FieldConstants.centerSpeakerOpening.toTranslation2d(), new Rotation2d());}));
         }
+    }
 
         //shooter
         //new Trigger(() -> {return operatorController.getAButton();}).whileTrue(new FeederOpenLoop(feeder, () -> {return FeederConstants.kFeederSpeed;}));
@@ -91,7 +91,7 @@ public class Bindings {
         
         new Trigger(() -> {return operatorController.getXButton();}).whileTrue(new PIDShooter(shooter, feeder, intake, -6000, false));
         
-        new Trigger(() -> {return operatorController.getAButton();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return ShooterConstants.kShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return FeederConstants.kFeederSpeed;})));
+        new Trigger(() -> {return operatorController.getAButton();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return -FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> -ClimbConstants.kAmpHandoffMaxSpeed)));
         //new Trigger(() -> {return driverController.getBackButtonPressed();}).onTrue(new TurnAndAim(angleController, driveSubsystem));
         //if(FieldConstants.kVisionEnable){
         //could possibly still work with odometry instead of vision
@@ -110,10 +110,13 @@ public class Bindings {
 
         
         //Angle Controller
-        new Trigger(() -> {return operatorController.getYButton();}).whileTrue(new AngleOpenLoop(angleController, -ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
+        //new Trigger(() -> {return operatorController.getYButton();}).whileTrue(new AngleOpenLoop(angleController, -ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
 
-        new Trigger(() -> {return operatorController.getBButton();}).whileTrue(new AngleOpenLoop(angleController, ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
+        //new Trigger(() -> {return operatorController.getBButton();}).whileTrue(new AngleOpenLoop(angleController, ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
 
+        new Trigger(() -> {return operatorController.getYButton();}).whileTrue(new AngleOpenLoop(angleController, -ShooterConstants.kAngleControlMaxSpeed));
+        
+        new Trigger(() -> {return operatorController.getBButton();}).whileTrue(new AngleOpenLoop(angleController, ShooterConstants.kAngleControlMaxSpeed));
         //Compressor Toggle
         new Trigger(() -> {return driverController.getRightBumper();}).onTrue(new InstantCommand(() -> {
         if(bCompressorEnabled){
@@ -141,19 +144,6 @@ public class Bindings {
         //     pneumatics.ActutateIntakeSolenoid(true);
         // }, intake));
 
-        new Trigger(() -> {return operatorController.getPOV() == 0;}).onTrue(new InstantCommand(() -> {
-            pneumatics.ActutateTrapSolenoid(bTrapToggle);
-            bTrapToggle = !bTrapToggle;
-        }));
-
-        // new Trigger(() -> {return operatorController.getPOV() == 90;}).onTrue(new InstantCommand(() -> {
-        //     pneumatics.ActutateTrapSolenoid(true);
-        // }, trap));
-
-        // new Trigger(() -> {return operatorController.getPOV() == 270;}).onTrue(new InstantCommand(() -> {
-        //     pneumatics.ActutateTrapSolenoid(false);
-        // }, trap));
-
         // // intake toggle
         // do things
         //  new Trigger(() -> {return operatorController.getLeftBumperPressed();}).onTrue(new InstantCommand(() -> {
@@ -178,29 +168,19 @@ public class Bindings {
 
 
 
-
-
-
-
-
-
-
          new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, () -> {return -operatorController.getLeftTriggerAxis();}));
+
+         new Trigger(() -> {return operatorController.getRightTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, () -> {return operatorController.getRightTriggerAxis();}));
 
          new Trigger(() -> {return operatorController.getRightBumper();}).whileTrue(new IntakeOpenLoop(intake, () -> {return IntakeConstants.kIntakeSlowSpeed;}));
 
          new Trigger(() -> {return operatorController.getLeftBumper();}).whileTrue(new IntakeOpenLoop(intake, () -> {return -IntakeConstants.kIntakeSlowSpeed;}));
 
-         //new Trigger(() -> {return operatorController.getRightBumperPressed();}).onTrue(new InstantCommand(() -> {pneumatics.ToggleTrapSolenoid();}, pneumatics));
-       
-         new Trigger(() -> {return driverController.getPOV() == 90;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
-         new Trigger(() -> {return driverController.getPOV() == 270;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));
-
-         //new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new TrapOpenLoop(trap, () -> {return ClimbConstants.kTrapMaxSpeed;}));
-         //new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new TrapOpenLoop(trap, () -> {return -ClimbConstants.kTrapMaxSpeed;}));
-
-         new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new ParallelCommandGroup(new TrapOpenLoop(trap, () -> {return ClimbConstants.kTrapMaxSpeed;}), new IntakeOpenLoop(intake, () -> {return 1.0;})));
-         new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new ParallelCommandGroup(new TrapOpenLoop(trap, () -> {return -ClimbConstants.kTrapMaxSpeed;}), new IntakeOpenLoop(intake, () -> {return -1.0;})));
+         new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new AmpOpenLoop(amp, () -> {return ClimbConstants.kAmpMaxSpeed;}));
+         new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new AmpOpenLoop(amp, () -> {return -ClimbConstants.kAmpMaxSpeed;}));
+        
+         new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
+         new Trigger(() -> {return operatorController.getPOV() == 180;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));
 
     }
     public static boolean getCompressorEnabled(){

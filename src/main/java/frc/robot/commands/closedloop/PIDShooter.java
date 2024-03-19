@@ -48,6 +48,7 @@ public class PIDShooter extends Command {
     bottomEncoder = bottomShooterMotor.getEncoder(); //TODO check type of encoder
     topEncoder = topShooterMotor.getEncoder();
     this.setpoint = setpoint;
+    m_TopPIDController = topShooterMotor.getPIDController();
     m_BottomPIDController = bottomShooterMotor.getPIDController();
     if(!isSlow){
     m_BottomPIDController.setP(ShooterConstants.kShooterP);
@@ -109,7 +110,7 @@ public class PIDShooter extends Command {
         timer.start();
         timerSet = true;
       }
-      m_Feeder.getMotor().set(FeederConstants.kFeederSpeed);               
+      m_Feeder.runMotors(() -> {return FeederConstants.kFeederSpeed;});              
       m_Intake.runIntake(() -> {return -IntakeConstants.kIntakeSpeed;});
     }
   }
@@ -121,7 +122,7 @@ public class PIDShooter extends Command {
     //shooterMotor.set(0);
     bottomShooterMotor.set(0);
     topShooterMotor.set(0);
-    m_Feeder.getMotor().set(0);
+    m_Feeder.runMotors(() -> {return 0.0;});
     m_Intake.stopIntake();
     timer.stop();
   }

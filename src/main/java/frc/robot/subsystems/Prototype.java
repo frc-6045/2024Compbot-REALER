@@ -38,7 +38,6 @@ public class Prototype extends SubsystemBase {
   }
 
 
-
   public void setOutput(Supplier<Double> speedSupplier) {
     m_PrototypeMotor1.set(speedSupplier.get() * 0.2);
     m_PrototypeMotor2.set(-speedSupplier.get() * 0.2);

@@ -15,18 +15,14 @@ import frc.robot.Constants.ClimbConstants;
 //This will probably be real scuffed, sorry
 public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
-  private final CANSparkFlex m_LeftClimbMotor;
-  private final CANSparkFlex m_RightClimbMotor;
+  private final CANSparkFlex m_ClimbMotor;
   
   public Climber() {
-    m_LeftClimbMotor = new CANSparkFlex(ClimbConstants.kLeftClimbMotorCanId, MotorType.kBrushless);
-    m_RightClimbMotor = new CANSparkFlex(ClimbConstants.kRightClimbMotorCanId, MotorType.kBrushless);
+    m_ClimbMotor = new CANSparkFlex(ClimbConstants.kClimbMotorCanId, MotorType.kBrushless);
 
-    m_LeftClimbMotor.setSmartCurrentLimit(50);
-    m_RightClimbMotor.setSmartCurrentLimit(50); 
+    m_ClimbMotor.setSmartCurrentLimit(50);
 
-    m_LeftClimbMotor.burnFlash();
-    m_RightClimbMotor.burnFlash();
+    m_ClimbMotor.burnFlash();
   }
 
   @Override
@@ -35,8 +31,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void runMotors(Supplier<Double> speedSupplier){
-    System.out.println("left: " + m_LeftClimbMotor.getOutputCurrent() + "|  right: " + m_RightClimbMotor.getOutputCurrent());
-    m_LeftClimbMotor.set(speedSupplier.get());
-    m_RightClimbMotor.set(-speedSupplier.get());
+    System.out.println(m_ClimbMotor.getOutputCurrent());
+    m_ClimbMotor.set(-speedSupplier.get());
   }
 }

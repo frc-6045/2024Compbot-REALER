@@ -30,16 +30,16 @@ public class FeederOpenLoop extends Command {
   @Override
   public void execute() {
     if(speedSupplier.get() <= FeederConstants.kFeederSpeed){
-      m_Feeder.getMotor().set(-speedSupplier.get());
+      m_Feeder.runMotors(() -> {return -speedSupplier.get();});
     } else {
-      m_Feeder.getMotor().set(-FeederConstants.kFeederSpeed);
+      m_Feeder.runMotors(() -> {return -FeederConstants.kFeederSpeed;});
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Feeder.getMotor().set(0);
+     m_Feeder.runMotors(() -> {return 0.0;});
   }
 
   // Returns true when the command should end.

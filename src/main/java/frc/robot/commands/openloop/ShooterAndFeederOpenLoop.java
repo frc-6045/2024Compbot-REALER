@@ -43,9 +43,9 @@ public class ShooterAndFeederOpenLoop extends Command {
     }
 
     if(feederSpeed.get() <= FeederConstants.kFeederSpeed){
-      m_Feeder.getMotor().set(-feederSpeed.get());
+      m_Feeder.runMotors(() -> {return -feederSpeed.get();});
     } else {
-      m_Feeder.getMotor().set(-FeederConstants.kFeederSpeed);
+      m_Feeder.runMotors(() -> {return -FeederConstants.kFeederSpeed;});
     }
   }
 
@@ -54,7 +54,7 @@ public class ShooterAndFeederOpenLoop extends Command {
   public void end(boolean interrupted) {
     m_Shooter.getMotors()[0].set(0);
     m_Shooter.getMotors()[1].set(0);
-    m_Feeder.getMotor().set(0);
+    m_Feeder.runMotors(() -> {return 0.0;});
   }
 
   // Returns true when the command should end.

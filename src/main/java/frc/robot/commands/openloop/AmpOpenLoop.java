@@ -7,17 +7,17 @@ package frc.robot.commands.openloop;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Trap;
+import frc.robot.subsystems.Amp;
 
-public class TrapOpenLoop extends Command {
-  /** Creates a new TrapOpenLoop. */
-  private final Trap m_trap;
+public class AmpOpenLoop extends Command {
+  /** Creates a new AmpOpenLoop. */
+  private final Amp m_amp;
   private Supplier<Double> speedSupplier;
-  public TrapOpenLoop(Trap trap, Supplier<Double> speedSupplier) {
-    m_trap = trap;
+  public AmpOpenLoop(Amp amp, Supplier<Double> speedSupplier) {
+    m_amp = amp;
     this.speedSupplier = speedSupplier;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_trap);
+    addRequirements(m_amp);
   }
 
   // Called when the command is initially scheduled.
@@ -27,13 +27,13 @@ public class TrapOpenLoop extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_trap.runMotors(speedSupplier);
+    m_amp.runMotors(speedSupplier);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_trap.runMotors(() -> {return 0.0;});
+    m_amp.runMotors(() -> {return 0.0;});
   }
 
   // Returns true when the command should end.

@@ -42,7 +42,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Prototype;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Trap;
+import frc.robot.subsystems.Amp;
 import frc.robot.subsystems.swerve.DriveSubsystem;
 import frc.robot.util.LookupTables;
 import frc.robot.util.PoseMath;
@@ -57,7 +57,7 @@ private final Pneumatics m_Pneumatics = new Pneumatics();
 private final Intake m_Intake = new Intake();
 private final Climber m_Climber = new Climber();
 private final AngleController m_AngleController = new AngleController();
-private final Trap m_Trap = new Trap();
+private final Amp m_Amp = new Amp();
 private final Prototype m_Prototype = new Prototype();
 
 
@@ -76,16 +76,6 @@ public RobotContainer() {
   NamedCommands.registerCommand("ActuateIntakeDown", new ParallelDeadlineGroup(new WaitCommand(0.3), new RunCommand(() -> {m_Pneumatics.ActutateIntakeSolenoid(true);})));
   NamedCommands.registerCommand("ActuateIntakeUp", new ParallelDeadlineGroup(new WaitCommand(0.3), new RunCommand(() -> {m_Pneumatics.ActutateIntakeSolenoid(false);})));
   m_Autos = new Autos(m_driveSubsystem, m_Feeder, m_Intake, m_Pneumatics, m_Shooter);  
-
-    // m_Pneumatics.setDefaultCommand(new RunCommand(() -> {
-    //   if(m_driverController.getPOV() == 0) {
-    //     m_Pneumatics.ActutateIntakeSolenoid(true);
-    //   } else if(m_driverController.getPOV() == 180) {
-    //     m_Pneumatics.ActutateIntakeSolenoid(false);
-    //   }
-    // }, m_Pneumatics));
-    
- 
     
     m_driveSubsystem.setDefaultCommand(
     new RunCommand(
@@ -96,11 +86,6 @@ public RobotContainer() {
               true),
           m_driveSubsystem)
     );
-    
-  
-    // m_AngleController.setDefaultCommand(
-    //   new HoldAngle(m_AngleController, () -> {return m_AngleController.getAngleEncoder().getPosition();}));
-    
     
 
 
@@ -116,7 +101,7 @@ public RobotContainer() {
     m_driveSubsystem, m_Shooter, 
     m_Feeder, m_Pneumatics, 
     m_AngleController, m_Intake, 
-    m_Climber, m_Trap,
+    m_Climber, m_Amp,
     m_Prototype);
   }
 

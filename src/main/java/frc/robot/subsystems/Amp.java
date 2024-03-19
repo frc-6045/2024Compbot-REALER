@@ -12,11 +12,11 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClimbConstants;
 
-public class Trap extends SubsystemBase {
+public class Amp extends SubsystemBase {
   /** Creates a new Trap. */
-  private final CANSparkFlex m_TrapMotor;
-  public Trap() {
-    m_TrapMotor = new CANSparkFlex(ClimbConstants.kTrapMotorCanId, MotorType.kBrushless);
+  private final CANSparkFlex m_AmpMotor;
+  public Amp() {
+    m_AmpMotor = new CANSparkFlex(ClimbConstants.kAmpMotorCanId, MotorType.kBrushless);
   }
 
   @Override
@@ -24,11 +24,11 @@ public class Trap extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public CANSparkFlex getTrapMotor(){
-    return m_TrapMotor;
+  public CANSparkFlex getAmpMotor(){
+    return m_AmpMotor;
   }
 
   public void runMotors(Supplier<Double> speedSupplier){
-    m_TrapMotor.set(speedSupplier.get());
+    m_AmpMotor.set(speedSupplier.get());
   }
 }

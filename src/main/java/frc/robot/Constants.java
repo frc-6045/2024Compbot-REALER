@@ -171,14 +171,6 @@ public final class Constants {
     public static final double kDrivingMinOutput = -1;
     public static final double kDrivingMaxOutput = 1;
 
-
-    // public static final double kDrivingP = 0.07; //was 0.04
-    // public static final double kDrivingI = 0;
-    // public static final double kDrivingD = 0;
-    // public static final double kDrivingFF = 1 / kDriveWheelFreeSpeedRps; 
-    // public static final double kDrivingMinOutput = -1;
-    // public static final double kDrivingMaxOutput = 1;
-
     public static final double kTurningP = .9; //rip spooky 0
     public static final double kTurningI = 0;
     public static final double kTurningD = 0;
@@ -258,12 +250,15 @@ public final class Constants {
 
   public static final class FeederConstants {
     public static final int kFeederCANID = 22;
+    public static final int kFeederCANID2 = 24;
     public static final double kFeederSpeed = 1.00;
+    public static final double kAmpFeederSpeed = 0.50;
   }
   public static final class ShooterConstants {
-    public static final int kBottomShooterMotorCANID = 10;
+    public static final int kBottomShooterMotorCANID = 29;
     public static final int kTopShooterMotorCANID = 30;
     public static final double kShooterMaxSpeed = 1.00;
+    public static final double kAmpShooterMaxSpeed = 0.50;
 
     public static final  int kRPMSetpointOffset = 100;
     
@@ -301,11 +296,11 @@ public final class Constants {
   }
 
   public static final class ClimbConstants {
-    public static final int kLeftClimbMotorCanId = 13;
-    public static final int kRightClimbMotorCanId = 14;
-    public static final int kTrapMotorCanId = 15;
-    public static final double kClimbMaxSpeed = 1.00;
-    public static final double kTrapMaxSpeed = 0.80;
+    public static final int kClimbMotorCanId = 14;
+    public static final int kAmpMotorCanId = 15;
+    public static final double kClimbMaxSpeed = 0.35;
+    public static final double kAmpMaxSpeed = 0.50;
+    public static final double kAmpHandoffMaxSpeed = 0.20;
 
   }
   
@@ -313,7 +308,6 @@ public final class Constants {
     public static final int kPneumaticsModuleCANID = 20; 
   
     public static final int kSolenoidSingleChannel = 0; 
-    public static final int kTrapSolenoidChannel = 1; 
 
   }
 }

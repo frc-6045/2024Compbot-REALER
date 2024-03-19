@@ -28,7 +28,8 @@ public class Shooter extends SubsystemBase {
     m_TopShooterMotor = new CANSparkFlex(ShooterConstants.kTopShooterMotorCANID, MotorType.kBrushless);
 
     m_Encoder = m_BottomShooterMotor.getEncoder(); //TODO: we might want to swap out for the throughbore encoder here
-    
+    m_BottomShooterMotor.setInverted(true);
+    m_BottomShooterMotor.burnFlash();
   }
  
 

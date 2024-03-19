@@ -12,6 +12,7 @@ import org.photonvision.PhotonUtils;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -42,7 +43,7 @@ public class AimAtSpeaker extends Command {
     currentPose = m_drive.getPose();
     Optional<Alliance> alliance = DriverStation.getAlliance();
     if(alliance.isPresent() && alliance.get() == Alliance.Red){
-      setpointAngle = PoseMath.getTargetAngle(FieldConstants.kRedSpeakerBackLocation, currentPose).getDegrees(); 
+      setpointAngle = PoseMath.getTargetAngle(new Pose2d(FieldConstants.centerSpeakerOpening.toTranslation2d(), new Rotation2d()), currentPose).getDegrees(); 
     } else {
        setpointAngle = PoseMath.getTargetAngle(FieldConstants.kSpeakerBackLocation, currentPose).getDegrees(); 
     }

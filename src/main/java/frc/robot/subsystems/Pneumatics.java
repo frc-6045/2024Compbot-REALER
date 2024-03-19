@@ -18,12 +18,10 @@ public class Pneumatics extends SubsystemBase {
   /** Creates a new Pneumatics. */
   private final Compressor m_Compressor;
   private final Solenoid m_Solenoid;
-  private final Solenoid m_TrapSolenoid;
   private boolean compressorEnabled;
   public Pneumatics() {
     m_Compressor = new Compressor(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH);
     m_Solenoid = new Solenoid(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH, PneumaticsConstants.kSolenoidSingleChannel);
-    m_TrapSolenoid = new Solenoid(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH, PneumaticsConstants.kTrapSolenoidChannel);
     //m_Compressor.enableAnalog(0, 115);
     m_Compressor.disable();
     compressorEnabled = false;
@@ -45,17 +43,9 @@ public class Pneumatics extends SubsystemBase {
   public void ActutateIntakeSolenoid(boolean isOn) {
     m_Solenoid.set(isOn);
   }
-
-  public void ActutateTrapSolenoid(boolean isOn){
-    m_TrapSolenoid.set(isOn);
-  }
   
   public void ToggleIntakeSolenoids(){
     m_Solenoid.toggle();
-  }
-
-  public void ToggleTrapSolenoid(){
-    m_TrapSolenoid.toggle();
   }
 
   public Solenoid getSolenoid(){

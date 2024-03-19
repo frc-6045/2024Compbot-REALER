@@ -10,6 +10,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
 import frc.robot.Constants.FieldConstants;
@@ -27,7 +28,7 @@ public class AutoAlign extends Command {
   public AutoAlign(DriveSubsystem drive, Supplier<Pose2d> poseSupplier) {
     m_drive = drive;
     this.poseSupplier = poseSupplier;
-    headingController = new ProfiledPIDController(0, 0, 0, null); //TODO: figure out these values
+    headingController = new ProfiledPIDController(.001, 0, 0, new TrapezoidProfile.Constraints(1,1)); //TODO: figure out these values
     headingController.enableContinuousInput(-180, 180);
     headingController.setTolerance(2);
     targetVehicleDirection = new Rotation2d();
