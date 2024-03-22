@@ -57,26 +57,26 @@ public final class Constants {
     public static final Translation3d topRightSpeaker =
         new Translation3d(
             Units.inchesToMeters(18.055),
-            Units.inchesToMeters(238.815),
+            Units.inchesToMeters(258.815), // was 238.815
             Units.inchesToMeters(83.091));
 
     public static final Translation3d topLeftSpeaker =
         new Translation3d(
             Units.inchesToMeters(18.055),
-            Units.inchesToMeters(197.765),
+            Units.inchesToMeters(227.765), // was 197.765
             Units.inchesToMeters(83.091));
 
     public static final Translation3d bottomRightSpeaker =
         new Translation3d(0.0, Units.inchesToMeters(238.815), Units.inchesToMeters(78.324));
     public static final Translation3d bottomLeftSpeaker =
-        new Translation3d(0.0, Units.inchesToMeters(197.765), Units.inchesToMeters(78.324));
+        new Translation3d(0.0, Units.inchesToMeters(197.765), Units.inchesToMeters(78.324)); //y: 197.765
 
     /** Center of the speaker opening (blue alliance) */
     public static final Translation3d centerSpeakerOpening =
         bottomLeftSpeaker.interpolate(topRightSpeaker, 0.5);
   
 
-    public static boolean kVisionEnable = false;
+    public static boolean kVisionEnable = true;
   }
 
   public static final class DriveConstants {
@@ -268,12 +268,12 @@ public final class Constants {
     public static final double kShooterAmpP = .001;
     public static final double kShooterAmpI = 0;
     public static final double kShooterAmpD = 0;
-    public static final int kShooterLaunchRPM = -2700; //4300
+    public static final int kShooterLaunchRPM = -4300; //-4300
 
     public static final int kAngleControlCANID = 11; //TODO hey
     public static final double kAngleControlMaxSpeed = 0.07;
 
-    public static final double kShooterAngleP = 7; // was 4.50
+    public static final double kShooterAngleP = 3.50; // was 4.50
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
     //public static final double kAngleHardSetpoint = 0.015;
@@ -284,6 +284,8 @@ public final class Constants {
     public static final double kAngleClimbSetpoint = .061; //was
 
     public static final double kAngle4RingSetpoint = 0.03;
+
+    public static final double kAngleFeedforward = 0.005;
   }
 
   public static final class IntakeConstants {

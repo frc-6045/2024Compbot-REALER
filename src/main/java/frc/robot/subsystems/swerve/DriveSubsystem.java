@@ -104,7 +104,7 @@ public class DriveSubsystem extends SubsystemBase {
           },
           new Pose2d(0, 0, new Rotation2d(0)), 
           VecBuilder.fill(0.85, 0.85, Units.degreesToRadians(0.5)), // initiial was 0.05 for both on top and 0.5 for bottom, 0.05, 0.05, 0.65
-          VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(60))); // 0.5, 0.5, 50 
+          VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(60))); // 0.01, 0.01, 10
 //0.15, 0.15, 0.5          .75, 0.75, 60
 
           //1.5 1.5 0.65

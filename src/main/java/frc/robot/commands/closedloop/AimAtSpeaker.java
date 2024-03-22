@@ -53,7 +53,7 @@ public class AimAtSpeaker extends Command {
   @Override
   public void execute() {
     //double turnSpeed = m_AimPIDController.calculate(m_drive.getPoseHeading(), setpointAngle);
-    double turnSpeed = m_AimPIDController.calculate(PhotonUtils.getYawToPose(m_drive.getPose(), FieldConstants.kSpeakerBackLocation).getDegrees(), 0);
+    double turnSpeed = m_AimPIDController.calculate(PhotonUtils.getYawToPose(m_drive.getPose(), new Pose2d(FieldConstants.centerSpeakerOpening.toTranslation2d(), new Rotation2d())).getDegrees(), 0);
     m_drive.drive(0, 0, turnSpeed, true);
   }
 

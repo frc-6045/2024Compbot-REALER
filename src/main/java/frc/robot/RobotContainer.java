@@ -87,7 +87,8 @@ public RobotContainer() {
           m_driveSubsystem)
     );
     
-
+    m_AngleController.setDefaultCommand(
+      new HoldAngle(m_AngleController, () -> {return m_AngleController.getAngleEncoder().getPosition();}));
 
     configureBindings();
     teleopTab.addDouble("Right Trigger Axis", m_driverController::getRightTriggerAxis);

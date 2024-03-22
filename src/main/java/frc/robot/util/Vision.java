@@ -30,7 +30,7 @@ public class Vision {
   public Vision(DriveSubsystem drive){
   if(FieldConstants.kVisionEnable){
     try {
-      m_visionPoseEstimator = new PhotonPoseEstimator(AprilTagFieldLayout.loadFromResource(AprilTagFields.k2024Crescendo.m_resourceFile), PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, new PhotonCamera("Arducam_OV2311_USB_Camera"), new Transform3d(new Translation3d(-Units.inchesToMeters(4.5), Units.inchesToMeters(12.7), Units.inchesToMeters(17.75)), new Rotation3d(180, 21,0))); //TODO: actually make this work
+      m_visionPoseEstimator = new PhotonPoseEstimator(AprilTagFieldLayout.loadFromResource(AprilTagFields.k2024Crescendo.m_resourceFile), PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, new PhotonCamera("Arducam_OV2311_USB_Camera"), new Transform3d(new Translation3d(-Units.inchesToMeters(4.5), Units.inchesToMeters(12.7), Units.inchesToMeters(17.75)), new Rotation3d(0, Units.degreesToRadians(21),Units.degreesToRadians(180)))); //TODO: actually make this work
     } catch(IOException e){
       System.out.println(e.getMessage() + "\n april tags didnt load");
     }

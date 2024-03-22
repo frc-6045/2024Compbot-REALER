@@ -45,12 +45,17 @@ public class HoldAngle extends Command {
   public void execute() {
     // System.out.println("error: " + m_AnglePIDController.getPositionError());
     // System.out.println("setpoint: " + actualSetpoint);
-    double feedforward = 0.0; // just to have TODO: maybe do characterization??
+    double feedforward = ShooterConstants.kAngleFeedforward; // just to have TODO: maybe do characterization??
     double speed;
     // if(m_AngleController.getAngleEncoder().getPosition() > .75){
     //   speed = -.10;
     // } else {
-      speed = -m_AnglePIDController.calculate(m_AngleController.getAngleEncoder().getPosition(), actualSetpoint);
+      speed = m_AnglePIDController.calculate(m_AngleController.getAngleEncoder().getPosition(), actualSetpoint);
+      if(speed > 0){
+        speed = speed + feedforward;
+      } else {
+        speed = speed - feedforward;
+      }
     //}
     m_AngleController.getAngleMotor().set(speed);
   }
@@ -64,7 +69,7 @@ public class HoldAngle extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
-    //return false;
+    //return true;
+    return false;
   }
 }

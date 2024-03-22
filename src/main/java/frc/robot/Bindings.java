@@ -92,13 +92,13 @@ public class Bindings {
         new Trigger(() -> {return operatorController.getXButton();}).whileTrue(new PIDShooter(shooter, feeder, intake, -6000, false));
         
         new Trigger(() -> {return operatorController.getAButton();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return -FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> -ClimbConstants.kAmpHandoffMaxSpeed)));
-        //new Trigger(() -> {return driverController.getBackButtonPressed();}).onTrue(new TurnAndAim(angleController, driveSubsystem));
-        //if(FieldConstants.kVisionEnable){
+
+        if(FieldConstants.kVisionEnable){
         //could possibly still work with odometry instead of vision
-        // new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose()));})); //3.9624 works
+         new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose()));})); //3.9624 works
         // } else {
         // new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleCloseSetpoint;})); //number returned is angle setpoint
-        // }  
+         }  
 
         // new Trigger(() -> {return operatorController.getStartButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAnglePodiumSetpoint;})); //was kAngleMidSetpoint
 
@@ -110,13 +110,13 @@ public class Bindings {
 
         
         //Angle Controller
-        //new Trigger(() -> {return operatorController.getYButton();}).whileTrue(new AngleOpenLoop(angleController, -ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
+        new Trigger(() -> {return operatorController.getYButton();}).whileTrue(new AngleOpenLoop(angleController, -ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
 
-        //new Trigger(() -> {return operatorController.getBButton();}).whileTrue(new AngleOpenLoop(angleController, ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
+        new Trigger(() -> {return operatorController.getBButton();}).whileTrue(new AngleOpenLoop(angleController, ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
 
-        new Trigger(() -> {return operatorController.getYButton();}).whileTrue(new AngleOpenLoop(angleController, -ShooterConstants.kAngleControlMaxSpeed));
+        //new Trigger(() -> {return operatorController.getYButton();}).whileTrue(new AngleOpenLoop(angleController, -ShooterConstants.kAngleControlMaxSpeed));
         
-        new Trigger(() -> {return operatorController.getBButton();}).whileTrue(new AngleOpenLoop(angleController, ShooterConstants.kAngleControlMaxSpeed));
+        //new Trigger(() -> {return operatorController.getBButton();}).whileTrue(new AngleOpenLoop(angleController, ShooterConstants.kAngleControlMaxSpeed));
         //Compressor Toggle
         new Trigger(() -> {return driverController.getRightBumper();}).onTrue(new InstantCommand(() -> {
         if(bCompressorEnabled){

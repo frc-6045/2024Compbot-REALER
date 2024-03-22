@@ -59,22 +59,21 @@ public class LookupTables {
      * </pre>
      */
     public static void InitValues() {
-        //trash values!!!!!!!!
-        //shooterAngleTable.put(1.3716, 37.1728);
-        // shooterAngleTable.put(1.64465, 36.1939);
-        // shooterAngleTable.put(1.9812, 34.165);
-        // shooterAngleTable.put(2.4257, 30.163);
-        // shooterAngleTable.put(2.794, 27.1463);
-        // shooterAngleTable.put(3.2639, 26.121);
-        // shooterAngleTable.put(3.77825, 24.1629);
-        // shooterAngleTable.put(4.17195, 22.7821);
-        // shooterAngleTable.put(4.6736, 22.5978);
+        //TODO
+        shooterAngleTable.put(1.905, .75563); // .74663
+        shooterAngleTable.put(2.2987, .766); // .757
+        shooterAngleTable.put(2.809875, .7748); // .7658
+        shooterAngleTable.put(3.39725, .7904); // .7814
+        shooterAngleTable.put(3.9497, .792); // .783
+        shooterAngleTable.put(4.5085, .8099); // .8009
+        shooterAngleTable.put(5.0927, .812); // .803
+        shooterAngleTable.put(5.7531, .813); // .804
+
+
 
         // new values
-        shooterAngleTable.put(1.4097, 0.1755);
-        shooterAngleTable.put(2.4892, 0.1414);
-        shooterAngleTable.put(3.048, 0.1277);
-        shooterAngleTable.put(3.5687, 0.1151);
+       
+    
     }
 
     public static InterpolatingTreeMap<Double, Double> getAngleTable(){
