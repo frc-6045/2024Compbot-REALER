@@ -24,6 +24,7 @@ import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.closedloop.AimAtSpeaker;
 import frc.robot.commands.closedloop.AutoAlign;
+import frc.robot.commands.closedloop.AutoAlignWithDrive;
 import frc.robot.commands.closedloop.HoldAngle;
 import frc.robot.commands.closedloop.OneButtonShooting;
 import frc.robot.commands.closedloop.PIDAngleControl;
@@ -74,9 +75,12 @@ public class Bindings {
         
         //new JoystickButton(driverController, XboxController.Button.kStart.value).onTrue(new InstantCommand(() -> { driveSubsystem.zeroHeading();}, driveSubsystem));
         new Trigger(() -> {return driverController.getStartButtonPressed();}).onTrue(new InstantCommand(() -> {driveSubsystem.zeroHeading();}, driveSubsystem));
+        
         if(FieldConstants.kVisionEnable){
         if(FieldConstants.kAutoAlignStratToggle){
-            new Trigger(() -> {return driverController.getYButtonPressed();}).onTrue(new AimAtSpeaker(driveSubsystem));
+            //new Trigger(() -> {return driverController.getYButtonPressed();}).onTrue(new AimAtSpeaker(driveSubsystem));
+            new Trigger(() -> {return driverController.getLeftBumper();}).whileTrue(new AutoAlignWithDrive(driveSubsystem, () -> {return MathUtil.applyDeadband(driverController.getLeftY(), 0.15);}, 
+           () -> {return MathUtil.applyDeadband(-driverController.getLeftX(), 0.15);}));
         } else {
             new Trigger(() -> {return driverController.getYButtonPressed();}).onTrue(new AutoAlign(driveSubsystem, () -> {return new Pose2d(FieldConstants.centerSpeakerOpening.toTranslation2d(), new Rotation2d());}));
         }
@@ -91,8 +95,10 @@ public class Bindings {
         
         new Trigger(() -> {return operatorController.getXButton();}).whileTrue(new PIDShooter(shooter, feeder, intake, -6000, false));
         
-        new Trigger(() -> {return operatorController.getAButton();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return -FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> -ClimbConstants.kAmpHandoffMaxSpeed)));
+        new Trigger(() -> {return operatorController.getAButton();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleAmpHandoffSetpoint;}));
 
+        new Trigger(() -> {return operatorController.getStartButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kSubwooferAngleSetpoint;}));
+            
         if(FieldConstants.kVisionEnable){
         //could possibly still work with odometry instead of vision
          new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose()));})); //3.9624 works
@@ -172,14 +178,13 @@ public class Bindings {
 
          new Trigger(() -> {return operatorController.getRightTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, () -> {return operatorController.getRightTriggerAxis();}));
 
-         new Trigger(() -> {return operatorController.getRightBumper();}).whileTrue(new IntakeOpenLoop(intake, () -> {return IntakeConstants.kIntakeSlowSpeed;}));
-
-         new Trigger(() -> {return operatorController.getLeftBumper();}).whileTrue(new IntakeOpenLoop(intake, () -> {return -IntakeConstants.kIntakeSlowSpeed;}));
+         new Trigger(() -> {return operatorController.getRightBumper();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> ClimbConstants.kAmpHandoffMaxSpeed), new IntakeOpenLoop(intake, () -> IntakeConstants.kIntakeSlowSpeed)));
+         new Trigger(() -> {return operatorController.getLeftBumper();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return -FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> -ClimbConstants.kAmpHandoffMaxSpeed), new IntakeOpenLoop(intake, () -> -IntakeConstants.kIntakeSlowSpeed))); 
 
          new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new AmpOpenLoop(amp, () -> {return ClimbConstants.kAmpMaxSpeed;}));
          new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new AmpOpenLoop(amp, () -> {return -ClimbConstants.kAmpMaxSpeed;}));
         
-         new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
+         new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed + 0.15;}));
          new Trigger(() -> {return operatorController.getPOV() == 180;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));
 
     }

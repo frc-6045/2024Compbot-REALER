@@ -27,7 +27,13 @@ public class ClimberOpenLoop extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_climber.runMotors(speedSupplier);
+    // if(m_climber.getLimitSwitch1().get() || m_climber.getLimitSwitch2().get()){
+    //   if(speedSupplier.get() > 0) {
+    //     m_climber.runMotors(speedSupplier);
+    //   }
+    // } else {
+      m_climber.runMotors(speedSupplier);
+   // }
   }
 
   // Called once the command ends or is interrupted.

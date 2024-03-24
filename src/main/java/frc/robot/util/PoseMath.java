@@ -77,6 +77,19 @@ public class PoseMath {
 public static Transform2d toTransform2d(Translation2d translation) {
     return new Transform2d(translation, new Rotation2d());
   }
-   
 
+public static Translation2d getAdjustedSpeakerPosition(Pose2d currentPose , ChassisSpeeds robotVel){
+    Translation2d goalPose = FieldConstants.centerSpeakerOpening.toTranslation2d();
+    double distanceToSpeaker = currentPose.getTranslation().getDistance(goalPose);
+    double x = goalPose.getX() - (robotVel.vxMetersPerSecond * (distanceToSpeaker / 10)); //note 10 is note velocity
+    double y = goalPose.getY() - (robotVel.vyMetersPerSecond * (distanceToSpeaker / 10)); //note 10 is note velocity
+    Translation2d goalPoseAdjusted = new Translation2d(x, y);
+    return goalPoseAdjusted;
+}
+public static double getTargetAngleRobotToTarget(Pose2d currentPose, ChassisSpeeds robotVel){
+    double x = getAdjustedSpeakerPosition(currentPose, robotVel).getX() - currentPose.getX();
+    double y = getAdjustedSpeakerPosition(currentPose, robotVel).getY() - currentPose.getY();
+    return Math.atan2(y, x);
+
+}
 }

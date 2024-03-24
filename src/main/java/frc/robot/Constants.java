@@ -57,19 +57,19 @@ public final class Constants {
     public static final Translation3d topRightSpeaker =
         new Translation3d(
             Units.inchesToMeters(18.055),
-            Units.inchesToMeters(258.815), // was 238.815
+            Units.inchesToMeters(238.815 + 20), // was 238.815
             Units.inchesToMeters(83.091));
 
     public static final Translation3d topLeftSpeaker =
         new Translation3d(
             Units.inchesToMeters(18.055),
-            Units.inchesToMeters(227.765), // was 197.765
+            Units.inchesToMeters(197.765), // was 197.765
             Units.inchesToMeters(83.091));
 
     public static final Translation3d bottomRightSpeaker =
         new Translation3d(0.0, Units.inchesToMeters(238.815), Units.inchesToMeters(78.324));
     public static final Translation3d bottomLeftSpeaker =
-        new Translation3d(0.0, Units.inchesToMeters(197.765), Units.inchesToMeters(78.324)); //y: 197.765
+        new Translation3d(0.0, Units.inchesToMeters(197.765 + 20), Units.inchesToMeters(78.324)); //y: 197.765
 
     /** Center of the speaker opening (blue alliance) */
     public static final Translation3d centerSpeakerOpening =
@@ -258,7 +258,7 @@ public final class Constants {
     public static final int kBottomShooterMotorCANID = 29;
     public static final int kTopShooterMotorCANID = 30;
     public static final double kShooterMaxSpeed = 1.00;
-    public static final double kAmpShooterMaxSpeed = 0.50;
+    public static final double kAmpShooterMaxSpeed = 0.20;
 
     public static final  int kRPMSetpointOffset = 100;
     
@@ -277,11 +277,9 @@ public final class Constants {
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
     //public static final double kAngleHardSetpoint = 0.015;
-    public static final double kAngleCloseSetpoint = 0.079; //was .0915
-    public static final double kStartingAngleCloseSetpoint = 0.079; // was 0.0634
-    public static final double kAngleRestSetpoint = 0.015; // was .022
-    public static final double kAnglePodiumSetpoint = .061; //same as climb
-    public static final double kAngleClimbSetpoint = .061; //was
+    public static final double kAngleAmpHandoffSetpoint = 0.835; //was .0915
+
+    public static final double kSubwooferAngleSetpoint = 0.722;
 
     public static final double kAngle4RingSetpoint = 0.03;
 
@@ -294,13 +292,13 @@ public final class Constants {
     public static final int kIndexerCANID = 23;
     public static final double kIntakeSpeed = 1.0; 
     public static final double kIndexerSpeed = .5;
-    public static final double kIntakeSlowSpeed = 0.2; 
+    public static final double kIntakeSlowSpeed = 0.45; 
   }
 
   public static final class ClimbConstants {
     public static final int kClimbMotorCanId = 14;
     public static final int kAmpMotorCanId = 15;
-    public static final double kClimbMaxSpeed = 0.35;
+    public static final double kClimbMaxSpeed = 0.50;
     public static final double kAmpMaxSpeed = 0.50;
     public static final double kAmpHandoffMaxSpeed = 0.20;
 
