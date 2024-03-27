@@ -68,6 +68,12 @@ public final class Constants {
             Units.inchesToMeters(238.815 + 20), // was 238.815
             Units.inchesToMeters(83.091));
 
+    public static final Translation3d redTopRightSpeaker =
+        new Translation3d(
+            22.062944,
+            Units.inchesToMeters(238.815 + 20), // was 238.815
+            Units.inchesToMeters(83.091));
+
     public static final Translation3d topLeftSpeaker =
         new Translation3d(
             Units.inchesToMeters(18.055),
@@ -76,12 +82,22 @@ public final class Constants {
 
     public static final Translation3d bottomRightSpeaker =
         new Translation3d(0.0, Units.inchesToMeters(238.815), Units.inchesToMeters(78.324));
+    
+    public static final Translation3d redBottomRightSpeaker =
+        new Translation3d(16.55978, Units.inchesToMeters(238.815), Units.inchesToMeters(78.324));
+
     public static final Translation3d bottomLeftSpeaker =
         new Translation3d(0.0, Units.inchesToMeters(197.765 + 20), Units.inchesToMeters(78.324)); //y: 197.765
+      
+    public static final Translation3d redBottomLeftSpeaker =
+        new Translation3d(16.55978, Units.inchesToMeters(197.765 + 20), Units.inchesToMeters(78.324)); //y: 197.765
 
     /** Center of the speaker opening (blue alliance) */
     public static final Translation3d centerSpeakerOpening =
         bottomLeftSpeaker.interpolate(topRightSpeaker, 0.5);
+
+    public static final Translation3d redCenterSpeakerOpening = 
+        redBottomLeftSpeaker.interpolate(redTopRightSpeaker, 0.5);
   
 
     public static boolean kVisionEnable = true;
