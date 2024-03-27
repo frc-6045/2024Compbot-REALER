@@ -50,7 +50,15 @@ public final class Constants {
     public static Pose2d kSpeakerFrontLoation = new Pose2d(kHighSpeakerOpeningDistanceFromWall, 5.525, new Rotation2d(0.0));
 
     public static Pose2d kRedSpeakerBackLocation = new Pose2d(16.579342, 5.525, new Rotation2d(Units.degreesToRadians(0))); // rotation might have to be flipped
-  
+
+    // All of this is stolen from Isaac, thanks Isaac!!! (feel free to refactor at any time)
+    public static final double VISION_FIELD_MARGIN = 0.5;
+    public static final double VISION_Z_MARGIN = 0.75;
+    public static final double VISION_STD_XY_SCALE = 0.1; //0.01 Rate at which vision corrects for error in position Higher = takes longer
+    public static final double VISION_STD_ROT_SCALE = 0.3;//0.035; Rate at which vision corrects for error in rotation/heading Higher = takes longer
+
+    public static final double FIELD_LENGTH = 16.5417;
+    public static final double FIELD_WIDTH = 8.0136;
 
 
     // corners (blue alliance origin)
@@ -250,15 +258,14 @@ public final class Constants {
 
   public static final class FeederConstants {
     public static final int kFeederCANID = 22;
-    public static final int kFeederCANID2 = 24;
     public static final double kFeederSpeed = 1.00;
-    public static final double kAmpFeederSpeed = 0.50;
+    public static final double kAmpFeederSpeed = 0.70; //0.5
   }
   public static final class ShooterConstants {
     public static final int kBottomShooterMotorCANID = 29;
     public static final int kTopShooterMotorCANID = 30;
     public static final double kShooterMaxSpeed = 1.00;
-    public static final double kAmpShooterMaxSpeed = 0.20;
+    public static final double kAmpShooterMaxSpeed = 0.10; //0.2
 
     public static final  int kRPMSetpointOffset = 100;
     
@@ -277,9 +284,9 @@ public final class Constants {
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
     //public static final double kAngleHardSetpoint = 0.015;
-    public static final double kAngleAmpHandoffSetpoint = 0.835; //was .0915
+    public static final double kAngleAmpHandoffSetpoint = 0.40099; //was .835
 
-    public static final double kSubwooferAngleSetpoint = 0.722;
+    public static final double kSubwooferAngleSetpoint = 0.3005; //was 0.722
 
     public static final double kAngle4RingSetpoint = 0.03;
 
@@ -292,15 +299,15 @@ public final class Constants {
     public static final int kIndexerCANID = 23;
     public static final double kIntakeSpeed = 1.0; 
     public static final double kIndexerSpeed = .5;
-    public static final double kIntakeSlowSpeed = 0.45; 
+    public static final double kIntakeSlowSpeed = 0.65; //0.45
   }
 
   public static final class ClimbConstants {
     public static final int kClimbMotorCanId = 14;
     public static final int kAmpMotorCanId = 15;
-    public static final double kClimbMaxSpeed = 0.50;
+    public static final double kClimbMaxSpeed = 1.00;
     public static final double kAmpMaxSpeed = 0.50;
-    public static final double kAmpHandoffMaxSpeed = 0.20;
+    public static final double kAmpHandoffMaxSpeed = 0.40; //0.2
 
   }
   

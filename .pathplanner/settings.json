@@ -5,9 +5,12 @@
   "pathFolders": [
     "4RingCenter",
     "CenterSteal",
+    "FarSideSteal",
     "Random Junk"
   ],
-  "autoFolders": [],
+  "autoFolders": [
+    "DoNothings"
+  ],
   "defaultMaxVel": 4.5,
   "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 540.0,

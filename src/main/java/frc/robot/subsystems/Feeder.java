@@ -17,11 +17,9 @@ import frc.robot.Constants.FeederConstants;
 
 public class Feeder extends SubsystemBase {
   private CANSparkFlex m_FeederMotor;
-  private CANSparkFlex m_FeederMotorTwo; 
   /** Creates a new Feeder. */
   public Feeder() {
     m_FeederMotor = new CANSparkFlex(FeederConstants.kFeederCANID, MotorType.kBrushless);
-    m_FeederMotorTwo = new CANSparkFlex(FeederConstants.kFeederCANID2, MotorType.kBrushless);
   }
 
   @Override
@@ -30,8 +28,7 @@ public class Feeder extends SubsystemBase {
   }
 
   public void runMotors(Supplier<Double> speedSupplier) {
-     m_FeederMotor.set(-speedSupplier.get());
-     m_FeederMotorTwo.set(speedSupplier.get());
+     m_FeederMotor.set(speedSupplier.get());
   }
   
   public CANSparkFlex getMotor(){

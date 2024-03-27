@@ -60,16 +60,21 @@ public class LookupTables {
      */
     public static void InitValues() {
         //                    DISTANCE     ENCODER VALUE
-        shooterAngleTable.put(1.3620, .718); // .74663
-        shooterAngleTable.put(1.7033, .7414); // .757
-        shooterAngleTable.put(2.4447, .7677); // .7658
-        shooterAngleTable.put(3.0194, .7824); // .7814
-        shooterAngleTable.put(3.4798, .7873); // .783
-        shooterAngleTable.put(3.9306, .797); // .8009
-        shooterAngleTable.put(4.3053, .8009); // .803
-        shooterAngleTable.put(4.6831, .801); // .804
-        shooterAngleTable.put(5.3244, .806); // .80
-        shooterAngleTable.put(5.7531, .807); // .80
+        shooterAngleTable.put(1.5303, .3005); // .74663
+        shooterAngleTable.put(1.9748, .3063); // .757
+        shooterAngleTable.put(2.1844, .3249); // .757
+        shooterAngleTable.put(2.4384, .3287); // .757
+        shooterAngleTable.put(2.6797, .3376); // .757
+        shooterAngleTable.put(2.9337, .3395); // .7658
+        shooterAngleTable.put(3.0607, .3434); // .757
+        shooterAngleTable.put(3.3655, .3483); // .7814
+        shooterAngleTable.put(3.683, .3581); // .3561
+        shooterAngleTable.put(3.9243, .3601); // .3581
+        shooterAngleTable.put(4.4323, .3639); // .803
+        shooterAngleTable.put(4.699, .3659); // .804
+        shooterAngleTable.put(4.9403, .3697); // .80
+        shooterAngleTable.put(5.1943, .3699); // .80
+        shooterAngleTable.put(5.4483, .3707); // .80
 
 
         //shooterAngleTable.put(1.905, .75563); // .74663

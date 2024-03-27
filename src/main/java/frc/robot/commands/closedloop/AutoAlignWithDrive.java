@@ -11,6 +11,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.swerve.DriveSubsystem;
 import frc.robot.util.PoseMath;
+import frc.robot.util.Vision;
 
 public class AutoAlignWithDrive extends Command {
   /** Creates a new AutoAlignWithDrive. */
@@ -39,7 +40,7 @@ public class AutoAlignWithDrive extends Command {
     m_ThetaController.setSetpoint(PoseMath.getTargetAngleRobotToTarget(m_DriveSubsystem.getPose(), m_DriveSubsystem.getChassisSpeeds()));
     double thetaOutput = m_ThetaController.calculate(m_DriveSubsystem.getPose().getRotation().rotateBy(Rotation2d.fromRadians(Math.PI)).getRadians());
     m_DriveSubsystem.drive(m_XSpeedSupplier.get(), m_YSpeedSupplier.get(), thetaOutput, true); //might have to disable rateLimiting
-
+    Vision.setDisplacementToTargetAngle(m_ThetaController.getPositionError());
   }
 
   // Called once the command ends or is interrupted.

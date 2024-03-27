@@ -167,15 +167,14 @@ public class Bindings {
     
 
          //new Trigger(() -> {return operatorController.getRightTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, operatorController::getRightTriggerAxis));
-         new Trigger(()-> driverController.getRightTriggerAxis() != 0).whileTrue(new PrototypeOpenLoop(m_Prototype, ()-> driverController.getRightTriggerAxis()).alongWith(new PrintCommand("stuff")));
+         //new Trigger(()-> driverController.getRightTriggerAxis() != 0).whileTrue(new PrototypeOpenLoop(m_Prototype, ()-> driverController.getRightTriggerAxis()).alongWith(new PrintCommand("stuff")));
 
 
 
 
 
 
-         new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, () -> {return -operatorController.getLeftTriggerAxis();}));
-
+         new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new ParallelCommandGroup(new IntakeOpenLoop(intake, () -> {return -operatorController.getLeftTriggerAxis();}), new AmpOpenLoop(amp, () -> {return -ClimbConstants.kAmpMaxSpeed;})));
          new Trigger(() -> {return operatorController.getRightTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, () -> {return operatorController.getRightTriggerAxis();}));
 
          new Trigger(() -> {return operatorController.getRightBumper();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> ClimbConstants.kAmpHandoffMaxSpeed), new IntakeOpenLoop(intake, () -> IntakeConstants.kIntakeSlowSpeed)));
@@ -184,7 +183,7 @@ public class Bindings {
          new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new AmpOpenLoop(amp, () -> {return ClimbConstants.kAmpMaxSpeed;}));
          new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new AmpOpenLoop(amp, () -> {return -ClimbConstants.kAmpMaxSpeed;}));
         
-         new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed + 0.15;}));
+         new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
          new Trigger(() -> {return operatorController.getPOV() == 180;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));
 
     }

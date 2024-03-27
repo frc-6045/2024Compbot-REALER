@@ -17,14 +17,14 @@ import frc.robot.Constants.ClimbConstants;
 public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   private final CANSparkFlex m_ClimbMotor;
-  //private final DigitalInput m_LimitSwitch1;
-  //private final DigitalInput m_LimitSwitch2;
+  private final DigitalInput m_LimitSwitch1;
+  private final DigitalInput m_LimitSwitch2;
   
   
   public Climber() {
     m_ClimbMotor = new CANSparkFlex(ClimbConstants.kClimbMotorCanId, MotorType.kBrushless);
-    // m_LimitSwitch1 = new DigitalInput(0);
-    // m_LimitSwitch2 = new DigitalInput(1);
+    m_LimitSwitch1 = new DigitalInput(9);
+    m_LimitSwitch2 = new DigitalInput(1);
     m_ClimbMotor.setSmartCurrentLimit(50);
 
     m_ClimbMotor.burnFlash();
@@ -36,15 +36,14 @@ public class Climber extends SubsystemBase {
   }
 
   public void runMotors(Supplier<Double> speedSupplier){
-    System.out.println(m_ClimbMotor.getOutputCurrent());
     m_ClimbMotor.set(-speedSupplier.get());
   }
 
-  // public DigitalInput getLimitSwitch1(){
-  //   return m_LimitSwitch1;
-  // }
+  public DigitalInput getLimitSwitch1(){
+    return m_LimitSwitch1;
+  }
 
-  // public DigitalInput getLimitSwitch2(){
-  //   return m_LimitSwitch2;
-  // }
+  public  DigitalInput getLimitSwitch2(){
+    return m_LimitSwitch2;
+  }
 }

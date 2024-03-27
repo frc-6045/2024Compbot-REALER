@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.73,
+        "y": 0.9
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 8.069482182723764,
+        "y": 1.1674708106308433
+      },
+      "isLocked": false,
+      "linkedName": "FarSideSteal1End"
+    },
+    {
+      "anchor": {
+        "x": 8.19,
+        "y": 1.84143365780466
+      },
+      "prevControl": {
+        "x": 8.1282759667775,
+        "y": 1.2241933255796338
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "FarSideSteal2End"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.5,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 87.20729763428673,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "FarSideSteal",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

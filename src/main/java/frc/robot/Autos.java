@@ -54,6 +54,7 @@ public class Autos {
         autoChooser.addOption("3RingNoPodium", AutoBuilder.buildAuto("3RingNoPodium"));
         autoChooser.addOption("3RingNoTop", AutoBuilder.buildAuto("3RingNoTop"));
         autoChooser.addOption("CenterSteal", AutoBuilder.buildAuto("CenterSteal"));
+        autoChooser.addOption("FarSideSteal", AutoBuilder.buildAuto("FarSideSteal"));
         autoChooser.addOption("ShootAndDoNothing", AutoBuilder.buildAuto("ShootAndDoNothing"));
         autoChooser.addOption("ShootAndDoNothingLeft", AutoBuilder.buildAuto("ShootAndDoNothingLeft"));
         autoChooser.addOption("ShootAndDoNothingRight", AutoBuilder.buildAuto("ShootAndDoNothingRight"));
@@ -64,7 +65,6 @@ public class Autos {
 
 
         SmartDashboard.putData("Autos", autoChooser);
-        //autoTab.add(autoChooser); sure
     }
     
     public Command getAutonomousCommand() {
