@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.192942878776753,
-        "y": 1.53
+        "x": 6.5,
+        "y": 1.4687248331842628
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3185190747912996,
-        "y": 1.8283328272420962
+        "x": 5.498154583986892,
+        "y": 1.9745108684530155
       },
       "isLocked": false,
-      "linkedName": "FarSideSteal4EndReal"
+      "linkedName": "FarSideSteal6End"
     },
     {
       "anchor": {
@@ -20,26 +20,26 @@
         "y": 3.268155920198095
       },
       "prevControl": {
-        "x": 3.548489886892945,
-        "y": 2.6714902657139037
+        "x": 3.387475969264735,
+        "y": 2.645650030636554
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "FarSideSteal5End"
+      "linkedName": "FarSideSteal3End"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.5,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 6.5,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -35.394795844987115,
+    "rotation": -37.184706453233005,
     "rotateFast": false
   },
   "reversed": false,
@@ -48,5 +48,5 @@
     "rotation": 0,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

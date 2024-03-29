@@ -20,6 +20,10 @@ public class Feeder extends SubsystemBase {
   /** Creates a new Feeder. */
   public Feeder() {
     m_FeederMotor = new CANSparkFlex(FeederConstants.kFeederCANID, MotorType.kBrushless);
+    m_FeederMotor.restoreFactoryDefaults();
+    m_FeederMotor.setSmartCurrentLimit(FeederConstants.kFeederCurrentLimit);
+    
+    m_FeederMotor.burnFlash();
   }
 
   @Override

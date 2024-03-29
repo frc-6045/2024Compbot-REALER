@@ -17,6 +17,9 @@ public class Amp extends SubsystemBase {
   private final CANSparkFlex m_AmpMotor;
   public Amp() {
     m_AmpMotor = new CANSparkFlex(ClimbConstants.kAmpMotorCanId, MotorType.kBrushless);
+    m_AmpMotor.restoreFactoryDefaults();
+    m_AmpMotor.setSmartCurrentLimit(50);
+    m_AmpMotor.burnFlash();
   }
 
   @Override

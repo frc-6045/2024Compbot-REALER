@@ -277,6 +277,7 @@ public final class Constants {
     public static final double kFeederSpeed = 1.00;
     public static final double kAmpFeederSpeed = 0.70; //0.5
     public static final double kAmpFeederAutoSpeed = 1.00; //0.5
+    public static final int kFeederCurrentLimit = 50;
   }
   public static final class ShooterConstants {
     public static final int kBottomShooterMotorCANID = 29;
@@ -319,6 +320,8 @@ public final class Constants {
     public static final double kIndexerSpeed = .5;
     public static final double kIntakeSlowSpeed = 0.65; //0.45
     public static final double kIntakeAutoSpeed = 0.70; //0.45
+    public static final int kIntakeCurrentLimit = 50;
+    public static final int kIndexerCurrentLimit = 50;
   }
 
   public static final class ClimbConstants {

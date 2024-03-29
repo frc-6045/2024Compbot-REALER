@@ -22,12 +22,6 @@
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "AmpSetpoint"
-                }
-              },
-              {
                 "type": "sequential",
                 "data": {
                   "commands": [
@@ -212,6 +206,18 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "FarSideSteal6"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "FarSideSteal7"
           }
         }
       ]

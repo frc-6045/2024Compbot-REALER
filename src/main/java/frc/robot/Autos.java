@@ -48,7 +48,7 @@ public class Autos {
         autoChooser.addOption("Shooter Characterization", new FeedForwardCharacterization(m_Shooter, true, new FeedForwardCharacterizationData("Shooter"),
                 m_Shooter::runCharacterizationVolts , m_Shooter::getCharacterizationVelocity));
         
-        autoChooser.addOption("Basic Test Auto", AutoBuilder.buildAuto("Basic Test Auto"));
+        autoChooser.addOption("Basic Test Auto", AutoBuilder.buildAuto("BasicTestAuto"));
         autoChooser.addOption("4RingRed", AutoBuilder.buildAuto("4RingRed"));
         autoChooser.addOption("4RingBlue", AutoBuilder.buildAuto("4RingBlue"));
         autoChooser.addOption("3RingNoPodium", AutoBuilder.buildAuto("3RingNoPodium"));

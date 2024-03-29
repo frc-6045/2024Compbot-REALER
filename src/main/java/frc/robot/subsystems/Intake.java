@@ -32,8 +32,8 @@ public class Intake extends SubsystemBase {
     m_IndexerMotor = new CANSparkFlex(IntakeConstants.kIndexerCANID, MotorType.kBrushless);
     m_IntakeMotor.restoreFactoryDefaults();
     m_IndexerMotor.restoreFactoryDefaults();
-    m_IntakeMotor.setSmartCurrentLimit(50);
-    m_IndexerMotor.setSmartCurrentLimit(50);
+    m_IntakeMotor.setSmartCurrentLimit(IntakeConstants.kIntakeCurrentLimit);
+    m_IndexerMotor.setSmartCurrentLimit(IntakeConstants.kIndexerCurrentLimit);
     m_IntakeMotor.setIdleMode(IdleMode.kBrake);
     m_IndexerMotor.setIdleMode(IdleMode.kBrake);
 
