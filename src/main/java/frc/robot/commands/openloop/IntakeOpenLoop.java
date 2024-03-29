@@ -9,15 +9,18 @@ import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LEDs;
 
 public class IntakeOpenLoop extends Command {
   private Intake m_Intake;
+  private LEDs m_LEDs;
   private Supplier<Double> speedSupplier;
   /** Creates a new IntakeOpenLoop. */
-  public IntakeOpenLoop(Intake intake, Supplier<Double> speedSupplier) {
+  public IntakeOpenLoop(Intake intake, LEDs leds, Supplier<Double> speedSupplier) {
     m_Intake = intake;
+    m_LEDs = leds;
     this.speedSupplier = speedSupplier;
-    addRequirements(m_Intake);
+    addRequirements(m_Intake, m_LEDs);
      // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -28,7 +31,12 @@ public class IntakeOpenLoop extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("running");
+    m_Intake.checkNote();
+    if(m_Intake.hasNote()){
+      m_LEDs.setColor(23, 252, 3);
+    } else {
+      m_LEDs.setColor(39, 2, 201);
+    }
     m_Intake.runIntake(speedSupplier);
   }
 

@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import java.util.function.Supplier;
 
+import com.playingwithfusion.TimeOfFlight;
+import com.playingwithfusion.TimeOfFlight.RangingMode;
 import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkMax;
@@ -22,6 +24,8 @@ public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
   private final CANSparkFlex m_IntakeMotor;
   private final CANSparkFlex m_IndexerMotor;
+  private final TimeOfFlight m_TimeOfFlightSensor;
+  private boolean hasNote;
   public Intake() {
     m_IntakeMotor = new CANSparkFlex(IntakeConstants.kIntakeCANID, MotorType.kBrushless);
     //m_Pneumatics.ActutateIntakeSolenoid();
@@ -35,6 +39,9 @@ public class Intake extends SubsystemBase {
 
     m_IntakeMotor.burnFlash();
     m_IndexerMotor.burnFlash();
+
+    m_TimeOfFlightSensor = new TimeOfFlight(IntakeConstants.kTimeOfFlightCANID);
+    m_TimeOfFlightSensor.setRangingMode(RangingMode.Short, 24);
   }
 
   public void runIntake(Supplier<Double> speed){
@@ -78,6 +85,20 @@ public class Intake extends SubsystemBase {
   }
 
    
+  public void checkNote(){
+    System.out.println("sensor range: " + m_TimeOfFlightSensor.getRange());
+    System.out.println("sensor std dev: " + m_TimeOfFlightSensor.getRangeSigma());
+    System.out.println("status: " + m_TimeOfFlightSensor.getStatus().toString());
+    if(m_TimeOfFlightSensor.getRange() < 350){
+      hasNote = true;
+    } else {
+      hasNote = false;
+    }
+  }
+
+  public boolean hasNote() {
+    return hasNote;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

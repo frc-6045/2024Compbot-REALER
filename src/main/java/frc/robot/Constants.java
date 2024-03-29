@@ -205,7 +205,7 @@ public final class Constants {
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
-    public static final int kDrivingMotorCurrentLimit = 80; // 80 amps
+    public static final int kDrivingMotorCurrentLimit = 50; // 80 amps
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
@@ -276,6 +276,7 @@ public final class Constants {
     public static final int kFeederCANID = 22;
     public static final double kFeederSpeed = 1.00;
     public static final double kAmpFeederSpeed = 0.70; //0.5
+    public static final double kAmpFeederAutoSpeed = 1.00; //0.5
   }
   public static final class ShooterConstants {
     public static final int kBottomShooterMotorCANID = 29;
@@ -313,9 +314,11 @@ public final class Constants {
   
     public static final int kIntakeCANID = 21; 
     public static final int kIndexerCANID = 23;
+    public static final int kTimeOfFlightCANID = 0; 
     public static final double kIntakeSpeed = 1.0; 
     public static final double kIndexerSpeed = .5;
     public static final double kIntakeSlowSpeed = 0.65; //0.45
+    public static final double kIntakeAutoSpeed = 0.70; //0.45
   }
 
   public static final class ClimbConstants {

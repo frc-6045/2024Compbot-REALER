@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.850603776395523,
-        "y": 0.7098263820587796
+        "x": 3.192942878776753,
+        "y": 1.53
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.97617997241007,
-        "y": 1.0081592093008758
+        "x": 2.3185190747912996,
+        "y": 1.8283328272420962
       },
       "isLocked": false,
-      "linkedName": "FarSideSteal4End"
+      "linkedName": "FarSideSteal4EndReal"
     },
     {
       "anchor": {
-        "x": 2.8179669391920243,
-        "y": 2.458673990029684
+        "x": 2.7357901161299956,
+        "y": 3.268155920198095
       },
       "prevControl": {
-        "x": 3.6306667099549736,
-        "y": 1.8620083355454928
+        "x": 3.548489886892945,
+        "y": 2.6714902657139037
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "FarSideSteal3End"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -39,7 +39,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -51.340191745909884,
+    "rotation": -35.394795844987115,
     "rotateFast": false
   },
   "reversed": false,

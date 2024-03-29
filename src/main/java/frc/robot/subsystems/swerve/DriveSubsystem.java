@@ -170,9 +170,9 @@ public class DriveSubsystem extends SubsystemBase {
     //eventually figure out what each result value is
 
     updateOdometry();
-    if(FieldConstants.kVisionEnable){
-      vision.UpdateVision();
-    }
+    //if(FieldConstants.kVisionEnable){
+    //  vision.UpdateVision();
+    //}
     SmartDashboard.putBoolean("Compressor Enabled", Bindings.getCompressorEnabled());
     SmartDashboard.putBoolean("Limit switch hit", Bindings.getCompressorEnabled());
     SmartDashboard.putNumber("m_gyro_Get Heading", getHeadingDegrees());

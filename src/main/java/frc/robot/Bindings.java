@@ -42,6 +42,7 @@ import frc.robot.subsystems.AngleController;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Prototype;
 import frc.robot.subsystems.Shooter;
@@ -71,7 +72,8 @@ public class Bindings {
             Intake intake,
             Climber climber, 
             Amp amp,
-            Prototype m_Prototype){
+            Prototype m_Prototype,
+            LEDs leds){
         
         //new JoystickButton(driverController, XboxController.Button.kStart.value).onTrue(new InstantCommand(() -> { driveSubsystem.zeroHeading();}, driveSubsystem));
         new Trigger(() -> {return driverController.getStartButtonPressed();}).onTrue(new InstantCommand(() -> {driveSubsystem.zeroHeading();}, driveSubsystem));
@@ -174,11 +176,11 @@ public class Bindings {
 
 
 
-         new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new ParallelCommandGroup(new IntakeOpenLoop(intake, () -> {return -operatorController.getLeftTriggerAxis();}), new AmpOpenLoop(amp, () -> {return -ClimbConstants.kAmpMaxSpeed;})));
-         new Trigger(() -> {return operatorController.getRightTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, () -> {return operatorController.getRightTriggerAxis();}));
+         new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new ParallelCommandGroup(new IntakeOpenLoop(intake, leds, () -> {return -operatorController.getLeftTriggerAxis();}), new AmpOpenLoop(amp, () -> {return -ClimbConstants.kAmpMaxSpeed;})));
+         new Trigger(() -> {return operatorController.getRightTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, leds, () -> {return operatorController.getRightTriggerAxis();}));
 
-         new Trigger(() -> {return operatorController.getRightBumper();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> ClimbConstants.kAmpHandoffMaxSpeed), new IntakeOpenLoop(intake, () -> IntakeConstants.kIntakeSlowSpeed)));
-         new Trigger(() -> {return operatorController.getLeftBumper();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return -FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> -ClimbConstants.kAmpHandoffMaxSpeed), new IntakeOpenLoop(intake, () -> -IntakeConstants.kIntakeSlowSpeed))); 
+         new Trigger(() -> {return operatorController.getRightBumper();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> ClimbConstants.kAmpHandoffMaxSpeed), new IntakeOpenLoop(intake, leds, () -> IntakeConstants.kIntakeSlowSpeed)));
+         new Trigger(() -> {return operatorController.getLeftBumper();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return -FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> -ClimbConstants.kAmpHandoffMaxSpeed), new IntakeOpenLoop(intake, leds, () -> -IntakeConstants.kIntakeSlowSpeed))); 
 
          new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new AmpOpenLoop(amp, () -> {return ClimbConstants.kAmpMaxSpeed;}));
          new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new AmpOpenLoop(amp, () -> {return -ClimbConstants.kAmpMaxSpeed;}));

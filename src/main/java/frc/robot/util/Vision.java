@@ -23,6 +23,7 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.FieldConstants;
@@ -41,7 +42,7 @@ public class Vision {
   fieldLayout = AprilTagFields.kDefaultField.loadAprilTagLayoutField();
   if(FieldConstants.kVisionEnable){
     try {
-      m_visionPoseEstimator = new PhotonPoseEstimator(AprilTagFieldLayout.loadFromResource(AprilTagFields.k2024Crescendo.m_resourceFile), PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, new PhotonCamera("Arducam_OV2311_USB_Camera"), new Transform3d(new Translation3d(-Units.inchesToMeters(4.5), Units.inchesToMeters(12.7), Units.inchesToMeters(17.75)), new Rotation3d(0, Units.degreesToRadians(21),Units.degreesToRadians(180)))); //TODO: actually make this work
+      m_visionPoseEstimator = new PhotonPoseEstimator(AprilTagFieldLayout.loadFromResource(AprilTagFields.k2024Crescendo.m_resourceFile), PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, new PhotonCamera("Arducam_OV2311_USB_Camera"), new Transform3d(new Translation3d(-Units.inchesToMeters(5.75), Units.inchesToMeters(13.75), Units.inchesToMeters(18.5)), new Rotation3d(0, Units.degreesToRadians(21),Units.degreesToRadians(180)))); //TODO: -5.75, 13.75, 18.5 /-4.5, 12.7, 17
     } catch(IOException e){
       System.out.println(e.getMessage() + "\n april tags didnt load");
     }
@@ -58,6 +59,7 @@ public class Vision {
     PhotonPoseEstimator poseEstimator = Vision.getPoseEstimator();
       // print out the time for this line to run 
       Optional<EstimatedRobotPose> pose = poseEstimator.update();
+      if(!DriverStation.isAutonomousEnabled()){
       if (pose.isPresent()) {
         Pose3d pose3d = pose.get().estimatedPose;
         Pose2d pose2d = pose3d.toPose2d();
@@ -87,10 +89,11 @@ public class Vision {
 
           m_photonVisionField.setRobotPose(pose2d);
       }
+    }
   }
 
   public void UpdateVision() {
-  if(FieldConstants.kVisionEnable){
+  if(FieldConstants.kVisionEnable && !DriverStation.isAutonomousEnabled()){
      m_visionPoseEstimator.update().ifPresent(estimatedRobotPose -> {
       //System.out.println(estimatedRobotPose.estimatedPose.toPose2d().toString());
       
