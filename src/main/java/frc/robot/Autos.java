@@ -48,13 +48,15 @@ public class Autos {
         autoChooser.addOption("Shooter Characterization", new FeedForwardCharacterization(m_Shooter, true, new FeedForwardCharacterizationData("Shooter"),
                 m_Shooter::runCharacterizationVolts , m_Shooter::getCharacterizationVelocity));
         
+        autoChooser.addOption("FarSideSteal", AutoBuilder.buildAuto("FarSideSteal"));
+        autoChooser.addOption("3RingMidfield", AutoBuilder.buildAuto("3RingMidfield"));
+        autoChooser.addOption("3RingMidfieldAlt", AutoBuilder.buildAuto("3RingMidfieldAlt"));
         autoChooser.addOption("Basic Test Auto", AutoBuilder.buildAuto("BasicTestAuto"));
         autoChooser.addOption("4RingRed", AutoBuilder.buildAuto("4RingRed"));
         autoChooser.addOption("4RingBlue", AutoBuilder.buildAuto("4RingBlue"));
         autoChooser.addOption("3RingNoPodium", AutoBuilder.buildAuto("3RingNoPodium"));
         autoChooser.addOption("3RingNoTop", AutoBuilder.buildAuto("3RingNoTop"));
         autoChooser.addOption("CenterSteal", AutoBuilder.buildAuto("CenterSteal"));
-        autoChooser.addOption("FarSideSteal", AutoBuilder.buildAuto("FarSideSteal"));
         autoChooser.addOption("ShootAndDoNothing", AutoBuilder.buildAuto("ShootAndDoNothing"));
         autoChooser.addOption("ShootAndDoNothingLeft", AutoBuilder.buildAuto("ShootAndDoNothingLeft"));
         autoChooser.addOption("ShootAndDoNothingRight", AutoBuilder.buildAuto("ShootAndDoNothingRight"));

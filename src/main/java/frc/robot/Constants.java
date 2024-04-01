@@ -283,7 +283,7 @@ public final class Constants {
     public static final int kBottomShooterMotorCANID = 29;
     public static final int kTopShooterMotorCANID = 30;
     public static final double kShooterMaxSpeed = 1.00;
-    public static final double kAmpShooterMaxSpeed = 0.10; //0.2
+    public static final double kAmpShooterMaxSpeed = 0.15; //0.2
 
     public static final  int kRPMSetpointOffset = 100;
     
@@ -302,7 +302,7 @@ public final class Constants {
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
     //public static final double kAngleHardSetpoint = 0.015;
-    public static final double kAngleAmpHandoffSetpoint = 0.40099; //was .835
+    public static final double kAngleAmpHandoffSetpoint = 0.40599; //was 0.40599
 
     public static final double kSubwooferAngleSetpoint = 0.3005; //was 0.722
 
@@ -317,9 +317,9 @@ public final class Constants {
     public static final int kIndexerCANID = 23;
     public static final int kTimeOfFlightCANID = 0; 
     public static final double kIntakeSpeed = 1.0; 
-    public static final double kIndexerSpeed = .5;
+    public static final double kIndexerSpeed = 1.0;
     public static final double kIntakeSlowSpeed = 0.65; //0.45
-    public static final double kIntakeAutoSpeed = 0.70; //0.45
+    public static final double kIntakeAutoSpeed = 0.90; //0.45
     public static final int kIntakeCurrentLimit = 50;
     public static final int kIndexerCurrentLimit = 50;
   }

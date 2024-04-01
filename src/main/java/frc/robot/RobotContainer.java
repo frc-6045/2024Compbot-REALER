@@ -70,6 +70,7 @@ private final LEDs m_LEDs = new LEDs();
 private Autos m_Autos;
 private ShuffleboardTab teleopTab = Shuffleboard.getTab("teleOp");
 public RobotContainer() {
+  NamedCommands.registerCommand("SpeakerSetpoint",new PIDAngleControl(m_AngleController,() -> {return ShooterConstants.kSubwooferAngleSetpoint;}));
   NamedCommands.registerCommand("AmpSetpoint", new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kAngleAmpHandoffSetpoint;}));
   NamedCommands.registerCommand("FarStealShootSetpoint1", new PIDAngleControl(m_AngleController, () -> {return 0.3495;}));
   NamedCommands.registerCommand("FarStealShootSetpoint2", new PIDAngleControl(m_AngleController, () -> {return 0.349;}));
@@ -80,12 +81,14 @@ public RobotContainer() {
 
 
   //Commented these out because they're old
-  //NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000)));
-  //NamedCommands.registerCommand("AngleAndShootClose", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return 0.797;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true)));
-  //NamedCommands.registerCommand("ShootClose", new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true));
-  //NamedCommands.registerCommand("ShootFromDistance", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true)));
-  //NamedCommands.registerCommand("StartingAngleAndShootClose", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kSubwooferAngleSetpoint;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true)));
-  //NamedCommands.registerCommand("AngleAndShoot4Ring", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kAngle4RingSetpoint;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true)));
+  NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000, false)));
+  NamedCommands.registerCommand("AngleAndShootClose", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return 0.797;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true)));
+  NamedCommands.registerCommand("ShootClose", new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true));
+  NamedCommands.registerCommand("ShootFromDistance", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true)));
+  NamedCommands.registerCommand("StartingAngleAndShootClose", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kSubwooferAngleSetpoint;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true)));
+  NamedCommands.registerCommand("AngleAndShoot4Ring", new SequentialCommandGroup(new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kAngle4RingSetpoint;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true)));
+
+
   NamedCommands.registerCommand("IntakeOut", new SequentialCommandGroup(new ParallelDeadlineGroup(new WaitCommand(1.5), new RunCommand(() -> {m_Intake.intakeIn();}, m_Intake)), new InstantCommand(() -> {m_Intake.stopIntake();}, m_Intake)));
   NamedCommands.registerCommand("IntakeIn", new SequentialCommandGroup(new ParallelDeadlineGroup(new WaitCommand(2.0), new RunCommand(() -> {m_Intake.intakeOut();}, m_Intake)), new InstantCommand(() -> {m_Intake.stopIntake();}, m_Intake)));
   NamedCommands.registerCommand("ActuateIntakeDown", new ParallelDeadlineGroup(new WaitCommand(0.3), new RunCommand(() -> {m_Pneumatics.ActutateIntakeSolenoid(true);})));

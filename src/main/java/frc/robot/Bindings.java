@@ -176,7 +176,7 @@ public class Bindings {
 
 
 
-         new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new ParallelCommandGroup(new IntakeOpenLoop(intake, leds, () -> {return -operatorController.getLeftTriggerAxis();}), new AmpOpenLoop(amp, () -> {return -ClimbConstants.kAmpMaxSpeed;})));
+         new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, leds, () -> {return -operatorController.getLeftTriggerAxis();}));
          new Trigger(() -> {return operatorController.getRightTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, leds, () -> {return operatorController.getRightTriggerAxis();}));
 
          new Trigger(() -> {return operatorController.getRightBumper();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> ClimbConstants.kAmpHandoffMaxSpeed), new IntakeOpenLoop(intake, leds, () -> IntakeConstants.kIntakeSlowSpeed)));

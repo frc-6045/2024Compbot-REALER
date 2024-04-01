@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.35,
-      "y": 1.68
+      "x": 0.7612792476769783,
+      "y": 4.367267881455193
     },
-    "rotation": 0
+    "rotation": -60.4612177404418
   },
   "command": {
     "type": "sequential",
@@ -16,15 +16,28 @@
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "FarSideSteal1"
+                  "name": "SpeakerSetpoint"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AmpSetpoint"
+                  "name": "PIDShooting"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "OutPathRight"
                 }
               },
               {
@@ -34,25 +47,57 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.9
+                        "waitTime": 1.7
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "RunAmp"
+                        "name": "IntakeIn"
                       }
-                    },
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ActuateIntakeUp"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "OutPathRightBack"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "FarStealShootSetpoint1"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.3
+                        "waitTime": 1.7
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "RingPassthrough"
+                        "name": "PIDShooting"
                       }
                     }
                   ]
@@ -68,7 +113,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSideSteal2"
+                  "pathName": "OutPathRightToRing2"
                 }
               },
               {
@@ -76,41 +121,21 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "deadline",
+                      "type": "wait",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "wait",
-                            "data": {
-                              "waitTime": 0.55
-                            }
-                          },
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "RingPassthrough"
-                            }
-                          }
-                        ]
+                        "waitTime": 1.75
                       }
                     },
                     {
-                      "type": "deadline",
+                      "type": "named",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "wait",
-                            "data": {
-                              "waitTime": 0.5
-                            }
-                          },
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "IntakeIn"
-                            }
-                          }
-                        ]
+                        "name": "ActuateIntakeDown"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "IntakeIn"
                       }
                     }
                   ]
@@ -124,9 +149,15 @@
           "data": {
             "commands": [
               {
+                "type": "named",
+                "data": {
+                  "name": "ActuateIntakeUp"
+                }
+              },
+              {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSideSteal3"
+                  "pathName": "OutPathRightFromRing2ToShoot"
                 }
               },
               {
@@ -143,120 +174,6 @@
                       "type": "wait",
                       "data": {
                         "waitTime": 1.0
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PIDShooting"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "FarSideSteal4"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "IntakeIn"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "FarSideSteal5"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "FarStealShootSetpoint2"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.5
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PIDShooting"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "FarSideSteal6"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "IntakeIn"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "FarSideSteal7"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "FarStealShootSetpoint2"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.5
                       }
                     },
                     {

@@ -12,19 +12,19 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "PIDShooting"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "ShootClose"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
-                  "pathName": "OutPathRight"
+                  "pathName": "OutPathRightAlt"
                 }
               },
               {
@@ -68,7 +68,13 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "OutPathRightBack"
+                  "pathName": "OutPathRightFromRing2ToShoot"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "FarStealShootSetpoint1"
                 }
               },
               {
@@ -78,13 +84,13 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.75
+                        "waitTime": 1.0
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "ShootFromDistance"
+                        "name": "PIDShooting"
                       }
                     }
                   ]
@@ -100,7 +106,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "OutPathRightToRing2"
+                  "pathName": "OutPathRightToRing2Alt"
                 }
               },
               {
@@ -144,7 +150,13 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "OutPathRightFromRing2ToShoot"
+                  "pathName": "OutPathRightBack"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "FarStealShootSetpoint1"
                 }
               },
               {
@@ -154,51 +166,13 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.75
+                        "waitTime": 1.0
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "ShootClose"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "OutPathRightToFinal"
-                }
-              },
-              {
-                "type": "parallel",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 2.75
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "ActuateIntakeDown"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "IntakeIn"
+                        "name": "PIDShooting"
                       }
                     }
                   ]
