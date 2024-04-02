@@ -48,6 +48,7 @@ public class Autos {
         autoChooser.addOption("Shooter Characterization", new FeedForwardCharacterization(m_Shooter, true, new FeedForwardCharacterizationData("Shooter"),
                 m_Shooter::runCharacterizationVolts , m_Shooter::getCharacterizationVelocity));
         
+        autoChooser.addOption("FarSideSteal2ndShot", AutoBuilder.buildAuto("FarSideSteal2ndShot"));
         autoChooser.addOption("FarSideSteal", AutoBuilder.buildAuto("FarSideSteal"));
         autoChooser.addOption("3RingMidfield", AutoBuilder.buildAuto("3RingMidfield"));
         autoChooser.addOption("3RingMidfieldAlt", AutoBuilder.buildAuto("3RingMidfieldAlt"));

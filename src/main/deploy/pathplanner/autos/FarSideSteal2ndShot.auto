@@ -170,32 +170,19 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeIn"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "FarSideSteal5"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "FarStealShootSetpoint2"
+                  "name": "FarStealShootSetpoint3"
                 }
               },
               {
                 "type": "sequential",
                 "data": {
                   "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "IntakeIn"
+                      }
+                    },
                     {
                       "type": "wait",
                       "data": {
@@ -221,7 +208,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSideSteal6"
+                  "pathName": "FarSideSteal62"
                 }
               },
               {
@@ -240,19 +227,19 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSideSteal7"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "PIDShooting"
+                  "pathName": "FarSideSteal72"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "FarStealShootSetpoint2"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PIDShooting"
                 }
               }
             ]

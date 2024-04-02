@@ -223,7 +223,7 @@ public final class Constants {
       4.8, //5.0, 0, 0.2
       //DriveConstants.kMaxSpeedMetersPerSecond, // Max module speed, in m/s
       DriveConstants.radiusMeters, // Drive base radius in meters. Distance from robot center to furthest module.
-      new ReplanningConfig());
+      new ReplanningConfig(false, false));
 
     public static final double kMaxSpeedMetersPerSecond = 4.5;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
@@ -329,7 +329,7 @@ public final class Constants {
     public static final int kAmpMotorCanId = 15;
     public static final double kClimbMaxSpeed = 1.00;
     public static final double kAmpMaxSpeed = 0.50;
-    public static final double kAmpHandoffMaxSpeed = 0.40; //0.2
+    public static final double kAmpHandoffMaxSpeed = 0.50; //0.2
 
   }
   

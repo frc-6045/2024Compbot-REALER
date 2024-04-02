@@ -169,7 +169,10 @@ public class DriveSubsystem extends SubsystemBase {
 
     //eventually figure out what each result value is
 
-    updateOdometry();
+    if(Math.abs(m_frontLeft.getPosition().distanceMeters) > 0.1 || Math.abs(m_frontRight.getPosition().distanceMeters) > 0.1 || Math.abs(m_rearLeft.getPosition().distanceMeters) > 0.1 || Math.abs(m_rearRight.getPosition().distanceMeters) > 0.1){
+      updateOdometry();
+    }
+
     //if(FieldConstants.kVisionEnable){
     //  vision.UpdateVision();
     //}

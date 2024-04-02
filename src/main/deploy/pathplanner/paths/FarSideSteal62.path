@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.7357901161299956,
-        "y": 3.268155920198095
+        "x": 3.192942878776753,
+        "y": 1.53
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.689002259521107,
-        "y": 1.8772443232090241
+        "x": 4.463941158458758,
+        "y": 1.501951475080896
       },
       "isLocked": false,
-      "linkedName": "FarSideSteal5End"
+      "linkedName": "FarSideSteal42End"
     },
     {
       "anchor": {
@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "FarSideSteal6End"
+      "linkedName": "FarSideSteal62End"
     }
   ],
   "rotationTargets": [],

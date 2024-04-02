@@ -70,10 +70,11 @@ private final LEDs m_LEDs = new LEDs();
 private Autos m_Autos;
 private ShuffleboardTab teleopTab = Shuffleboard.getTab("teleOp");
 public RobotContainer() {
-  NamedCommands.registerCommand("SpeakerSetpoint",new PIDAngleControl(m_AngleController,() -> {return ShooterConstants.kSubwooferAngleSetpoint;}));
-  NamedCommands.registerCommand("AmpSetpoint", new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kAngleAmpHandoffSetpoint;}));
-  NamedCommands.registerCommand("FarStealShootSetpoint1", new PIDAngleControl(m_AngleController, () -> {return 0.3495;}));
-  NamedCommands.registerCommand("FarStealShootSetpoint2", new PIDAngleControl(m_AngleController, () -> {return 0.349;}));
+  NamedCommands.registerCommand("SpeakerSetpoint", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController,() -> {return ShooterConstants.kSubwooferAngleSetpoint;})));
+  NamedCommands.registerCommand("AmpSetpoint", new ParallelDeadlineGroup(new WaitCommand(2.00), new PIDAngleControl(m_AngleController, () -> {return ShooterConstants.kAngleAmpHandoffSetpoint;})));
+  NamedCommands.registerCommand("FarStealShootSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, () -> {return 0.345;})));
+  NamedCommands.registerCommand("FarStealShootSetpoint2", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, () -> {return 0.341;})));
+  NamedCommands.registerCommand("FarStealShootSetpoint3", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, () -> {return 0.3561;})));
   NamedCommands.registerCommand("RingPassthrough", new ParallelDeadlineGroup(new WaitCommand(1.60), new ShooterOpenLoop(m_Shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(m_Feeder, () -> {return -FeederConstants.kAmpFeederAutoSpeed;}), new AmpOpenLoop(m_Amp, () -> -ClimbConstants.kAmpHandoffMaxSpeed), new IntakeOpenLoop(m_Intake, m_LEDs, () -> -IntakeConstants.kIntakeAutoSpeed)));
   NamedCommands.registerCommand("AutoAngle", new ParallelDeadlineGroup(new WaitCommand(0.5), new PIDAngleControl(m_AngleController,() -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));})));
   NamedCommands.registerCommand("PIDShooting", new ParallelDeadlineGroup(new WaitCommand(1.4), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000, false)));
