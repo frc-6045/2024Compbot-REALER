@@ -223,7 +223,7 @@ public final class Constants {
       4.8, //5.0, 0, 0.2
       //DriveConstants.kMaxSpeedMetersPerSecond, // Max module speed, in m/s
       DriveConstants.radiusMeters, // Drive base radius in meters. Distance from robot center to furthest module.
-      new ReplanningConfig(false, false));
+      new ReplanningConfig());
 
     public static final double kMaxSpeedMetersPerSecond = 4.5;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
@@ -283,7 +283,7 @@ public final class Constants {
     public static final int kBottomShooterMotorCANID = 29;
     public static final int kTopShooterMotorCANID = 30;
     public static final double kShooterMaxSpeed = 1.00;
-    public static final double kAmpShooterMaxSpeed = 0.15; //0.2
+    public static final double kAmpShooterMaxSpeed = 0.20; //0.2
 
     public static final  int kRPMSetpointOffset = 100;
     
@@ -319,7 +319,7 @@ public final class Constants {
     public static final double kIntakeSpeed = 1.0; 
     public static final double kIndexerSpeed = 1.0;
     public static final double kIntakeSlowSpeed = 0.65; //0.45
-    public static final double kIntakeAutoSpeed = 0.90; //0.45
+    public static final double kIntakeAutoSpeed = 1.00; //0.45
     public static final int kIntakeCurrentLimit = 50;
     public static final int kIndexerCurrentLimit = 50;
   }
@@ -329,14 +329,17 @@ public final class Constants {
     public static final int kAmpMotorCanId = 15;
     public static final double kClimbMaxSpeed = 1.00;
     public static final double kAmpMaxSpeed = 0.50;
-    public static final double kAmpHandoffMaxSpeed = 0.50; //0.2
+    public static final double kAmpHandoffMaxSpeed = 0.30; //0.2
+    public static final double kAmpHandoffMaxAutoSpeed = 0.50;
 
   }
   
   public static final class PneumaticsConstants {
     public static final int kPneumaticsModuleCANID = 20; 
   
-    public static final int kSolenoidSingleChannel = 0; 
+    public static final int kIntakeSolenoidSingleChannel = 8; 
+
+    public static final int kBrakeSolenoidSingleChannel = 9;
 
   }
 }

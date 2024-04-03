@@ -58,6 +58,7 @@ public class Bindings {
 
     private static boolean bCompressorEnabled = false;
     private static boolean bIntakeToggle = true;
+    private static boolean bBrakeToggle = true;
 
 
     public Bindings() {}
@@ -137,43 +138,20 @@ public class Bindings {
         }, pneumatics));
 
         
-        // // B toggle for SingleSolenoid
-        
-        new Trigger(() -> {return operatorController.getPOV() == 180;}).onTrue(new InstantCommand(() -> {
+        new Trigger(() -> {return operatorController.getPOV() == 90;}).onTrue(new InstantCommand(() -> {
             pneumatics.ActutateIntakeSolenoid(bIntakeToggle);
             bIntakeToggle = !bIntakeToggle;
         }));
-        //intake solenoids (up is down, down is up! i hate it)
-        // new Trigger(() -> {return operatorController.getPOV() == 0;}).onTrue(new InstantCommand(() -> {
-        //     pneumatics.ActutateIntakeSolenoid(false);
-        // }, intake));
 
-        //    new Trigger(() -> {return operatorController.getPOV() == 180;}).onTrue(new InstantCommand(() -> {
-        //     pneumatics.ActutateIntakeSolenoid(true);
-        // }, intake));
-
-        // // intake toggle
-        // do things
-        //  new Trigger(() -> {return operatorController.getLeftBumperPressed();}).onTrue(new InstantCommand(() -> {
-        //    if(!bIntakeToggle){
-        //      intake.intakeIn();
-        //      bIntakeToggle = true;
-        //    } else {
-        //     intake.stopIntake();
-        //      bIntakeToggle = false;
-        //    }
-        //  }, intake));
-
-        
+        new Trigger(() -> {return driverController.getXButton();}).onTrue(new InstantCommand(() -> {
+            pneumatics.ActutateBrakeSolenoid(bBrakeToggle);
+            bBrakeToggle = !bBrakeToggle;
+        }));
 
     
 
          //new Trigger(() -> {return operatorController.getRightTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, operatorController::getRightTriggerAxis));
          //new Trigger(()-> driverController.getRightTriggerAxis() != 0).whileTrue(new PrototypeOpenLoop(m_Prototype, ()-> driverController.getRightTriggerAxis()).alongWith(new PrintCommand("stuff")));
-
-
-
-
 
 
          new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, leds, () -> {return -operatorController.getLeftTriggerAxis();}));
@@ -183,7 +161,6 @@ public class Bindings {
          new Trigger(() -> {return operatorController.getLeftBumper();}).whileTrue(new ParallelCommandGroup(new ShooterOpenLoop(shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(feeder, () -> {return -FeederConstants.kAmpFeederSpeed;}), new AmpOpenLoop(amp, () -> -ClimbConstants.kAmpHandoffMaxSpeed), new IntakeOpenLoop(intake, leds, () -> -IntakeConstants.kIntakeSlowSpeed))); 
 
          new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new AmpOpenLoop(amp, () -> {return ClimbConstants.kAmpMaxSpeed;}));
-         new Trigger(() -> {return operatorController.getPOV() == 90;}).whileTrue(new AmpOpenLoop(amp, () -> {return -ClimbConstants.kAmpMaxSpeed;}));
         
          new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
          new Trigger(() -> {return operatorController.getPOV() == 180;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));

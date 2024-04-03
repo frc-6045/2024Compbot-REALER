@@ -28,6 +28,18 @@
                 }
               },
               {
+                "type": "named",
+                "data": {
+                  "name": "DisableCompressor"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ActuateIntakeDown"
+                }
+              },
+              {
                 "type": "sequential",
                 "data": {
                   "commands": [
@@ -82,7 +94,7 @@
                           {
                             "type": "wait",
                             "data": {
-                              "waitTime": 0.6
+                              "waitTime": 0.4
                             }
                           },
                           {
@@ -142,7 +154,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.4
+                        "waitTime": 1.45
                       }
                     },
                     {
@@ -164,7 +176,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSideSteal4"
+                  "pathName": "FarSideSteal42"
                 }
               },
               {
@@ -178,21 +190,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
-                      "data": {
-                        "name": "IntakeIn"
-                      }
-                    },
-                    {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.5
+                        "waitTime": 1.0
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "PIDShooting"
+                        "name": "IntakeAndShoot"
                       }
                     }
                   ]
@@ -212,9 +218,22 @@
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "IntakeIn"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "IntakeIn"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -237,12 +256,31 @@
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "PIDShooting"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.55
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PIDShooting"
+                      }
+                    }
+                  ]
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActuateIntakeUp"
           }
         }
       ]

@@ -17,12 +17,14 @@ import frc.robot.Constants.PneumaticsConstants;
 public class Pneumatics extends SubsystemBase {
   /** Creates a new Pneumatics. */
   private final Compressor m_Compressor;
-  private final Solenoid m_Solenoid;
+  private final Solenoid m_IntakeSolenoid;
+  private final Solenoid m_BrakeSolenoid;
   private boolean compressorEnabled;
   public Pneumatics() {
     m_Compressor = new Compressor(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH);
-    m_Solenoid = new Solenoid(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH, PneumaticsConstants.kSolenoidSingleChannel);
-    //m_Compressor.enableAnalog(0, 115);
+    m_IntakeSolenoid = new Solenoid(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH, PneumaticsConstants.kIntakeSolenoidSingleChannel);
+    m_BrakeSolenoid = new Solenoid(PneumaticsConstants.kPneumaticsModuleCANID, PneumaticsModuleType.REVPH, PneumaticsConstants.kBrakeSolenoidSingleChannel);
+    m_Compressor.enableAnalog(0, 115);
     m_Compressor.disable();
     compressorEnabled = false;
     System.out.println("enabled compressor");
@@ -41,18 +43,28 @@ public class Pneumatics extends SubsystemBase {
   }
 
   public void ActutateIntakeSolenoid(boolean isOn) {
-    m_Solenoid.set(isOn);
+    m_IntakeSolenoid.set(isOn);
+  }
+
+  public void ActutateBrakeSolenoid(boolean isOn) {
+    m_BrakeSolenoid.set(isOn);
   }
   
   public void ToggleIntakeSolenoids(){
-    m_Solenoid.toggle();
+    m_IntakeSolenoid.toggle();
   }
 
-  public Solenoid getSolenoid(){
-    return m_Solenoid;
+  public void ToggleBrakeSolenoids(){
+    m_BrakeSolenoid.toggle();
   }
 
-  
+  public Solenoid getIntakeSolenoid(){
+    return m_IntakeSolenoid;
+  }
+
+  public Solenoid getBrakeSolenoid(){
+    return m_BrakeSolenoid;
+  }
 
   
 }
