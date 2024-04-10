@@ -1,0 +1,31 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6577168148015188,
+      "y": 4.400431961420181
+    },
+    "rotation": -60.068488159492176
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "SpeakerSetpoint"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "PIDShooting"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "OnlyOne",
+  "choreoAuto": false
+}

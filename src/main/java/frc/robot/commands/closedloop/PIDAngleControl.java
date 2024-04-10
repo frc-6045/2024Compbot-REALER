@@ -10,6 +10,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.AngleController;
+import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.Shooter;
 
 
@@ -17,19 +18,21 @@ public class PIDAngleControl extends Command {
   /** Creates a new PIDAngleControl. */
 
   private final AngleController m_AngleController;
+  private final LEDs m_LEDs;
   private final PIDController m_AnglePIDController;
   private Supplier<Double> setpoint;
   private double actualSetpoint;
-  public PIDAngleControl(AngleController angleController, Supplier<Double> setpoint) {
+  public PIDAngleControl(AngleController angleController, LEDs leds, Supplier<Double> setpoint) {
     m_AngleController = angleController;
+    m_LEDs = leds;
     this.setpoint = setpoint;
     System.out.println("first setpoint : " + setpoint.get());
     m_AnglePIDController = new PIDController(ShooterConstants.kShooterAngleP, ShooterConstants.kShooterAngleI, ShooterConstants.kShooterAngleD);
-    m_AnglePIDController.setTolerance(.003); //was .01//who care
+    m_AnglePIDController.setTolerance(.003); //was .01
     m_AnglePIDController.enableContinuousInput(0,1);
     //m_AnglePIDController.disableContinuousInput();
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_AngleController);
+    addRequirements(m_AngleController, leds);
   }
 
   // Called when the command is initially scheduled.
@@ -37,6 +40,7 @@ public class PIDAngleControl extends Command {
   public void initialize() {
     System.out.println("PID angel controll scheduled 8)");
     System.out.println("setpoint : " + setpoint.get());
+    m_LEDs.setColor(39, 2, 201);
     actualSetpoint = setpoint.get();
   }
 
@@ -65,6 +69,7 @@ public class PIDAngleControl extends Command {
   public void end(boolean interrupted) {
     System.out.println("pidanglecontrol is finished");
     m_AngleController.getAngleMotor().set(0);
+    m_LEDs.setColor(225, 213,0);
   }
 
   // Returns true when the command should end.

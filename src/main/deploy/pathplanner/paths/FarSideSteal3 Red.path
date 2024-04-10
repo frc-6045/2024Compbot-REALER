@@ -4,15 +4,15 @@
     {
       "anchor": {
         "x": 8.221623267891088,
-        "y": 1.955057559404218
+        "y": 1.96
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.239770378402957,
-        "y": 1.4737295719850625
+        "x": 5.240219340977783,
+        "y": 1.4787198065721783
       },
       "isLocked": false,
-      "linkedName": "FarSideSteal2End"
+      "linkedName": "FarSideSteal2EndRed"
     },
     {
       "anchor": {
@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "FarSideSteal3End"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -45,7 +45,7 @@
   "reversed": false,
   "folder": "FarSideSteal",
   "previewStartingState": {
-    "rotation": 93.10757822939512,
+    "rotation": 95.9853752857602,
     "velocity": 0
   },
   "useDefaultConstraints": false

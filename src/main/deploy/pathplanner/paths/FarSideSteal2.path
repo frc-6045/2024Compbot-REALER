@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.842283741439522,
-        "y": 0.61
+        "x": 7.92,
+        "y": 0.78
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.176645493564257,
-        "y": 0.8734003543953042
+        "x": 8.254361752124737,
+        "y": 1.0434003543953043
       },
       "isLocked": false,
       "linkedName": "FarSideSteal1End"
@@ -39,7 +39,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 84.25076023599871,
+    "rotation": 102.1484033341175,
     "rotateFast": false
   },
   "reversed": false,

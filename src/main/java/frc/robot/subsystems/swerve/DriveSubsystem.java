@@ -121,8 +121,8 @@ public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
     public DriveSubsystem() {
       
-    this.xLimiter = new SlewRateLimiter(1.2); // was 1.2
-    this.yLimiter = new SlewRateLimiter(1.2); // was 1.2
+    this.xLimiter = new SlewRateLimiter(1.4); // was 1.2
+    this.yLimiter = new SlewRateLimiter(1.4); // was 1.2
     this.turningLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond);
     m_VisionLockController.setSetpoint(0);
 
@@ -177,8 +177,8 @@ public class DriveSubsystem extends SubsystemBase {
     //  vision.UpdateVision();
     //}
     SmartDashboard.putBoolean("Compressor Enabled", Bindings.getCompressorEnabled());
-    SmartDashboard.putBoolean("Limit switch hit", Bindings.getCompressorEnabled());
-    SmartDashboard.putNumber("m_gyro_Get Heading", getHeadingDegrees());
+    //SmartDashboard.putBoolean("Limit switch hit", Bindings.getCompressorEnabled());
+    //SmartDashboard.putNumber("m_gyro_Get Heading", getHeadingDegrees());
     SmartDashboard.putNumber("drive angle", getPoseHeading());
     SmartDashboard.putNumber("target angle 8lue", PoseMath.getTargetAngle(FieldConstants.kSpeakerBackLocation, getPose()).getDegrees());
     SmartDashboard.putNumber("target angle red", PoseMath.getTargetAngle(FieldConstants.kRedSpeakerBackLocation, getPose()).getDegrees());

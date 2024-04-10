@@ -3,49 +3,49 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.221623267891088,
-        "y": 1.955057559404218
+        "x": 0.68885194660402,
+        "y": 6.694053337537775
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.239770378402957,
-        "y": 1.4737295719850625
+        "x": 0.9171762464890293,
+        "y": 7.140323560040294
       },
       "isLocked": false,
-      "linkedName": "FarSideSteal2End"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.74,
-        "y": 3.27
+        "x": 2.9,
+        "y": 7.8
       },
       "prevControl": {
-        "x": 3.5277933212508037,
-        "y": 1.9545943853792473
+        "x": 1.9,
+        "y": 7.8
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "FarSideSteal3End"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.6,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 2.0,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -37.961859769448026,
+    "rotation": 0.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "FarSideSteal",
+  "folder": "OnlyOje",
   "previewStartingState": {
-    "rotation": 93.10757822939512,
+    "rotation": 60.12400730831058,
     "velocity": 0
   },
   "useDefaultConstraints": false

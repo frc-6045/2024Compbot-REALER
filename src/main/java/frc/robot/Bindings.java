@@ -26,10 +26,10 @@ import frc.robot.commands.closedloop.AimAtSpeaker;
 import frc.robot.commands.closedloop.AutoAlign;
 import frc.robot.commands.closedloop.AutoAlignWithDrive;
 import frc.robot.commands.closedloop.HoldAngle;
-import frc.robot.commands.closedloop.OneButtonShooting;
+
 import frc.robot.commands.closedloop.PIDAngleControl;
 import frc.robot.commands.closedloop.PIDShooter;
-import frc.robot.commands.closedloop.TurnAndAim;
+
 import frc.robot.commands.openloop.AngleOpenLoop;
 import frc.robot.commands.openloop.ClimberOpenLoop;
 import frc.robot.commands.openloop.FeederOpenLoop;
@@ -59,6 +59,7 @@ public class Bindings {
     private static boolean bCompressorEnabled = false;
     private static boolean bIntakeToggle = true;
     private static boolean bBrakeToggle = true;
+    
 
 
     public Bindings() {}
@@ -98,13 +99,13 @@ public class Bindings {
         
         new Trigger(() -> {return operatorController.getXButton();}).whileTrue(new PIDShooter(shooter, feeder, intake, -6000, false));
         
-        new Trigger(() -> {return operatorController.getAButton();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleAmpHandoffSetpoint;}));
+        new Trigger(() -> {return operatorController.getAButton();}).onTrue(new PIDAngleControl(angleController, leds, () -> {return ShooterConstants.kAngleAmpHandoffSetpoint;}));
 
-        new Trigger(() -> {return operatorController.getStartButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kSubwooferAngleSetpoint;}));
+        new Trigger(() -> {return operatorController.getStartButtonPressed();}).onTrue(new PIDAngleControl(angleController, leds, () -> {return ShooterConstants.kSubwooferAngleSetpoint;}));
             
         if(FieldConstants.kVisionEnable){
         //could possibly still work with odometry instead of vision
-         new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose()));})); //3.9624 works
+         new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController, leds, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose()));})); //3.9624 works
         // } else {
         // new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController,() -> {return ShooterConstants.kAngleCloseSetpoint;})); //number returned is angle setpoint
          }  
@@ -145,6 +146,11 @@ public class Bindings {
 
         new Trigger(() -> {return driverController.getXButton();}).onTrue(new InstantCommand(() -> {
             pneumatics.ActutateBrakeSolenoid(bBrakeToggle);
+            if(bBrakeToggle == true){
+               leds.setColor(255, 0, 0);
+            } else {
+                leds.setColor(39, 2, 201);
+            }
             bBrakeToggle = !bBrakeToggle;
         }));
 

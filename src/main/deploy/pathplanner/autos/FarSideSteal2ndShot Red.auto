@@ -18,19 +18,19 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSideSteal1"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AmpSetpoint"
+                  "pathName": "FarSideSteal1 Red"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "ActuateIntakeDown"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AmpSetpoint"
                 }
               },
               {
@@ -74,7 +74,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSideSteal2"
+                  "pathName": "FarSideSteal2 Red"
                 }
               },
               {
@@ -132,7 +132,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSideSteal3"
+                  "pathName": "FarSideSteal3 Red"
                 }
               },
               {

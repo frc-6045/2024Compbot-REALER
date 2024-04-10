@@ -65,13 +65,13 @@ public final class Constants {
     public static final Translation3d topRightSpeaker =
         new Translation3d(
         Units.inchesToMeters(18.055),
-        Units.inchesToMeters(238.815 + 20), // was 238.815
+        Units.inchesToMeters(238.815 + 13), // was 238.815 15
         Units.inchesToMeters(83.091));
 
     public static final Translation3d redTopRightSpeaker =
         new Translation3d(
         22.062944,
-        Units.inchesToMeters(238.815 + 20), // was 238.815
+        Units.inchesToMeters(238.815 + 25), // was 238.815 20
         Units.inchesToMeters(83.091));
 
     public static final Translation3d topLeftSpeaker =
@@ -95,13 +95,13 @@ public final class Constants {
     public static final Translation3d bottomLeftSpeaker =
         new Translation3d(
         0.0, 
-        Units.inchesToMeters(197.765 + 20), 
+        Units.inchesToMeters(197.765 + 13), //15
         Units.inchesToMeters(78.324)); //y: 197.765
       
     public static final Translation3d redBottomLeftSpeaker =
         new Translation3d(
         16.55978, 
-        Units.inchesToMeters(197.765 + 20), 
+        Units.inchesToMeters(197.765 + 25), //20
         Units.inchesToMeters(78.324)); //y: 197.765
 
     /** Center of the speaker opening (blue alliance) */
@@ -314,9 +314,9 @@ public final class Constants {
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
     //public static final double kAngleHardSetpoint = 0.015;
-    public static final double kAngleAmpHandoffSetpoint = 0.40899; //was 0.40599
+    public static final double kAngleAmpHandoffSetpoint = 0.40999; //was 0.40599
 
-    public static final double kSubwooferAngleSetpoint = 0.2888; //was 0.722
+    public static final double kSubwooferAngleSetpoint = 0.2788; //was 0.2888
 
     public static final double kAngle4RingSetpoint = 0.03;
 
