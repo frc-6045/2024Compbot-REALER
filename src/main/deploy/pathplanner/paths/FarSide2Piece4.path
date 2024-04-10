@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.4,
+        "y": 1.53
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.9108698975691785,
+        "y": 2.071777413697007
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.94,
+        "y": 3.77
+      },
+      "prevControl": {
+        "x": 2.2786373534832376,
+        "y": 3.063896175185714
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.5,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -51.016013950462956,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "ChampsAutos",
+  "previewStartingState": {
+    "rotation": -38.088772880975284,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

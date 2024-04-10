@@ -305,7 +305,8 @@ public final class Constants {
     public static final double kShooterAmpP = .001;
     public static final double kShooterAmpI = 0;
     public static final double kShooterAmpD = 0;
-    public static final int kShooterLaunchRPM = -4300; //-4300
+    public static final int kShootingLaunchRPM = -4300; //-4300
+    public static final int kFeedingLaunchRPM = -3000;
 
     public static final int kAngleControlCANID = 11; //TODO hey
     public static final double kAngleControlMaxSpeed = 0.07;

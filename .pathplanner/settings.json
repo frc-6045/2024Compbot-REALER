@@ -8,12 +8,14 @@
     "CenterSteal",
     "FarSideSteal",
     "New 4Ring",
+    "ChampsAutos",
     "OnlyOje",
     "Random Junk"
   ],
   "autoFolders": [
     "DoNothings",
     "FarSideSteal",
+    "ChampsAutos",
     "OnlyOne"
   ],
   "defaultMaxVel": 4.5,

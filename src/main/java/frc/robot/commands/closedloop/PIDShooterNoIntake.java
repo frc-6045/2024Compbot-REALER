@@ -35,10 +35,11 @@ public class PIDShooterNoIntake extends Command {
   private final RelativeEncoder bottomEncoder;
   private final RelativeEncoder topEncoder;
   private double setpoint;
+  private double launchrpm;
   private boolean atSetpoint;
   private boolean timerSet;
   private Timer timer;
-  public PIDShooterNoIntake(Shooter shooter, Feeder feeder, double setpoint, boolean isSlow) {
+  public PIDShooterNoIntake(Shooter shooter, Feeder feeder, double setpoint, double launchrpm, boolean isSlow) {
     m_Shooter = shooter;
     m_Feeder = feeder;
     bottomShooterMotor = shooter.getMotors()[0];
@@ -46,6 +47,7 @@ public class PIDShooterNoIntake extends Command {
     bottomEncoder = bottomShooterMotor.getEncoder(); //TODO check type of encoder
     topEncoder = topShooterMotor.getEncoder();
     this.setpoint = setpoint;
+    this.launchrpm = launchrpm;
     m_TopPIDController = topShooterMotor.getPIDController();
     m_BottomPIDController = bottomShooterMotor.getPIDController();
     if(!isSlow){
@@ -99,7 +101,7 @@ public class PIDShooterNoIntake extends Command {
 
     
    System.out.println(bottomEncoder.getVelocity());
-    if(bottomEncoder.getVelocity() <= ShooterConstants.kShooterLaunchRPM){
+    if(bottomEncoder.getVelocity() <= launchrpm){
       if(!timerSet){
 
         timer.reset();
