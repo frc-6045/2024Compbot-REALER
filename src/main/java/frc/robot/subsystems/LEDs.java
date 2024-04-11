@@ -23,6 +23,7 @@ public class LEDs extends SubsystemBase {
     m_LEDBuffer = new AddressableLEDBuffer(39);
     m_LED.setLength(m_LEDBuffer.getLength());
     ledSchemes.add(ledSchema::TransSchema);
+    ledSchemes.add(ledSchema::GaySchema);
 
     m_LED.setData(m_LEDBuffer);
     m_LED.start();
@@ -73,7 +74,7 @@ public class LEDs extends SubsystemBase {
   public void enableLedControl(){
     LEDMode = true;
   }
-  
+
   public void disableLedControl(){
     LEDMode = false;
   }
@@ -104,5 +105,34 @@ public class LEDs extends SubsystemBase {
         colorIndex++;
       }
     }
+
+    public void GaySchema(){
+      int i = 0;
+      int colorIndex = 0;
+      while(i < m_LEDBuffer.getLength()){
+        if(colorIndex > 5){
+          colorIndex = 0;
+        }
+      
+      switch(colorIndex) {
+        case 0: 
+          setPixelColor(i, 228, 3, 3);
+        case 1: 
+          setPixelColor(i, 255, 140, 0);
+        case 2: 
+          setPixelColor(i, 255, 237, 0);
+        case 3: 
+          setPixelColor(i, 0, 128, 38);
+        case 4: 
+          setPixelColor(i, 	36, 64, 142);
+        case 5:
+          setPixelColor(i, 115, 41, 130);
+        default: 
+          setPixelColor(i, 255, 255, 255);
+      }
+      i++;
+      colorIndex++;
+    }
+  }
   }
 }

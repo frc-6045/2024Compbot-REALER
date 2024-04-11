@@ -181,6 +181,7 @@ public class Bindings {
                 leds.disableLedControl();
                 bLedToggle = true;
             }
+
         }));
 
         new Trigger(() -> {return ledController.getRightBumper();}).onTrue(new InstantCommand(leds::loadNextScheme));
