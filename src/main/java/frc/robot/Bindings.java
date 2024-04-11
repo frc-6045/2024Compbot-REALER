@@ -59,13 +59,13 @@ public class Bindings {
     private static boolean bCompressorEnabled = false;
     private static boolean bIntakeToggle = true;
     private static boolean bBrakeToggle = true;
-    
+    private static boolean bLedToggle = true;
 
 
     public Bindings() {}
 
         
-        public static void InitBindings(XboxController driverController, XboxController operatorController, 
+        public static void InitBindings(XboxController driverController, XboxController operatorController,  XboxController ledController,
             DriveSubsystem driveSubsystem, 
             Shooter shooter,
             Feeder feeder,
@@ -173,6 +173,17 @@ public class Bindings {
          new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
          new Trigger(() -> {return operatorController.getPOV() == 180;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));
 
+         new Trigger(() -> {return ledController.getStartButton();}).onTrue(new InstantCommand(() -> {
+            if(bLedToggle){
+                leds.enableLedControl();
+                bLedToggle = false;
+            } else {
+                leds.disableLedControl();
+                bLedToggle = true;
+            }
+        }));
+
+        new Trigger(() -> {return ledController.getRightBumper();}).onTrue(new InstantCommand(leds::loadNextScheme));
     }
     public static boolean getCompressorEnabled(){
         return bCompressorEnabled;

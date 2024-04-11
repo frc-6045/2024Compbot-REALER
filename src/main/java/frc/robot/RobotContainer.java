@@ -59,6 +59,7 @@ public class RobotContainer {
 private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
 private final XboxController m_driverController = new XboxController(0);
 private final XboxController m_operatorController = new XboxController(1);
+private final XboxController m_ledController = new XboxController(2);
 private final Shooter m_Shooter = new Shooter();
 private final Feeder m_Feeder = new Feeder();
 private final Pneumatics m_Pneumatics = new Pneumatics();
@@ -119,7 +120,7 @@ public RobotContainer() {
   }
 
   private void configureBindings() {
-    Bindings.InitBindings(m_driverController, m_operatorController, 
+    Bindings.InitBindings(m_driverController, m_operatorController, m_ledController, 
     m_driveSubsystem, m_Shooter, 
     m_Feeder, m_Pneumatics, 
     m_AngleController, m_Intake, 
