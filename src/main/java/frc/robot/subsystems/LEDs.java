@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.util.LEDSchema;
 
 public class LEDs extends SubsystemBase {
   /** Creates a new LEDs. */
@@ -22,9 +23,8 @@ public class LEDs extends SubsystemBase {
     m_LED = new AddressableLED(9);
     m_LEDBuffer = new AddressableLEDBuffer(39);
     m_LED.setLength(m_LEDBuffer.getLength());
-    ledSchemes.add(ledSchema::TransSchema);
-    ledSchemes.add(ledSchema::GaySchema);
 
+   
     m_LED.setData(m_LEDBuffer);
     m_LED.start();
     for(int i = 0; i < m_LEDBuffer.getLength(); i++){
@@ -35,6 +35,9 @@ public class LEDs extends SubsystemBase {
     System.out.println("led on");
     LEDMode = false;
     schemeIndex = 0;
+    ledSchema = new LEDSchema(this);
+    ledSchemes.add(ledSchema::TransSchema);
+    ledSchemes.add(ledSchema::GaySchema);
   }
 
   public void setColor(int red, int green, int blue){
@@ -55,6 +58,14 @@ public class LEDs extends SubsystemBase {
     }
   }
 
+  public void loadCurrentScheme(){
+    if(LEDMode){
+      ledSchemes.get(schemeIndex).run();
+      m_LED.setData(m_LEDBuffer);
+    } else {
+      System.out.println("LED Mode Somehow Not On, Cannot Change Schema!");
+    }
+  }
   public void loadNextScheme(){
     if(LEDMode){
       schemeIndex++;
@@ -79,60 +90,9 @@ public class LEDs extends SubsystemBase {
     LEDMode = false;
   }
 
-  private class LEDSchema {
-    public void TransSchema(){
-      int i = 0;
-      int colorIndex = 0;
-      while(i < m_LEDBuffer.getLength()){
-        if(colorIndex > 4){
-          colorIndex = 0;
-        }
-        switch(colorIndex) {
-          case 0: 
-            setPixelColor(i, 91, 206, 250);
-          case 1: 
-            setPixelColor(i, 245, 169, 184);
-          case 2: 
-            setPixelColor(i, 255, 255, 255);
-          case 3: 
-            setPixelColor(i, 245, 169, 184);
-          case 4: 
-            setPixelColor(i, 91, 206, 250);
-          default: 
-            setPixelColor(i, 255, 255, 255);
-        }
-        i++;
-        colorIndex++;
-      }
-    }
+  public AddressableLEDBuffer getBuffer(){
+    return m_LEDBuffer;
+  }
 
-    public void GaySchema(){
-      int i = 0;
-      int colorIndex = 0;
-      while(i < m_LEDBuffer.getLength()){
-        if(colorIndex > 5){
-          colorIndex = 0;
-        }
-      
-      switch(colorIndex) {
-        case 0: 
-          setPixelColor(i, 228, 3, 3);
-        case 1: 
-          setPixelColor(i, 255, 140, 0);
-        case 2: 
-          setPixelColor(i, 255, 237, 0);
-        case 3: 
-          setPixelColor(i, 0, 128, 38);
-        case 4: 
-          setPixelColor(i, 	36, 64, 142);
-        case 5:
-          setPixelColor(i, 115, 41, 130);
-        default: 
-          setPixelColor(i, 255, 255, 255);
-      }
-      i++;
-      colorIndex++;
-    }
-  }
-  }
+  
 }
