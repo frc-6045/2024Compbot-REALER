@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.util.LEDSchema;
+
 
 public class LEDs extends SubsystemBase {
   /** Creates a new LEDs. */
   private AddressableLED m_LED;
   private AddressableLEDBuffer m_LEDBuffer;
   private boolean LEDMode;
-  private LEDSchema ledSchema;
+ 
   private ArrayList<Runnable> ledSchemes;
   private int schemeIndex;
   public LEDs() {
@@ -35,9 +35,6 @@ public class LEDs extends SubsystemBase {
     System.out.println("led on");
     LEDMode = false;
     schemeIndex = 0;
-    // ledSchema = new LEDSchema(this);
-    // ledSchemes.add(ledSchema::TransSchema);
-    // ledSchemes.add(ledSchema::GaySchema);
   }
 
   public void setColor(int red, int green, int blue){
@@ -49,33 +46,17 @@ public class LEDs extends SubsystemBase {
 
   public void setPixelColor(int index, int red, int green, int blue){
     m_LEDBuffer.setRGB(index, red, green, blue);
-    m_LED.setData(m_LEDBuffer);
   }
 
+  public void setData(){
+    m_LED.setData(m_LEDBuffer);
+  }
   public void checkSchemeIndex(){
     if(schemeIndex >= ledSchemes.size()){
       schemeIndex = 0;
     }
   }
 
-  // public void loadCurrentScheme(){
-  //   if(LEDMode){
-  //     ledSchemes.get(schemeIndex).run();
-  //     m_LED.setData(m_LEDBuffer);
-  //   } else {
-  //     System.out.println("LED Mode Somehow Not On, Cannot Change Schema!");
-  //   }
-  // }
-  // public void loadNextScheme(){
-  //   if(LEDMode){
-  //     schemeIndex++;
-  //     checkSchemeIndex();
-  //     ledSchemes.get(schemeIndex).run();
-  //     m_LED.setData(m_LEDBuffer);
-  //   } else {
-  //     System.out.println("LED Mode Not On, Cannot Change Schema!");
-  //   }
-  // }
   
   @Override
   public void periodic() {

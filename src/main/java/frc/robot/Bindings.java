@@ -30,6 +30,8 @@ import frc.robot.commands.closedloop.HoldAngle;
 import frc.robot.commands.closedloop.PIDAngleControl;
 import frc.robot.commands.closedloop.PIDShooter;
 import frc.robot.commands.closedloop.PIDShooterNoIndexer;
+import frc.robot.commands.leds.GayLeds;
+import frc.robot.commands.leds.TransLeds;
 import frc.robot.commands.openloop.AngleOpenLoop;
 import frc.robot.commands.openloop.ClimberOpenLoop;
 import frc.robot.commands.openloop.FeederOpenLoop;
@@ -185,6 +187,9 @@ public class Bindings {
         }));
 
         //new Trigger(() -> {return ledController.getRightBumper();}).onTrue(new InstantCommand(leds::loadNextScheme));
+        new Trigger(() -> {return ledController.getRightBumper();}).onTrue(new TransLeds(leds));
+        new Trigger(() -> {return ledController.getLeftBumper();}).onTrue(new GayLeds(leds));
+
     }
     public static boolean getCompressorEnabled(){
         return bCompressorEnabled;
