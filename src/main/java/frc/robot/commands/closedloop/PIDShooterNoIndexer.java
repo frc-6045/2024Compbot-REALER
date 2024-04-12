@@ -22,10 +22,11 @@ import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
-public class PIDShooterNoIntake extends Command {
+public class PIDShooterNoIndexer extends Command {
   /** Creates a new PIDShooter. */
   private final Shooter m_Shooter;
   private final Feeder m_Feeder;
+  private final Intake m_Intake;
   private SparkPIDController m_BottomPIDController;
   private SparkPIDController m_TopPIDController;
 
@@ -39,9 +40,10 @@ public class PIDShooterNoIntake extends Command {
   private boolean atSetpoint;
   private boolean timerSet;
   private Timer timer;
-  public PIDShooterNoIntake(Shooter shooter, Feeder feeder, double setpoint, double launchrpm, boolean isSlow) {
+  public PIDShooterNoIndexer(Shooter shooter, Feeder feeder, Intake intake, double setpoint, double launchrpm, boolean isSlow) {
     m_Shooter = shooter;
     m_Feeder = feeder;
+    m_Intake = intake;
     bottomShooterMotor = shooter.getMotors()[0];
     topShooterMotor = shooter.getMotors()[1];
     bottomEncoder = bottomShooterMotor.getEncoder(); //TODO check type of encoder
@@ -79,7 +81,7 @@ public class PIDShooterNoIntake extends Command {
     timer = new Timer();
     timerSet = false;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_Shooter, m_Feeder);
+    addRequirements(m_Shooter, m_Feeder, m_Intake);
   }
 
   // Called when the command is initially scheduled.
@@ -99,6 +101,10 @@ public class PIDShooterNoIntake extends Command {
     m_BottomPIDController.setReference(setpoint, ControlType.kVelocity, 0, m_Feedforward.calculate(setpoint));
     m_TopPIDController.setReference(setpoint, ControlType.kVelocity, 0, m_Feedforward.calculate(setpoint)); //TODO: characterization for feedforward
 
+    m_Intake.runIntakeNoIndexer(() -> {return -0.5;});
+
+
+    
    System.out.println(bottomEncoder.getVelocity());
     if(bottomEncoder.getVelocity() <= launchrpm){
       if(!timerSet){
@@ -108,6 +114,7 @@ public class PIDShooterNoIntake extends Command {
         timerSet = true;
       }
       m_Feeder.runMotors(() -> {return FeederConstants.kFeederSpeed;});              
+      m_Intake.runIntake(() -> {return -IntakeConstants.kIntakeSpeed;});
     }
   }
 
@@ -119,6 +126,7 @@ public class PIDShooterNoIntake extends Command {
     bottomShooterMotor.set(0);
     topShooterMotor.set(0);
     m_Feeder.runMotors(() -> {return 0.0;});
+    m_Intake.stopIntake();
     timer.stop();
   }
 

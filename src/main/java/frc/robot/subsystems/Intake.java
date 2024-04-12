@@ -54,6 +54,14 @@ public class Intake extends SubsystemBase {
     }
   }
 
+   public void runIntakeNoIndexer(Supplier<Double> speed){
+    if(speed.get() <= IntakeConstants.kIntakeSpeed){
+      m_IntakeMotor.set(-speed.get());
+    } else {
+      m_IntakeMotor.set(-IntakeConstants.kIntakeSpeed);
+    }
+  }
+
   public void testRunMotors(Supplier<Double> speed1, Supplier<Double> speed2){
     if(speed1.get() <= IntakeConstants.kIntakeSpeed){
       m_IntakeMotor.set(speed1.get());
@@ -74,6 +82,9 @@ public class Intake extends SubsystemBase {
 
   }
 
+  public void intakeInNoFeeder(){
+    m_IntakeMotor.set(-IntakeConstants.kIntakeSpeed);
+  }
   public void intakeOut(){
     m_IntakeMotor.set(IntakeConstants.kIntakeSpeed);
     m_IndexerMotor.set(-IntakeConstants.kIntakeSpeed);

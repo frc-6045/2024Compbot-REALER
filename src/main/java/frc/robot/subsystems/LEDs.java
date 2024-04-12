@@ -35,9 +35,9 @@ public class LEDs extends SubsystemBase {
     System.out.println("led on");
     LEDMode = false;
     schemeIndex = 0;
-    ledSchema = new LEDSchema(this);
-    ledSchemes.add(ledSchema::TransSchema);
-    ledSchemes.add(ledSchema::GaySchema);
+    // ledSchema = new LEDSchema(this);
+    // ledSchemes.add(ledSchema::TransSchema);
+    // ledSchemes.add(ledSchema::GaySchema);
   }
 
   public void setColor(int red, int green, int blue){
@@ -58,24 +58,24 @@ public class LEDs extends SubsystemBase {
     }
   }
 
-  public void loadCurrentScheme(){
-    if(LEDMode){
-      ledSchemes.get(schemeIndex).run();
-      m_LED.setData(m_LEDBuffer);
-    } else {
-      System.out.println("LED Mode Somehow Not On, Cannot Change Schema!");
-    }
-  }
-  public void loadNextScheme(){
-    if(LEDMode){
-      schemeIndex++;
-      checkSchemeIndex();
-      ledSchemes.get(schemeIndex).run();
-      m_LED.setData(m_LEDBuffer);
-    } else {
-      System.out.println("LED Mode Not On, Cannot Change Schema!");
-    }
-  }
+  // public void loadCurrentScheme(){
+  //   if(LEDMode){
+  //     ledSchemes.get(schemeIndex).run();
+  //     m_LED.setData(m_LEDBuffer);
+  //   } else {
+  //     System.out.println("LED Mode Somehow Not On, Cannot Change Schema!");
+  //   }
+  // }
+  // public void loadNextScheme(){
+  //   if(LEDMode){
+  //     schemeIndex++;
+  //     checkSchemeIndex();
+  //     ledSchemes.get(schemeIndex).run();
+  //     m_LED.setData(m_LEDBuffer);
+  //   } else {
+  //     System.out.println("LED Mode Not On, Cannot Change Schema!");
+  //   }
+  // }
   
   @Override
   public void periodic() {

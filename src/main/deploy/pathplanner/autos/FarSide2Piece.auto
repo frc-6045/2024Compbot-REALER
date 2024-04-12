@@ -62,7 +62,7 @@
                           {
                             "type": "wait",
                             "data": {
-                              "waitTime": 0.7
+                              "waitTime": 0.5
                             }
                           },
                           {
@@ -103,7 +103,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.05
+                        "waitTime": 1.75
                       }
                     },
                     {
@@ -125,13 +125,13 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSide2Piece3"
+                  "pathName": "FarSide2Piece5"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "FarStealShootSetpoint3"
+                  "name": "FarStealShootSetpoint1"
                 }
               },
               {
@@ -141,13 +141,26 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.7
+                        "waitTime": 1.2
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "deadline",
                       "data": {
-                        "name": "IntakeIn"
+                        "commands": [
+                          {
+                            "type": "wait",
+                            "data": {
+                              "waitTime": 0.7
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "IntakeIn"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
@@ -163,13 +176,13 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSide2Piece4"
+                  "pathName": "FarSide2Piece6"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "FarStealShootSetpoint3"
+                  "name": "FarStealShootSetpoint2"
                 }
               },
               {
@@ -179,7 +192,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.0
+                        "waitTime": 1.7
                       }
                     },
                     {
@@ -192,12 +205,6 @@
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ActuateIntakeUp"
           }
         }
       ]
