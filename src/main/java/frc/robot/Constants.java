@@ -318,7 +318,7 @@ public final class Constants {
     public static final double kAngleAmpHandoffSetpoint = 0.40999; //was 0.40599
 
     public static final double kSubwooferAngleSetpoint = 0.2788; //was 0.2888
-
+    public static final double kFeederSetpoint = 0.3161;
     public static final double kAngle4RingSetpoint = 0.03;
 
     public static final double kAngleFeedforward = 0.005;

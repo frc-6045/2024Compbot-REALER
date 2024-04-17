@@ -76,8 +76,8 @@ private ShuffleboardTab teleopTab = Shuffleboard.getTab("teleOp");
 public RobotContainer() {
   NamedCommands.registerCommand("SpeakerSetpoint", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return ShooterConstants.kSubwooferAngleSetpoint;})));
   NamedCommands.registerCommand("AmpSetpoint", new ParallelDeadlineGroup(new WaitCommand(2.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return ShooterConstants.kAngleAmpHandoffSetpoint;})));
-  NamedCommands.registerCommand("FarStealShootSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.33;}))); // 0.330 SOFT 340
-  NamedCommands.registerCommand("FarStealShootSetpoint2", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.344;}))); // 0.345 SOFT
+  NamedCommands.registerCommand("FarStealShootSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.340;}))); // 0.330 SOFT 340
+  NamedCommands.registerCommand("FarStealShootSetpoint2", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.345;}))); // 0.345 SOFT
   NamedCommands.registerCommand("FarStealShootSetpoint3", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.364;}))); // 0.371 
   NamedCommands.registerCommand("RingPassthrough", new ParallelDeadlineGroup(new WaitCommand(1.40), new ShooterOpenLoop(m_Shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(m_Feeder, () -> {return -FeederConstants.kAmpFeederAutoSpeed;}), new AmpOpenLoop(m_Amp, () -> -ClimbConstants.kAmpHandoffMaxAutoSpeed), new IntakeOpenLoop(m_Intake, m_LEDs, () -> -IntakeConstants.kIntakeAutoSpeed)));
   NamedCommands.registerCommand("AutoAngle", new ParallelDeadlineGroup(new WaitCommand(0.5), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));})));

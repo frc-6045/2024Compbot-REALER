@@ -54,7 +54,8 @@ public class Autos {
         // autoChooser.addOption("FarSideSteal2ndShot3Note Red", AutoBuilder.buildAuto("FarSideSteal2ndShot3Note Red"));
         // autoChooser.addOption("GCR Finals", AutoBuilder.buildAuto("GCRFinalsAuto"));
         // autoChooser.addOption("NOMOVE", AutoBuilder.buildAuto("NOMOVE"));
-        autoChooser.addOption("FarSide2Piece", AutoBuilder.buildAuto("FarSide2Piece"));
+        autoChooser.addOption("FarSide2Piece1stNote", AutoBuilder.buildAuto("FarSide2Piece"));
+        autoChooser.addOption("FarSide2Piece2ndNote", AutoBuilder.buildAuto("FarSide2Piece2ndNote"));
         // autoChooser.addOption("FarSideSteal", AutoBuilder.buildAuto("FarSideSteal"));
         // autoChooser.addOption("3RingMidfieldAlt", AutoBuilder.buildAuto("3RingMidfieldAlt"));
         // autoChooser.addOption("Basic Test Auto", AutoBuilder.buildAuto("BasicTestAuto"));
