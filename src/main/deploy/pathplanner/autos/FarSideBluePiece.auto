@@ -18,7 +18,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSide2Piece12nd"
+                  "pathName": "FarSide2Piece1"
                 }
               },
               {
@@ -40,7 +40,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.7
+                        "waitTime": 0.9
                       }
                     },
                     {
@@ -87,7 +87,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSide2Piece22nd"
+                  "pathName": "FarSideBluePiece2"
                 }
               },
               {
@@ -176,7 +176,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "FarSide2Piece6"
+                  "pathName": "FarSideBluePiece6"
                 }
               },
               {

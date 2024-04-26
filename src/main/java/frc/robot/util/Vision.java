@@ -100,10 +100,10 @@ public class Vision {
       m_drive.getPoseEstimator().addVisionMeasurement(estimatedRobotPose.estimatedPose.toPose2d(), estimatedRobotPose.timestampSeconds);
       visionPose = estimatedRobotPose.estimatedPose.toPose2d();
       //SmartDashboard.putNumber("Estimated Angle", PoseMath.FindShootingAngle(estimatedRobotPose.estimatedPose.toPose2d())); //enhnngg
-      SmartDashboard.putNumber("estimated dist", PoseMath.getDistanceToSpeakerBack(estimatedRobotPose.estimatedPose.toPose2d()));
-      SmartDashboard.putNumber("vision angle", visionPose.getRotation().getDegrees());
+      //SmartDashboard.putNumber("estimated dist", PoseMath.getDistanceToSpeakerBack(estimatedRobotPose.estimatedPose.toPose2d()));
+      //SmartDashboard.putNumber("vision angle", visionPose.getRotation().getDegrees());
       //SmartDashboard.putNumber("estimated proper turning angle", PoseMath.getTargetAngle(FieldConstants.kSpeakerBackLocation, estimatedRobotPose.estimatedPose.toPose2d()).getDegrees());
-      SmartDashboard.putNumber("lookup table number", LookupTables.getAngleTable().get(PoseMath.getDistanceToSpeakerBack(estimatedRobotPose.estimatedPose.toPose2d())));
+      //SmartDashboard.putNumber("lookup table number", LookupTables.getAngleTable().get(PoseMath.getDistanceToSpeakerBack(estimatedRobotPose.estimatedPose.toPose2d())));
     });
   }
   }

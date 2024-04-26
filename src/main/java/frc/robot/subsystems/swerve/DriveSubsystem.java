@@ -147,7 +147,7 @@ public class DriveSubsystem extends SubsystemBase {
         return false;},
       this);
 
-    SmartDashboard.putData("field", m_field);
+    //SmartDashboard.putData("field", m_field);
     vision = new Vision(this);
   }
 
@@ -179,16 +179,16 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Compressor Enabled", Bindings.getCompressorEnabled());
     //SmartDashboard.putBoolean("Limit switch hit", Bindings.getCompressorEnabled());
     //SmartDashboard.putNumber("m_gyro_Get Heading", getHeadingDegrees());
-    SmartDashboard.putNumber("drive angle", getPoseHeading());
-    SmartDashboard.putNumber("target angle 8lue", PoseMath.getTargetAngle(FieldConstants.kSpeakerBackLocation, getPose()).getDegrees());
-    SmartDashboard.putNumber("target angle red", PoseMath.getTargetAngle(FieldConstants.kRedSpeakerBackLocation, getPose()).getDegrees());
-    SmartDashboard.putNumber("Front Left", m_frontLeft.getPosition().distanceMeters);
-    SmartDashboard.putNumber("Front Right", m_frontRight.getPosition().distanceMeters);
-    SmartDashboard.putNumber("Rear Left", m_rearLeft.getPosition().distanceMeters);
-    SmartDashboard.putNumber("Rear Right", m_rearRight.getPosition().distanceMeters);
+    //SmartDashboard.putNumber("drive angle", getPoseHeading());
+    //SmartDashboard.putNumber("target angle 8lue", PoseMath.getTargetAngle(FieldConstants.kSpeakerBackLocation, getPose()).getDegrees());
+    //SmartDashboard.putNumber("target angle red", PoseMath.getTargetAngle(FieldConstants.kRedSpeakerBackLocation, getPose()).getDegrees());
+    //SmartDashboard.putNumber("Front Left", m_frontLeft.getPosition().distanceMeters);
+    //SmartDashboard.putNumber("Front Right", m_frontRight.getPosition().distanceMeters);
+    //SmartDashboard.putNumber("Rear Left", m_rearLeft.getPosition().distanceMeters);
+    //SmartDashboard.putNumber("Rear Right", m_rearRight.getPosition().distanceMeters);
 
-    SmartDashboard.putNumber("shooter angle number", LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(getPose())));
-    m_field.setRobotPose(getPose());
+    //SmartDashboard.putNumber("shooter angle number", LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(getPose())));
+    //m_field.setRobotPose(getPose());
 
     
      

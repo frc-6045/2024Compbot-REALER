@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ClimbConstants;
 import frc.robot.Constants.FeederConstants;
@@ -30,13 +29,10 @@ import frc.robot.commands.closedloop.HoldAngle;
 import frc.robot.commands.closedloop.PIDAngleControl;
 import frc.robot.commands.closedloop.PIDShooter;
 import frc.robot.commands.closedloop.PIDShooterNoIndexer;
-import frc.robot.commands.leds.GayLeds;
-import frc.robot.commands.leds.TransLeds;
 import frc.robot.commands.openloop.AngleOpenLoop;
 import frc.robot.commands.openloop.ClimberOpenLoop;
 import frc.robot.commands.openloop.FeederOpenLoop;
 import frc.robot.commands.openloop.IntakeOpenLoop;
-import frc.robot.commands.openloop.PrototypeOpenLoop;
 import frc.robot.commands.openloop.ShooterAndFeederOpenLoop;
 import frc.robot.commands.openloop.ShooterOpenLoop;
 import frc.robot.commands.openloop.AmpOpenLoop;
@@ -46,7 +42,6 @@ import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.Pneumatics;
-import frc.robot.subsystems.Prototype;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Amp;
 import frc.robot.subsystems.swerve.DriveSubsystem;
@@ -76,10 +71,8 @@ public class Bindings {
             Intake intake,
             Climber climber, 
             Amp amp,
-            Prototype m_Prototype,
             LEDs leds){
         
-        //new JoystickButton(driverController, XboxController.Button.kStart.value).onTrue(new InstantCommand(() -> { driveSubsystem.zeroHeading();}, driveSubsystem));
         new Trigger(() -> {return driverController.getStartButtonPressed();}).onTrue(new InstantCommand(() -> {driveSubsystem.zeroHeading();}, driveSubsystem));
         
         if(FieldConstants.kVisionEnable){
@@ -101,12 +94,12 @@ public class Bindings {
         
         new Trigger(() -> {return operatorController.getXButton();}).whileTrue(new PIDShooter(shooter, feeder, intake, -6000, ShooterConstants.kShootingLaunchRPM, false));
 
-        new Trigger(() -> {return driverController.getLeftTriggerAxis() > 0;}).whileTrue(new PIDShooter(shooter, feeder, intake, -4000, ShooterConstants.kFeedingLaunchRPM, false));
+        new Trigger(() -> {return driverController.getLeftTriggerAxis() > 0;}).whileTrue(new PIDShooter(shooter, feeder, intake, -4125, ShooterConstants.kFeedingLaunchRPM, false));
         
         new Trigger(() -> {return operatorController.getAButton();}).onTrue(new PIDAngleControl(angleController, leds, () -> {return ShooterConstants.kAngleAmpHandoffSetpoint;}));
 
         new Trigger(() -> {return operatorController.getStartButtonPressed();}).onTrue(new PIDAngleControl(angleController, leds, () -> {return ShooterConstants.kSubwooferAngleSetpoint;}));
-            
+        
         if(FieldConstants.kVisionEnable){
         //could possibly still work with odometry instead of vision
          new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController, leds, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose()));})); //3.9624 works
@@ -132,7 +125,7 @@ public class Bindings {
         
         //new Trigger(() -> {return operatorController.getBButton();}).whileTrue(new AngleOpenLoop(angleController, ShooterConstants.kAngleControlMaxSpeed));
         //Compressor Toggle
-        new Trigger(() -> {return driverController.getRightBumper();}).onTrue(new InstantCommand(() -> {
+        new Trigger(() -> {return operatorController.getRightStickButton();}).onTrue(new InstantCommand(() -> {
         if(bCompressorEnabled){
             pneumatics.disableCompressor();
             bCompressorEnabled = false;
@@ -161,7 +154,6 @@ public class Bindings {
     
 
          //new Trigger(() -> {return operatorController.getRightTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, operatorController::getRightTriggerAxis));
-         //new Trigger(()-> driverController.getRightTriggerAxis() != 0).whileTrue(new PrototypeOpenLoop(m_Prototype, ()-> driverController.getRightTriggerAxis()).alongWith(new PrintCommand("stuff")));
 
 
          new Trigger(() -> {return operatorController.getLeftTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, leds, () -> {return -operatorController.getLeftTriggerAxis();}));
@@ -175,25 +167,9 @@ public class Bindings {
          new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
          new Trigger(() -> {return operatorController.getPOV() == 180;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));
 
-         new Trigger(() -> {return ledController.getStartButton();}).onTrue(new InstantCommand(() -> {
-            if(bLedToggle){
-                leds.enableLedControl();
-                bLedToggle = false;
-            } else {
-                leds.disableLedControl();
-                bLedToggle = true;
-            }
-
-        }));
-
-        //new Trigger(() -> {return ledController.getRightBumper();}).onTrue(new InstantCommand(leds::loadNextScheme));
-        new Trigger(() -> {return ledController.getRightBumper();}).onTrue(new TransLeds(leds));
-        new Trigger(() -> {return ledController.getLeftBumper();}).onTrue(new GayLeds(leds));
-
-    }
+        };
     public static boolean getCompressorEnabled(){
         return bCompressorEnabled;
     }
-
-    
 }
+

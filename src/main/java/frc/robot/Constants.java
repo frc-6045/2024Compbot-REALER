@@ -112,7 +112,7 @@ public final class Constants {
         redBottomLeftSpeaker.interpolate(redTopRightSpeaker, 0.5);
   
 
-    public static boolean kVisionEnable = true;
+    public static boolean kVisionEnable = false;
   }
 
   public static final class DriveConstants {
@@ -306,18 +306,18 @@ public final class Constants {
     public static final double kShooterAmpI = 0;
     public static final double kShooterAmpD = 0;
     public static final int kShootingLaunchRPM = -4300; //-4300
-    public static final int kFeedingLaunchRPM = -3000;
+    public static final int kFeedingLaunchRPM = -3125;
 
     public static final int kAngleControlCANID = 11; //TODO hey
     public static final double kAngleControlMaxSpeed = 0.07;
 
-    public static final double kShooterAngleP = 3.50; // was 4.50
+    public static final double kShooterAngleP = 3.70; // was 4.50
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
     //public static final double kAngleHardSetpoint = 0.015;
     public static final double kAngleAmpHandoffSetpoint = 0.40999; //was 0.40599
 
-    public static final double kSubwooferAngleSetpoint = 0.2788; //was 0.2888
+    public static final double kSubwooferAngleSetpoint = 0.2958; //was 0.2788
     public static final double kFeederSetpoint = 0.3161;
     public static final double kAngle4RingSetpoint = 0.03;
 

@@ -27,7 +27,6 @@ import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ClimbConstants;
 import frc.robot.Constants.FeederConstants;
@@ -49,7 +48,6 @@ import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.Pneumatics;
-import frc.robot.subsystems.Prototype;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Amp;
 import frc.robot.subsystems.swerve.DriveSubsystem;
@@ -68,7 +66,6 @@ private final Intake m_Intake = new Intake();
 private final Climber m_Climber = new Climber();
 private final AngleController m_AngleController = new AngleController();
 private final Amp m_Amp = new Amp();
-private final Prototype m_Prototype = new Prototype();
 private final LEDs m_LEDs = new LEDs();
 
 private Autos m_Autos;
@@ -76,8 +73,8 @@ private ShuffleboardTab teleopTab = Shuffleboard.getTab("teleOp");
 public RobotContainer() {
   NamedCommands.registerCommand("SpeakerSetpoint", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return ShooterConstants.kSubwooferAngleSetpoint;})));
   NamedCommands.registerCommand("AmpSetpoint", new ParallelDeadlineGroup(new WaitCommand(2.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return ShooterConstants.kAngleAmpHandoffSetpoint;})));
-  NamedCommands.registerCommand("FarStealShootSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.340;}))); // 0.330 SOFT 340
-  NamedCommands.registerCommand("FarStealShootSetpoint2", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.345;}))); // 0.345 SOFT
+  NamedCommands.registerCommand("FarStealShootSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.352;}))); // 0.330 SOFT 340
+  NamedCommands.registerCommand("FarStealShootSetpoint2", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.357;}))); // 0.345 SOFT
   NamedCommands.registerCommand("FarStealShootSetpoint3", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.364;}))); // 0.371 
   NamedCommands.registerCommand("RingPassthrough", new ParallelDeadlineGroup(new WaitCommand(1.40), new ShooterOpenLoop(m_Shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(m_Feeder, () -> {return -FeederConstants.kAmpFeederAutoSpeed;}), new AmpOpenLoop(m_Amp, () -> -ClimbConstants.kAmpHandoffMaxAutoSpeed), new IntakeOpenLoop(m_Intake, m_LEDs, () -> -IntakeConstants.kIntakeAutoSpeed)));
   NamedCommands.registerCommand("AutoAngle", new ParallelDeadlineGroup(new WaitCommand(0.5), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));})));
@@ -115,10 +112,10 @@ public RobotContainer() {
       new HoldAngle(m_AngleController, () -> {return m_AngleController.getAngleEncoder().getPosition();}));
 
     configureBindings();
-    teleopTab.addDouble("Right Trigger Axis", m_driverController::getRightTriggerAxis);
-    teleopTab.addDouble("Left Trigger Axis", m_driverController::getLeftTriggerAxis);
-    teleopTab.addDouble("Shooter RPM", () -> {return m_Shooter.getMotors()[0].getEncoder().getVelocity();});
-    teleopTab.addDouble("hood position", () -> {return m_AngleController.getAngleEncoder().getPosition();});
+    //teleopTab.addDouble("Right Trigger Axis", m_driverController::getRightTriggerAxis);
+    //teleopTab.addDouble("Left Trigger Axis", m_driverController::getLeftTriggerAxis);
+    //teleopTab.addDouble("Shooter RPM", () -> {return m_Shooter.getMotors()[0].getEncoder().getVelocity();});
+    //teleopTab.addDouble("hood position", () -> {return m_AngleController.getAngleEncoder().getPosition();});
   }
 
   private void configureBindings() {
@@ -126,8 +123,7 @@ public RobotContainer() {
     m_driveSubsystem, m_Shooter, 
     m_Feeder, m_Pneumatics, 
     m_AngleController, m_Intake, 
-    m_Climber, m_Amp,
-    m_Prototype, m_LEDs);
+    m_Climber, m_Amp, m_LEDs);
   }
 
   public Command getAutonomousCommand() {
