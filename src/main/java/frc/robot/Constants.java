@@ -315,11 +315,11 @@ public final class Constants {
     public static final double kShooterAngleI = 0.0;
     public static final double kShooterAngleD = 0.00;
     //public static final double kAngleHardSetpoint = 0.015;
-    public static final double kAngleAmpHandoffSetpoint = 0.40999; //was 0.40599
+    public static final double kAngleAmpHandoffSetpoint = 0.74819; //was 0.40999
 
-    public static final double kSubwooferAngleSetpoint = 0.2958; //was 0.2788
-    public static final double kFeederSetpoint = 0.3161;
-    public static final double kAngle4RingSetpoint = 0.03;
+    public static final double kSubwooferAngleSetpoint = 0.634; //was 0.2958
+    public static final double kFeederSetpoint = 0.6543; // was 0.3161
+    public static final double kAngle4RingSetpoint = 0.650;
 
     public static final double kAngleFeedforward = 0.005;
   }
@@ -350,7 +350,7 @@ public final class Constants {
   public static final class PneumaticsConstants {
     public static final int kPneumaticsModuleCANID = 20; 
   
-    public static final int kIntakeSolenoidSingleChannel = 8; 
+    public static final int kIntakeSolenoidSingleChannel = 10; 
 
     public static final int kBrakeSolenoidSingleChannel = 9;
 

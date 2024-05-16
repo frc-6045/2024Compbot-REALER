@@ -121,8 +121,8 @@ public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
     public DriveSubsystem() {
       
-    this.xLimiter = new SlewRateLimiter(1.4); // was 1.2
-    this.yLimiter = new SlewRateLimiter(1.4); // was 1.2
+    this.xLimiter = new SlewRateLimiter(1.4); // was 1.2, then 1.4
+    this.yLimiter = new SlewRateLimiter(1.4); // was 1.2, then 1.4
     this.turningLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond);
     m_VisionLockController.setSetpoint(0);
 
@@ -164,7 +164,7 @@ public class DriveSubsystem extends SubsystemBase {
     }
     
     // Stolen from Isaac, thanks Isaac!!
-    Vision.addFilteredPoseData(getPose(), m_poseEstimator);
+    //Vision.addFilteredPoseData(getPose(), m_poseEstimator);
 
 
     //eventually figure out what each result value is

@@ -57,6 +57,7 @@ public class Autos {
         autoChooser.addOption("FarSide2Piece1stNote", AutoBuilder.buildAuto("FarSide2Piece"));
         autoChooser.addOption("FarSideBluePiece1stNote", AutoBuilder.buildAuto("FarSideBluePiece"));
         autoChooser.addOption("FarSide2Piece2ndNote", AutoBuilder.buildAuto("FarSide2Piece2ndNote"));
+        autoChooser.addOption("Center4Note", AutoBuilder.buildAuto("Center4Note"));
         // autoChooser.addOption("FarSideSteal", AutoBuilder.buildAuto("FarSideSteal"));
         // autoChooser.addOption("3RingMidfieldAlt", AutoBuilder.buildAuto("3RingMidfieldAlt"));
         // autoChooser.addOption("Basic Test Auto", AutoBuilder.buildAuto("BasicTestAuto"));

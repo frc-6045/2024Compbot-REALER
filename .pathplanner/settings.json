@@ -6,16 +6,18 @@
     "3RingMidfieldAlt",
     "4RingCenter",
     "CenterSteal",
+    "ChampsAutos",
     "FarSideSteal",
     "New 4Ring",
-    "ChampsAutos",
+    "StateAuto",
     "OnlyOje",
     "Random Junk"
   ],
   "autoFolders": [
+    "ChampsAutos",
     "DoNothings",
     "FarSideSteal",
-    "ChampsAutos",
+    "StateAuto",
     "OnlyOne"
   ],
   "defaultMaxVel": 4.5,

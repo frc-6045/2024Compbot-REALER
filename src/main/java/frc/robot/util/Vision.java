@@ -54,6 +54,7 @@ public class Vision {
     return m_visionPoseEstimator;
   }
   
+  /*
   // All of this is stolen from Isaac, thanks Isaac!!! (feel free to refactor at any time)
   public static void addFilteredPoseData(Pose2d currentPose, SwerveDrivePoseEstimator m_poseEstimator) {
     PhotonPoseEstimator poseEstimator = Vision.getPoseEstimator();
@@ -91,7 +92,7 @@ public class Vision {
       }
     }
   }
-
+ */
   public void UpdateVision() {
   if(FieldConstants.kVisionEnable && !DriverStation.isAutonomousEnabled()){
      m_visionPoseEstimator.update().ifPresent(estimatedRobotPose -> {

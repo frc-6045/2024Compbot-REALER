@@ -92,9 +92,9 @@ public class Bindings {
 
         //new Trigger(() -> {return operatorController.getRightTriggerAxis() > 0;}).whileTrue(new ShooterAndFeederOpenLoop(shooter, feeder, operatorController::getRightTriggerAxis, operatorController::getRightTriggerAxis));
         
-        new Trigger(() -> {return operatorController.getXButton();}).whileTrue(new PIDShooter(shooter, feeder, intake, -6000, ShooterConstants.kShootingLaunchRPM, false));
+        new Trigger(() -> {return operatorController.getXButton();}).whileTrue(new PIDShooter(shooter, feeder, intake, leds, -6000, ShooterConstants.kShootingLaunchRPM, false));
 
-        new Trigger(() -> {return driverController.getLeftTriggerAxis() > 0;}).whileTrue(new PIDShooter(shooter, feeder, intake, -4125, ShooterConstants.kFeedingLaunchRPM, false));
+        new Trigger(() -> {return driverController.getLeftTriggerAxis() > 0;}).whileTrue(new PIDShooter(shooter, feeder, intake, leds, -4125, ShooterConstants.kFeedingLaunchRPM, false));
         
         new Trigger(() -> {return operatorController.getAButton();}).onTrue(new PIDAngleControl(angleController, leds, () -> {return ShooterConstants.kAngleAmpHandoffSetpoint;}));
 

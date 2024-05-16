@@ -20,6 +20,7 @@ import frc.robot.Constants.FeederConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.Shooter;
 
 public class PIDShooter extends Command {
@@ -27,6 +28,7 @@ public class PIDShooter extends Command {
   private final Shooter m_Shooter;
   private final Feeder m_Feeder;
   private final Intake m_Intake;
+  private final LEDs m_LEDs;
   private SparkPIDController m_BottomPIDController;
   private SparkPIDController m_TopPIDController;
 
@@ -40,10 +42,11 @@ public class PIDShooter extends Command {
   private boolean atSetpoint;
   private boolean timerSet;
   private Timer timer;
-  public PIDShooter(Shooter shooter, Feeder feeder, Intake intake, double setpoint, double launchrpm, boolean isSlow) {
+  public PIDShooter(Shooter shooter, Feeder feeder, Intake intake, LEDs leds, double setpoint, double launchrpm, boolean isSlow) {
     m_Shooter = shooter;
     m_Feeder = feeder;
     m_Intake = intake;
+    m_LEDs = leds;
     bottomShooterMotor = shooter.getMotors()[0];
     topShooterMotor = shooter.getMotors()[1];
     bottomEncoder = bottomShooterMotor.getEncoder(); //TODO check type of encoder
@@ -89,6 +92,7 @@ public class PIDShooter extends Command {
   public void initialize() {
     atSetpoint = false;
     timerSet = false;
+    m_LEDs.setColor(39, 2, 201);
     timer.reset();
   }
 
@@ -96,7 +100,6 @@ public class PIDShooter extends Command {
   @Override
   public void execute() {
 
-   
    
     m_BottomPIDController.setReference(setpoint, ControlType.kVelocity, 0, m_Feedforward.calculate(setpoint));
     m_TopPIDController.setReference(setpoint, ControlType.kVelocity, 0, m_Feedforward.calculate(setpoint)); //TODO: characterization for feedforward
@@ -112,6 +115,8 @@ public class PIDShooter extends Command {
         timer.start();
         timerSet = true;
       }
+      
+      m_LEDs.setColor(225,0,255);
       m_Feeder.runMotors(() -> {return FeederConstants.kFeederSpeed;});              
       m_Intake.runIntake(() -> {return -IntakeConstants.kIntakeSpeed;});
     }
@@ -122,6 +127,7 @@ public class PIDShooter extends Command {
   @Override
   public void end(boolean interrupted) {
     //shooterMotor.set(0);
+    m_LEDs.setColor(39, 2, 201);
     bottomShooterMotor.set(0);
     topShooterMotor.set(0);
     m_Feeder.runMotors(() -> {return 0.0;});
@@ -133,7 +139,7 @@ public class PIDShooter extends Command {
   @Override
   public boolean isFinished() {
     System.out.println(timer.get());
-    if(timer.get() > 0.9){ //lmao
+    if(timer.get() > 1.3){
       return true;
     }
     return false;
