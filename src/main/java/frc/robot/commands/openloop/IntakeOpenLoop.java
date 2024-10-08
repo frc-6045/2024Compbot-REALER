@@ -7,7 +7,6 @@ package frc.robot.commands.openloop;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LEDs;
@@ -35,10 +34,8 @@ public class IntakeOpenLoop extends Command {
     m_Intake.checkNote();
     if(m_Intake.hasNote()){
       m_LEDs.setColor(23, 252, 3);
-      // m_Intake.stopIntake();
     } else {
       m_LEDs.setColor(39, 2, 201);
-      // m_Intake.runIntake(speedSupplier);
     }
     m_Intake.runIntake(speedSupplier);
   }
