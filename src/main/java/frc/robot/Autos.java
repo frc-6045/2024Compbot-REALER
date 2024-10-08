@@ -67,7 +67,7 @@ public class Autos {
         // autoChooser.addOption("3RingNoPodium", AutoBuilder.buildAuto("3RingNoPodium"));
         // autoChooser.addOption("3RingNoTop", AutoBuilder.buildAuto("3RingNoTop"));
         // autoChooser.addOption("CenterSteal", AutoBuilder.buildAuto("CenterSteal"));
-        // autoChooser.addOption("ShootAndDoNothing", AutoBuilder.buildAuto("ShootAndDoNothing"));
+        autoChooser.addOption("ShootAndDoNothing", AutoBuilder.buildAuto("ShootAndDoNothing"));
         // autoChooser.addOption("ShootASndDoNothingLeft", AutoBuilder.buildAuto("ShootAndDoNothingLeft"));
         // autoChooser.addOption("ShootAndDoNothingRight", AutoBuilder.buildAuto("ShootAndDoNothingRight"));
         // autoChooser.addOption("ShootAndOutRight", AutoBuilder.buildAuto("ShootAndOutRight"));

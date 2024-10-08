@@ -164,9 +164,26 @@ public class Bindings {
 
          new Trigger(() -> {return operatorController.getPOV() == 270;}).whileTrue(new PIDAngleControl(angleController, leds, () -> {return ShooterConstants.kFeederSetpoint;}));
         
+         //new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
+         //new Trigger(() -> {return operatorController.getPOV() == 180;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));
+
          new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new ClimberOpenLoop(climber, () -> {return ClimbConstants.kClimbMaxSpeed;}));
          new Trigger(() -> {return operatorController.getPOV() == 180;}).whileTrue(new ClimberOpenLoop(climber, () -> {return -ClimbConstants.kClimbMaxSpeed;}));
 
+         //QUINNS CRAP
+        
+       //  new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new PIDShooter(shooter, feeder, intake, leds, -6000, ShooterConstants.kShootingLaunchRPM, true));
+
+
+         // new Trigger(() -> {return driverController.getLeftTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, leds, () -> {return -operatorController.getLeftTriggerAxis();}));
+         // new Trigger(() -> {return driverController.getRightTriggerAxis() > .05;}).whileTrue(new IntakeOpenLoop(intake, leds, () -> {return operatorController.getRightTriggerAxis();}));
+
+
+
+        // new Trigger(() -> {return operatorController.getPOV() == 0;}).whileTrue(new PIDShooter(shooter, feeder, intake, leds, -4125, ShooterConstants.kShootingLaunchRPM, true));
+
+        
+        
         };
     public static boolean getCompressorEnabled(){
         return bCompressorEnabled;

@@ -17,8 +17,9 @@
     "ChampsAutos",
     "DoNothings",
     "FarSideSteal",
-    "StateAuto",
-    "OnlyOne"
+    "MROC AUTOS",
+    "OnlyOne",
+    "StateAuto"
   ],
   "defaultMaxVel": 4.5,
   "defaultMaxAccel": 3.0,
