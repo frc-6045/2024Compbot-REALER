@@ -57,7 +57,13 @@
                           {
                             "type": "wait",
                             "data": {
-                              "waitTime": 0
+                              "waitTime": 0.0
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "ActuateIntakeDown"
                             }
                           },
                           {
@@ -67,6 +73,12 @@
                             }
                           }
                         ]
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.0
                       }
                     },
                     {
@@ -217,6 +229,6 @@
       ]
     }
   },
-  "folder": "StateAuto",
+  "folder": "MROC AUTOS",
   "choreoAuto": false
 }
