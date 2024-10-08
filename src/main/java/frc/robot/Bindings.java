@@ -99,7 +99,7 @@ public class Bindings {
         new Trigger(() -> {return operatorController.getAButton();}).onTrue(new PIDAngleControl(angleController, leds, () -> {return ShooterConstants.kAngleAmpHandoffSetpoint;}));
 
         new Trigger(() -> {return operatorController.getStartButtonPressed();}).onTrue(new PIDAngleControl(angleController, leds, () -> {return ShooterConstants.kSubwooferAngleSetpoint;}));
-
+        
         if(FieldConstants.kVisionEnable){
         //could possibly still work with odometry instead of vision
          new Trigger(() -> {return operatorController.getBackButtonPressed();}).onTrue(new PIDAngleControl(angleController, leds, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(driveSubsystem.getPose()));})); //3.9624 works
@@ -120,7 +120,6 @@ public class Bindings {
         new Trigger(() -> {return operatorController.getYButton();}).whileTrue(new AngleOpenLoop(angleController, -ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
 
         new Trigger(() -> {return operatorController.getBButton();}).whileTrue(new AngleOpenLoop(angleController, ShooterConstants.kAngleControlMaxSpeed)).onFalse(new HoldAngle(angleController, () -> {return angleController.getAngleEncoder().getPosition();}));
-
 
         //new Trigger(() -> {return operatorController.getYButton();}).whileTrue(new AngleOpenLoop(angleController, -ShooterConstants.kAngleControlMaxSpeed));
         
