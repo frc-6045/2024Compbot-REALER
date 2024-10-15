@@ -9,9 +9,9 @@
     "ChampsAutos",
     "FarSideSteal",
     "New 4Ring",
-    "StateAuto",
     "OnlyOje",
-    "Random Junk"
+    "Random Junk",
+    "StateAuto"
   ],
   "autoFolders": [
     "ChampsAutos",
@@ -19,7 +19,8 @@
     "FarSideSteal",
     "MROC AUTOS",
     "OnlyOne",
-    "StateAuto"
+    "StateAuto",
+    "NEW POSTSEASON AUTOS"
   ],
   "defaultMaxVel": 4.5,
   "defaultMaxAccel": 3.0,
