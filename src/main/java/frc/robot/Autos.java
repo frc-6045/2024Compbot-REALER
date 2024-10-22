@@ -74,6 +74,7 @@ public class Autos {
         // autoChooser.addOption("DoNothing", AutoBuilder.buildAuto("DoNothing"));
         // autoChooser.addOption("DoNothingLeft", AutoBuilder.buildAuto("DoNothingLeft"));
         // autoChooser.addOption("DoNothingRight", AutoBuilder.buildAuto("DoNothingRight"));
+        autoChooser.addOption("openSide1Piece", AutoBuilder.buildAuto("openSide1Piece"));
 
 
         SmartDashboard.putData("Autos", autoChooser);
