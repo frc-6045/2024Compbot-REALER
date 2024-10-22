@@ -71,13 +71,14 @@ private final LEDs m_LEDs = new LEDs();
 private Autos m_Autos;
 private ShuffleboardTab teleopTab = Shuffleboard.getTab("teleOp");
 public RobotContainer() {
-  NamedCommands.registerCommand("SpeakerSetpoint", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return ShooterConstants.kSubwooferAngleSetpoint;})));
+  NamedCommands.registerCommand("SpeakerSetpoint", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.901;}))); // Shots 1, 3
   NamedCommands.registerCommand("AmpSetpoint", new ParallelDeadlineGroup(new WaitCommand(2.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return ShooterConstants.kAngleAmpHandoffSetpoint;})));
   NamedCommands.registerCommand("FarStealShootSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6895;}))); // 0.6902
   NamedCommands.registerCommand("FarStealShootSetpoint2", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6897;}))); // 0.6907 SOFT
   NamedCommands.registerCommand("FarStealShootSetpoint3", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6907;}))); // 0.371 
-  NamedCommands.registerCommand("Center4NoteSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6902;})));
-  NamedCommands.registerCommand("Center4NoteSetpoint2", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6902;})));
+  // NamedCommands.registerCommand("Center4NoteSetpoint0", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.644;}))); // Shots 1 & 3
+  NamedCommands.registerCommand("Center4NoteSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.659;}))); // Shot 2
+  NamedCommands.registerCommand("Center4NoteSetpoint2", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6802;}))); // Shot 4
   NamedCommands.registerCommand("RingPassthrough", new ParallelDeadlineGroup(new WaitCommand(1.40), new ShooterOpenLoop(m_Shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(m_Feeder, () -> {return -FeederConstants.kAmpFeederAutoSpeed;}), new AmpOpenLoop(m_Amp, () -> -ClimbConstants.kAmpHandoffMaxAutoSpeed), new IntakeOpenLoop(m_Intake, m_LEDs, () -> -IntakeConstants.kIntakeAutoSpeed)));
   NamedCommands.registerCommand("AutoAngle", new ParallelDeadlineGroup(new WaitCommand(0.5), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));})));
   NamedCommands.registerCommand("PIDShooting", new ParallelDeadlineGroup(new WaitCommand(1.8), new PIDShooter(m_Shooter, m_Feeder, m_Intake, m_LEDs, -6000, ShooterConstants.kShootingLaunchRPM, false))); //time was 1.4 seconds
