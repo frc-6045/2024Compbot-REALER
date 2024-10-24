@@ -85,7 +85,7 @@ public RobotContainer() {
   NamedCommands.registerCommand("PIDShootingNoIndexer", new ParallelDeadlineGroup(new WaitCommand(1.4), new PIDShooterNoIndexer(m_Shooter, m_Feeder, m_Intake, -6000, ShooterConstants.kShootingLaunchRPM, false)));
   NamedCommands.registerCommand("RunAmp", new ParallelDeadlineGroup(new WaitCommand(0.5), new AmpOpenLoop(m_Amp, () -> {return -ClimbConstants.kAmpHandoffMaxSpeed;})));
   NamedCommands.registerCommand("IntakeAndShoot", new ParallelDeadlineGroup(new WaitCommand(2.0), new IntakeOpenLoopNoLed(m_Intake, () -> -IntakeConstants.kIntakeAutoSpeed), new PIDShooterNoIntake(m_Shooter, m_Feeder, -6000, ShooterConstants.kShootingLaunchRPM, false)));
-  NamedCommands.registerCommand("OpenSide1PieceSetpoint", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6898;})));
+  NamedCommands.registerCommand("OpenSide1PieceSetpoint", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6888;})));
 
   //Commented these out because they're old                                                              was 2.0
   //NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController,  m_LEDs,() -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000, false)));
