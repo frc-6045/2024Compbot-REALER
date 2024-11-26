@@ -1,0 +1,254 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.3478789030902982,
+      "y": 5.531675083577728
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Forword"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ActuateIntakeDown"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.1
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Center4NoteSetpoint1"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PIDShooting"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "ForwordToCenterNote"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeIn"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "CenterNoteForword"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.1
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Center4NoteSetpoint1"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PIDShooting"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "ForwardLeft"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeIn"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "LeftForword"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.1
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Center4NoteSetpoint1"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PIDShooting"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "ForwordRight"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeIn"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "RightForword"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.1
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Center4NoteSetpoint1"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PIDShooting"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": "NEW POSTSEASON AUTOS",
+  "choreoAuto": false
+}

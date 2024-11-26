@@ -1,0 +1,25 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.2670652829457314,
+      "y": 1.4979047967574595
+    },
+    "rotation": -31.41067482109061
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MiniMinneMobility"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "NEW POSTSEASON AUTOS",
+  "choreoAuto": false
+}

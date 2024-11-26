@@ -1,0 +1,106 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.7,
+      "y": 4.3381616978151785
+    },
+    "rotation": -58.389999999999986
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "openSideForword"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ActuateIntakeDown"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Center4NoteSetpoint1"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PIDShooting"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "OpenSideForwordNote3"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeIn"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Note3OpenSideForword"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PIDShooting"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": "NEW POSTSEASON AUTOS",
+  "choreoAuto": false
+}

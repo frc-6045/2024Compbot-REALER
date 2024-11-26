@@ -20,20 +20,20 @@
                 "data": {
                   "pathName": "open side one piece "
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "OpenSide1PieceSetpoint"
-                }
               }
             ]
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "OpenSide1PieceSetpoint"
+          }
+        },
+        {
           "type": "wait",
           "data": {
-            "waitTime": 0.0
+            "waitTime": 1.0
           }
         },
         {

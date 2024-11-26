@@ -73,11 +73,11 @@ private ShuffleboardTab teleopTab = Shuffleboard.getTab("teleOp");
 public RobotContainer() {
   NamedCommands.registerCommand("SpeakerSetpoint", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return ShooterConstants.kSubwooferAngleSetpoint;}))); // Shots 1, 3
   NamedCommands.registerCommand("AmpSetpoint", new ParallelDeadlineGroup(new WaitCommand(2.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return ShooterConstants.kAngleAmpHandoffSetpoint;})));
-  NamedCommands.registerCommand("FarStealShootSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6895;}))); // 0.6902
+  NamedCommands.registerCommand("FarStealShootSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6890;}))); // 0.6902
   NamedCommands.registerCommand("FarStealShootSetpoint2", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6897;}))); // 0.6907 SOFT
   NamedCommands.registerCommand("FarStealShootSetpoint3", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6907;}))); // 0.371 
   // NamedCommands.registerCommand("Center4NoteSetpoint0", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.644;}))); // Shots 1 & 3
-  NamedCommands.registerCommand("Center4NoteSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.659;}))); // Shot 2
+  NamedCommands.registerCommand("Center4NoteSetpoint1", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6685;}))); // Shot 2
   NamedCommands.registerCommand("Center4NoteSetpoint2", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6802;}))); // Shot 4
   NamedCommands.registerCommand("RingPassthrough", new ParallelDeadlineGroup(new WaitCommand(1.40), new ShooterOpenLoop(m_Shooter, () -> {return -ShooterConstants.kAmpShooterMaxSpeed;}), new FeederOpenLoop(m_Feeder, () -> {return -FeederConstants.kAmpFeederAutoSpeed;}), new AmpOpenLoop(m_Amp, () -> -ClimbConstants.kAmpHandoffMaxAutoSpeed), new IntakeOpenLoop(m_Intake, m_LEDs, () -> -IntakeConstants.kIntakeAutoSpeed)));
   NamedCommands.registerCommand("AutoAngle", new ParallelDeadlineGroup(new WaitCommand(0.5), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));})));
@@ -85,9 +85,11 @@ public RobotContainer() {
   NamedCommands.registerCommand("PIDShootingNoIndexer", new ParallelDeadlineGroup(new WaitCommand(1.4), new PIDShooterNoIndexer(m_Shooter, m_Feeder, m_Intake, -6000, ShooterConstants.kShootingLaunchRPM, false)));
   NamedCommands.registerCommand("RunAmp", new ParallelDeadlineGroup(new WaitCommand(0.5), new AmpOpenLoop(m_Amp, () -> {return -ClimbConstants.kAmpHandoffMaxSpeed;})));
   NamedCommands.registerCommand("IntakeAndShoot", new ParallelDeadlineGroup(new WaitCommand(2.0), new IntakeOpenLoopNoLed(m_Intake, () -> -IntakeConstants.kIntakeAutoSpeed), new PIDShooterNoIntake(m_Shooter, m_Feeder, -6000, ShooterConstants.kShootingLaunchRPM, false)));
-  NamedCommands.registerCommand("OpenSide1PieceSetpoint", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.6888;})));
+  NamedCommands.registerCommand("OpenSide1PieceSetpoint", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.69996;})));
 
-  //Commented these out because they're old                                                              was 2.0
+  NamedCommands.registerCommand("LowSetpoint", new ParallelDeadlineGroup(new WaitCommand(1.00), new PIDAngleControl(m_AngleController, m_LEDs, () -> {return 0.7454;})));
+
+  //Commented these out because they're old                                                              was 2.
   //NamedCommands.registerCommand("AngleAndShoot", new SequentialCommandGroup(new PIDAngleControl(m_AngleController,  m_LEDs,() -> {return LookupTables.getAngleValueAtDistance(PoseMath.getDistanceToSpeakerBack(m_driveSubsystem.getPose()));}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -6000, false)));
   //NamedCommands.registerCommand("AngleAndShootClose", new SequentialCommandGroup(new PIDAngleControl(m_AngleController,  m_LEDs, () -> {return 0.797;}), new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true)));
   //NamedCommands.registerCommand("ShootClose", new PIDShooter(m_Shooter, m_Feeder, m_Intake, -3000, true));

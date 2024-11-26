@@ -57,7 +57,7 @@ public class Autos {
         autoChooser.addOption("FarSide2Piece1stNote", AutoBuilder.buildAuto("FarSide2Piece"));
         autoChooser.addOption("FarSideBluePiece1stNote", AutoBuilder.buildAuto("FarSideBluePiece"));
         autoChooser.addOption("FarSide2Piece2ndNote", AutoBuilder.buildAuto("FarSide2Piece2ndNote"));
-        autoChooser.addOption("Center4Note", AutoBuilder.buildAuto("Center4Note"));
+        autoChooser.addOption("Center4Note2", AutoBuilder.buildAuto("Center4Note2"));
         // autoChooser.addOption("FarSideSteal", AutoBuilder.buildAuto("FarSideSteal"));
         // autoChooser.addOption("3RingMidfieldAlt", AutoBuilder.buildAuto("3RingMidfieldAlt"));
         // autoChooser.addOption("Basic Test Auto", AutoBuilder.buildAuto("BasicTestAuto"));
@@ -75,7 +75,13 @@ public class Autos {
         // autoChooser.addOption("DoNothingLeft", AutoBuilder.buildAuto("DoNothingLeft"));
         // autoChooser.addOption("DoNothingRight", AutoBuilder.buildAuto("DoNothingRight"));
         autoChooser.addOption("OpenSide1Piece", AutoBuilder.buildAuto("OpenSide1Piece"));
+        autoChooser.addOption("NewCenter4note", AutoBuilder.buildAuto("NewCenter4note"));
+        autoChooser.addOption("OpenSide2piece", AutoBuilder.buildAuto("OpenSide2piece"));
 
+         
+        autoChooser.addOption("MiniMinneMobility", AutoBuilder.buildAuto("MiniMinneMobility"));
+
+        autoChooser.addOption("MiniMinneFeed", AutoBuilder.buildAuto("MiniMinneFeed"));
 
         SmartDashboard.putData("Autos", autoChooser);
     }
